@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { lazy } from "react";
 const Auth = lazy(() => import("@/pages/Auth"));
 
-export const Route = createFileRoute("/auth")({
+export const Route = createFileRoute("/auth//")({
   head: () => ({
     meta: [
       { title: "ANGEL AI — auth" },

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { lazy } from "react";
 import { MovedToFunRich } from "@/components/MovedToFunRich";
 
-export const Route = createFileRoute("/messages")({
+export const Route = createFileRoute("/messages//")({
   head: () => ({
     meta: [
       { title: "ANGEL AI — messages" },

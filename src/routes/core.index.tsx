@@ -3,7 +3,7 @@ import { lazy } from "react";
 const AICoreDashboard = lazy(() => import("@/pages/core/AICoreDashboard"));
 import { RequireCoreAccess } from "@/components/guards/RequireCoreAccess";
 
-export const Route = createFileRoute("/core")({
+export const Route = createFileRoute("/core//")({
   head: () => ({
     meta: [
       { title: "ANGEL AI — core" },
