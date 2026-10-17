@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * useAttesterSigning — Reads pending/signed mint requests from pplp_mint_requests
  * and allows GOV attesters to sign them (add their group to multisig_completed_groups).

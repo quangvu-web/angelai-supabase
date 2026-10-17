@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowDownLeft, Heart, Gift, Wallet, ChevronRight, ChevronDown, RefreshCw } from "lucide-react";

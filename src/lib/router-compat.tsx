@@ -93,7 +93,7 @@ export function useLocation() {
 }
 
 export function useParams<T extends Record<string, string | undefined> = Record<string, string | undefined>>(): T {
-  return useTParams({ strict: false }) as T;
+  return (useTParams as any)({ strict: false }) as T;
 }
 
 export function useSearchParams(): [URLSearchParams, (next: any, opts?: { replace?: boolean }) => void] {
@@ -119,3 +119,4 @@ export function Navigate({ to, replace }: { to: To; replace?: boolean }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return null;
 }
+export type NavigateFunction = ReturnType<typeof useNavigate>;

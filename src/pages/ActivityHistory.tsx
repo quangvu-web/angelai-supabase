@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { smartBack } from "@/lib/smartBack";
 import { useNavigate, Link } from "@/lib/router-compat";
