@@ -32,7 +32,7 @@ import TelegramKnowledgeManager from "@/components/admin/TelegramKnowledgeManage
 import KnowledgeBackupPanel from "@/components/admin/KnowledgeBackupPanel";
 import UrlIngestCard from "@/components/admin/UrlIngestCard";
 import { titleFromFileName, titleFromUrl } from "@/lib/knowledgeTitle";
-import { canonicalKnowledgeFolder } from "../../supabase/functions/_shared/knowledge-folders";
+import { canonicalKnowledgeFolder } from "@/lib/knowledge-folders";
 
 import KnowledgeFeedbackReviewPanel from "@/components/admin/KnowledgeFeedbackReviewPanel";
 import UrantiaIngestPanel from "@/components/admin/UrantiaIngestPanel";
