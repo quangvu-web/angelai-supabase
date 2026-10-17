@@ -8,7 +8,16 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, Suspense, type ReactNode } from "react";
+import { ClientOnly } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "@/hooks/useAuth";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { Web3WalletProvider } from "@/contexts/Web3WalletContext";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { BackToTopButton } from "@/components/BackToTopButton";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -78,21 +87,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Angel A.I. Core — Intelligence Layer of FUN Ecosystem" },
+      { name: "description", content: "Trung tâm trí tuệ của hệ sinh thái FUN." },
+      { name: "author", content: "Angel AI" },
+      { property: "og:title", content: "Angel A.I. Core" },
+      { property: "og:description", content: "Trung tâm trí tuệ của hệ sinh thái FUN." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@AngelAI" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
@@ -121,7 +130,31 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ClientOnly fallback={<Loading />}>
+        <LanguageProvider>
+          <AuthProvider>
+            <Web3WalletProvider>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <ScrollToTop />
+                <BackToTopButton />
+                <Suspense fallback={<Loading />}>
+                  <Outlet />
+                </Suspense>
+              </TooltipProvider>
+            </Web3WalletProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </ClientOnly>
     </QueryClientProvider>
+  );
+}
+
+function Loading() {
+  return (
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary/30 border-t-primary" />
+    </div>
   );
 }
