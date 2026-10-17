@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { FUN_ID_SSO_ENABLED } from "@/lib/authFeatureFlags";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";

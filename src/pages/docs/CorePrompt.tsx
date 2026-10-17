@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { ArrowLeft, Star, Heart, Eye, Shield, Wallet, Users, MessageCircle, Sparkles, Sun, Scale, Zap, Infinity, Crown, Brain, HandHeart, Lightbulb, Globe, UserCheck, ShieldCheck, Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

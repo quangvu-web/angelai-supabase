@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowLeft, BookOpen, ChevronRight } from "lucide-react";
 import { AppLayout } from "@/components/layouts/AppLayout";
 import constitution from "@/content/digital-constitution.txt?raw";

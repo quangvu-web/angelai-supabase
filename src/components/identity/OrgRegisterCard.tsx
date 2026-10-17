@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useRegisterOrg, useMyOrgProfile } from "@/hooks/useOrgIdentity";
 import { Building2, ShieldCheck, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 
 export function OrgRegisterCard() {
   const { data: myOrg } = useMyOrgProfile();

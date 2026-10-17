@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ArrowLeft, Play, RefreshCw, Loader2, AlertCircle, CheckCircle2, Ban } from "lucide-react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { formatDistanceToNow } from "date-fns";
 import { vi } from "date-fns/locale";
 import { smartBack } from "@/lib/smartBack";

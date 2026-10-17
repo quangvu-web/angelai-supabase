@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@/lib/router-compat'
 import { Sparkles, ChevronRight } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { useCosmicRiddles } from '@/hooks/useCosmicRiddles'

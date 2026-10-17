@@ -21,7 +21,7 @@ import {
 import { AlertCircle, Bell, RefreshCw, XCircle, Clock, ArrowLeft, Loader2, CheckCircle2, Shield } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { formatDistanceToNow } from "date-fns";
 import { vi } from "date-fns/locale";
 

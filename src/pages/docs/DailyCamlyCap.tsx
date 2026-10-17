@@ -1,5 +1,5 @@
 import { ChevronLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { smartBack } from "@/lib/smartBack";

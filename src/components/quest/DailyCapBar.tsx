@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Coins, AlertCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useDailyCamlyCap } from "@/hooks/useDailyCamlyCap";
 
 const fmt = (n: number) => n.toLocaleString("vi-VN");

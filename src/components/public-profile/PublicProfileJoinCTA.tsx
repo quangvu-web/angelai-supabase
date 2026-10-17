@@ -1,6 +1,6 @@
 import { LogIn, Globe } from "lucide-react";
 import { FUN_ID_SSO_ENABLED } from "@/lib/authFeatureFlags";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";

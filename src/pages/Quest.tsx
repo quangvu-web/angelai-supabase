@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Flame, ChevronLeft, CheckCircle2, Lock, Loader2, Package, MapPin, ChevronDown, ExternalLink, BookOpen } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { useDailyQuests, type DailyQuest } from "@/hooks/useDailyQuests";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";

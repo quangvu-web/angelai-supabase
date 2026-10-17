@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useSearchParams, useLocation } from "react-router-dom";
+import { useParams, useSearchParams, useLocation } from "@/lib/router-compat";
 import { Loader2 } from "lucide-react";
 import { usePublicProfile } from "@/hooks/usePublicProfile";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,7 +16,7 @@ import { AskAngelButton } from "@/components/public-profile/AskAngelButton";
 import { trackProfileEvent } from "@/lib/profileEvents";
 import { setCanonical, setMetaTags, injectJsonLd, cleanupSeo, getSeoOrigin } from "@/lib/seoHelpers";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Gift } from "lucide-react";
 import angelLogo from "@/assets/angel-ai-golden-logo.png";
 import { GiftCoinDialog } from "@/components/gifts/GiftCoinDialog";

@@ -8,7 +8,7 @@ import { Link as LinkIcon, Loader2, ShieldAlert, Sparkles, Wallet } from "lucide
 import { useEnqueueSbtMint, useMySbtQueue } from "@/hooks/useZkAndOnchain";
 import { useDID } from "@/hooks/useDID";
 import { OnChainStatusBadge } from "@/components/identity/OnChainStatusBadge";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import type { SBT } from "@/hooks/useSBTs";
 
 interface Props {

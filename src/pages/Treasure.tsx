@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { ChevronLeft, MapPin, Lock, CheckCircle2, Gift, Sparkles, Users } from "lucide-react";
 import { useTreasure } from "@/hooks/useTreasure";

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { Search, X, Loader2, Users } from "lucide-react";
 import { Input } from "@/components/ui/input";

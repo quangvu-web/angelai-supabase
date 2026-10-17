@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Lock, Mail, ArrowLeft, Sparkles, UserPlus, Loader2 } from "lucide-react";

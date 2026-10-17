@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "@/lib/router-compat";
 import { ChevronLeft, Send, Loader2, Sparkles, Pencil } from "lucide-react";
 import { usePet, xpForLevel, PetElement, PetPersonality } from "@/hooks/usePet";
 import { PetAvatar } from "@/components/pet/PetAvatar";

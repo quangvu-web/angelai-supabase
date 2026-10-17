@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 
 interface WhitelistEntry {

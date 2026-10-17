@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { Loader2, PawPrint, ChevronRight, Check } from "lucide-react";
 import { usePet, xpForLevel } from "@/hooks/usePet";

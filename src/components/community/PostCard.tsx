@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Heart, MessageCircle, Share2, Award, Coins, Send, Loader2, MoreHorizontal, Pencil, Trash2, X, Check, Image, ImageOff, Volume2, VolumeX, Download, Gift, Copy, Link as LinkIcon, Sparkles, ArrowRight, ExternalLink } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getProfilePath, getPostPath } from "@/lib/profileUrl";

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router-compat";
 import { useEffect, lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router-compat";
 
 // Routes where scroll position should be preserved when navigating back
 const PRESERVE_SCROLL_ROUTES = ["/chat", "/community", "/earn", "/mint", "/messages"];

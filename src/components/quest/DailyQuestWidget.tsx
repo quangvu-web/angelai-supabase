@@ -1,5 +1,5 @@
 import { Sparkles, Flame, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Card } from "@/components/ui/card";
 import { useDailyQuests } from "@/hooks/useDailyQuests";
 

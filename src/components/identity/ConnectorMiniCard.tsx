@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight, Clock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useConnectorStats } from "@/hooks/useConnectorStats";
 import { useEffect, useState } from "react";
 

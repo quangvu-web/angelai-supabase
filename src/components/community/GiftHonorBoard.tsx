@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCoinGifts } from "@/hooks/useCoinGifts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { motion } from "framer-motion";
 import camlyCoinLogo from "@/assets/camly-coin-logo.png";

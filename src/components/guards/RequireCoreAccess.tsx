@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { Loader2, ShieldAlert, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useCoordinatorRole } from "@/hooks/useCoordinatorRole";

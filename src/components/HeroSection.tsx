@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Sparkles, PenLine } from "lucide-react";
 import { motion } from "framer-motion";
 import angelAvatar from "@/assets/angel-avatar.png";

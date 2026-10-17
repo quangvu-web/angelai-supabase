@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Crown, Star, CheckCircle2, MessageCircle, Gift, ArrowRight, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import camlyCoinLogo from "@/assets/camly-coin-logo.png";
 
 export function EarlyAdopterProgress() {

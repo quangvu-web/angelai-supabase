@@ -12,7 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useWeb3WalletContext as useWeb3Wallet } from "@/contexts/Web3WalletContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import camlyCoinLogo from "@/assets/camly-coin-logo.png";
 import { createRealtimeChannelId } from "@/lib/realtime";
 

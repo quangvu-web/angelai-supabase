@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { Trophy, ChevronDown, Sparkles, Users } from "lucide-react";
 import { RainbowTitle } from "@/components/leaderboard/RainbowTitle";
 import { Button } from "@/components/ui/button";

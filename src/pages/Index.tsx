@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { setCanonical, cleanupSeo, getSeoOrigin } from "@/lib/seoHelpers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";

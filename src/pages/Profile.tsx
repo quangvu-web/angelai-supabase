@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, Link, useSearchParams, useParams, Navigate, useLocation } from "react-router-dom";
+import { useNavigate, Link, useSearchParams, useParams, Navigate, useLocation } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLightAgreement } from "@/hooks/useLightAgreement";

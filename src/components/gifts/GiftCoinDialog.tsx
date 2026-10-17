@@ -24,7 +24,7 @@ import { CryptoTransferTab } from "./CryptoTransferTab";
 import { TokenSelector, type SelectedToken } from "./TokenSelector";
 import camlyCoinLogo from "@/assets/camly-coin-logo.png";
 import funMoneyLogo from "@/assets/fun-money-logo.png";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 
 interface GiftCoinDialogProps {
   open: boolean;

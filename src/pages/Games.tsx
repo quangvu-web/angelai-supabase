@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { smartBack } from "@/lib/smartBack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import {
   Sparkles, Package, PawPrint, Map, Ticket, Sun, Users2,

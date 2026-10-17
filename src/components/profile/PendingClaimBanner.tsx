@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Coins, ArrowRight, Sparkles } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { formatDistanceToNow } from "date-fns";
 import { vi } from "date-fns/locale";
 

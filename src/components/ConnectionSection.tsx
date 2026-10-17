@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { Send } from "lucide-react";
 import fatherUniverseLogo from "@/assets/father-universe-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";

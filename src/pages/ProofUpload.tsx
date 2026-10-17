@@ -2,7 +2,7 @@ import { AppLayout } from "@/components/layouts/AppLayout";
 import { ProofUploadPanel } from "@/components/pplp/ProofUploadPanel";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Upload } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 

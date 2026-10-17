@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { formatDistanceToNow } from "date-fns";
 import { vi, enUS } from "date-fns/locale";

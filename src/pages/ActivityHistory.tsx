@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { smartBack } from "@/lib/smartBack";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import {
   Globe, RefreshCw, Download, Search, Gift, Heart, Wallet,

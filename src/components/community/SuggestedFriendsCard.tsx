@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useFriendship } from "@/hooks/useFriendship";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import angelAvatar from "@/assets/angel-avatar.png";
 import { toast } from "sonner";

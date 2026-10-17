@@ -1,5 +1,5 @@
 import { FileText, Heart, MessageCircle, Share2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";

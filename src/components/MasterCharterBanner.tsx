@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sun, Crown, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";

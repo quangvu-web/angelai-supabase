@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { X, ExternalLink, Copy, Sparkles, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { toast } from "sonner";
 import camlyCoinLogo from "@/assets/camly-coin-logo.png";

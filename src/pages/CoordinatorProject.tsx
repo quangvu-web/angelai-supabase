@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
 import { useCoordinatorRole } from "@/hooks/useCoordinatorRole";
 import { useCoordinatorProjects, useProjectVersions } from "@/hooks/useCoordinatorProjects";

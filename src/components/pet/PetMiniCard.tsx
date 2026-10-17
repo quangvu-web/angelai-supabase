@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Card } from "@/components/ui/card";
 import { usePet, xpForLevel } from "@/hooks/usePet";
 import { PetAvatar } from "@/components/pet/PetAvatar";

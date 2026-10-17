@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@/lib/router-compat";
 import { angelChatUrl } from "@/lib/angelEndpoint";
 
 type Msg = { role: "user" | "assistant"; text: string; imageUrl?: string };

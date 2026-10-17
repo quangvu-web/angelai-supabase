@@ -24,7 +24,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { useCamlyCoin } from "@/hooks/useCamlyCoin";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { 
   Coins, 
   Trophy, 

@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Crown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useSeasonPass } from "@/hooks/useSeasonPass";
 import { SeasonProgressBar } from "@/components/season/SeasonProgressBar";
 

@@ -2,7 +2,7 @@ import { Sparkles, Award } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { useMastery } from "@/hooks/useMastery";
 
 export function MasteryMiniCard() {

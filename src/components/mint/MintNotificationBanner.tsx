@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Bell, Coins, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "@/lib/router-compat";
 
 export function MintNotificationBanner() {
   const { user } = useAuth();

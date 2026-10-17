@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { stripMarkdown } from "@/lib/stripMarkdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { 
   ArrowLeft, 
   MessageSquare, 

@@ -3,7 +3,7 @@ import { smartBack } from "@/lib/smartBack";
 import { stripMarkdown } from "@/lib/stripMarkdown";
 import { getPlainTextForClipboard, isInlineImageSrc } from "@/lib/clipboardText";
 
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "@/lib/router-compat";
 import { 
   ArrowLeft, Send, Square, Sparkles, Lock, Coins, Heart, Copy, Share2, 
   ImagePlus, Camera, Wand2, X, Download, Loader2, MessageSquare,

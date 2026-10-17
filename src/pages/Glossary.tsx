@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { smartBack } from "@/lib/smartBack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { ChevronLeft, BookOpen, Search } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";

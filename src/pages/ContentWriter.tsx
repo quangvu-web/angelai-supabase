@@ -30,7 +30,7 @@ import {
   Loader2,
   ArrowLeft
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import angelAvatar from "@/assets/angel-avatar.png";
 
 const contentCategories = [

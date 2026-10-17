@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "@/lib/router-compat";
 import { Home, Users, MessageCircle, Gift, Plus, LogOut, ChevronDown, Shield } from "lucide-react";
 import { GiftCoinDialog } from "@/components/gifts/GiftCoinDialog";
 import { Web3WalletButton } from "@/components/Web3WalletButton";

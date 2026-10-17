@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { smartBack } from "@/lib/smartBack";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { GiftCoinDialog } from "@/components/gifts/GiftCoinDialog";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { useAuth } from "@/hooks/useAuth";
 import { useCoordinatorRole } from "@/hooks/useCoordinatorRole";

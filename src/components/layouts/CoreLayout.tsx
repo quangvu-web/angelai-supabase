@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "@/lib/router-compat";
 import { Header } from "@/components/Header";
 import { MainSidebar } from "@/components/MainSidebar";
 import { BackToTopButton } from "@/components/BackToTopButton";

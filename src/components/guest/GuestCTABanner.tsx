@@ -1,6 +1,6 @@
 import { Globe, LogIn, Sparkles } from "lucide-react";
 import { FUN_ID_SSO_ENABLED } from "@/lib/authFeatureFlags";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";

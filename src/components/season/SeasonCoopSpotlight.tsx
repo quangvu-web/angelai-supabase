@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HeartHandshake, Loader2, Network, Users2, Compass, ArrowRight } from "lucide-react";
 import { useSeasonCoopSpotlight } from "@/hooks/useSeasonCoopSpotlight";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";

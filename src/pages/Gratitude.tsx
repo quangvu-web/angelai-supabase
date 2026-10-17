@@ -1,6 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import DailyGratitude from "@/components/DailyGratitude";
 import GratitudeJournal from "@/components/GratitudeJournal";
 import { smartBack } from "@/lib/smartBack";

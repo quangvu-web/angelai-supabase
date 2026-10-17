@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { useAuth } from "@/hooks/useAuth";
 import { useLightAgreement } from "@/hooks/useLightAgreement";
 import { useProfileCompletion } from "@/hooks/useProfileCompletion";

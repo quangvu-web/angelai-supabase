@@ -1,5 +1,5 @@
 import { UserPlus, MessageCircle, Gift, UserCheck, Clock, Loader2, Lock, Heart } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { AuthActionGuard } from "@/components/AuthActionGuard";

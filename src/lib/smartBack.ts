@@ -1,4 +1,4 @@
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "@/lib/router-compat";
 
 /**
  * Smart back navigation that works inside Telegram in-app browser.

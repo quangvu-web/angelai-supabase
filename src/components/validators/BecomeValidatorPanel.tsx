@@ -10,7 +10,7 @@ import { useDID } from "@/hooks/useDID";
 import { useTrustProfile } from "@/hooks/useTrustProfile";
 import { useCamlyCoin } from "@/hooks/useCamlyCoin";
 import { useRegisterOrg, useStakeValidator, useMyOrgProfile } from "@/hooks/useOrgIdentity";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { toast } from "sonner";
 
 const TIER_ORDER = ["T0", "T1", "T2", "T3", "T4"];

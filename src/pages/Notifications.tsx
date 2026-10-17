@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { Bell, ArrowLeft, CheckCheck, Users, Check } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { Button } from "@/components/ui/button";
 import { useNotifications, type Notification } from "@/hooks/useNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";

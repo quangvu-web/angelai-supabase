@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Award, Lock, CheckCircle2, Hourglass, Copy, ExternalLink, AlertCircle, RefreshCw, Search, X } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { toast } from "sonner";
 
 interface KeeperItem {

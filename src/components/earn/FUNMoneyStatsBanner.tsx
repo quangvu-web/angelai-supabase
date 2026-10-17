@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useFUNMoneyStats } from "@/hooks/useFUNMoneyStats";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Coins, CheckCircle, Sparkles, ArrowRight } from "lucide-react";
 import funMoneyLogo from "@/assets/fun-money-logo.png";
 

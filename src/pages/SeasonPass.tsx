@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Crown, Sparkles, Loader2, ArrowLeft } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import { useSeasonPass } from "@/hooks/useSeasonPass";
 import { SeasonRewardCard } from "@/components/season/SeasonRewardCard";
 import { SeasonProgressBar } from "@/components/season/SeasonProgressBar";

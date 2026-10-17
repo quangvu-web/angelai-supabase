@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { Loader2 } from "lucide-react";
 import { useNftCollections } from "@/hooks/useNftCollections";
 import { NftCatalogCard } from "./NftCatalogCard";

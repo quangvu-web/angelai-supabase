@@ -4,7 +4,7 @@ import funProfileLogo from "@/assets/fun-profile-logo.png";
 import goldDiamondBadge from "@/assets/gold-diamond-badge.png";
 import funPlayLogo from "@/assets/fun-play-logo.png";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@/lib/router-compat";
 import { getProfilePath } from "@/lib/profileUrl";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PoPLBadge } from "@/components/profile/PoPLBadge";
