@@ -1,0 +1,215 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FUN Core API",
+    "version": "1.0.0",
+    "description": "Unified API surface for the FUN Ecosystem — Identity, PPLP, Wallet, Game, AI, Admin. All consumers (Fun.Rich, LoveHUB, Academy, Farm, Charity) speak this contract.",
+    "contact": {
+      "name": "Angel A.I. Core",
+      "url": "https://angel-funrich.lovable.app"
+    },
+    "license": {
+      "name": "FUN Charter v1",
+      "url": "https://angel-funrich.lovable.app/docs/light-constitution"
+    }
+  },
+  "servers": [
+    { "url": "https://api.fun.rich/v1", "description": "Production (planned)" },
+    { "url": "https://ssjoetiitctqzapymtzl.supabase.co/functions/v1", "description": "Lovable Cloud edge functions" }
+  ],
+  "tags": [
+    { "name": "Identity", "description": "FUN ID, profile, DID/SBT/DIB, trust" },
+    { "name": "PPLP", "description": "AI Integrity scoring, epoch mint, light score" },
+    { "name": "Wallet", "description": "FUN Money + Camly balance, gift, withdraw" },
+    { "name": "Game", "description": "Quests, lantern, season pass, treasure" },
+    { "name": "AI", "description": "Angel Chat, embeddings, image generation" },
+    { "name": "Admin", "description": "Mint cycle, fraud, governance — coordinator+" }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Supabase user JWT"
+      },
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-angel-ingest-key",
+        "description": "Service-to-service ingest key (ANGEL_AI_INGEST_KEY)"
+      }
+    },
+    "schemas": {
+      "FunProfile": {
+        "type": "object",
+        "properties": {
+          "fun_id": { "type": "string", "example": "fun_xxxx" },
+          "display_name": { "type": "string" },
+          "handle": { "type": "string" },
+          "avatar_url": { "type": "string", "format": "uri" },
+          "tier": { "type": "integer", "minimum": 0, "maximum": 5 },
+          "display_ls": { "type": "number" }
+        }
+      },
+      "PplpScore": {
+        "type": "object",
+        "properties": {
+          "user_id": { "type": "string", "format": "uuid" },
+          "action": { "type": "string", "example": "post.video" },
+          "score": { "type": "number", "minimum": 0, "maximum": 5 },
+          "risk": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence_hash": { "type": "string" }
+        },
+        "required": ["user_id", "action", "score"]
+      },
+      "WalletBalance": {
+        "type": "object",
+        "properties": {
+          "fun_money": { "type": "number" },
+          "fun_money_locked": { "type": "number" },
+          "camly_coin": { "type": "number" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Identity"], "summary": "Email + password sign-in",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["email","password"], "properties": { "email": {"type":"string","format":"email"}, "password": {"type":"string","minLength":8} } } } } },
+        "responses": { "200": { "description": "JWT + refresh", "content": { "application/json": { "example": { "access_token": "eyJ...", "refresh_token": "..." } } } }, "401": { "description": "Invalid credentials" } }
+      }
+    },
+    "/auth/oauth": {
+      "post": {
+        "tags": ["Identity"], "summary": "Google OAuth bridge (PKCE)",
+        "responses": { "200": { "description": "Redirect URL" } }
+      }
+    },
+    "/profile/{funId}": {
+      "get": {
+        "tags": ["Identity"], "summary": "Public profile by FUN ID",
+        "parameters": [{ "name": "funId", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Profile", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FunProfile" } } } } }
+      }
+    },
+    "/identity/trust/{userId}": {
+      "get": {
+        "tags": ["Identity"], "summary": "Trust profile + tier (T0–T4)",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }],
+        "responses": { "200": { "description": "Trust profile" } }
+      }
+    },
+    "/pplp/score": {
+      "post": {
+        "tags": ["PPLP"], "summary": "AI Integrity score for an action",
+        "security": [{ "apiKeyAuth": [] }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PplpScore" } } } },
+        "responses": { "200": { "description": "Stored score" }, "403": { "description": "Bad ingest key" } }
+      }
+    },
+    "/pplp/preview/{userId}": {
+      "get": {
+        "tags": ["PPLP"], "summary": "Epoch mint preview (next cycle estimate)",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }],
+        "responses": { "200": { "description": "Mint preview" } }
+      }
+    },
+    "/pplp/light/{userId}": {
+      "get": {
+        "tags": ["PPLP"], "summary": "TLS + 6-tier display",
+        "parameters": [{ "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }],
+        "responses": { "200": { "description": "Light score" } }
+      }
+    },
+    "/pplp/claim": {
+      "post": {
+        "tags": ["PPLP"], "summary": "Claim epoch allocation",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Allocation claimed" } }
+      }
+    },
+    "/wallet/balance/{userId}": {
+      "get": {
+        "tags": ["Wallet"], "summary": "FUN Money + Camly balance",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }],
+        "responses": { "200": { "description": "Balance", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/WalletBalance" } } } } }
+      }
+    },
+    "/wallet/withdraw": {
+      "post": {
+        "tags": ["Wallet"], "summary": "Request FUN Money withdrawal (3-of-3 multisig)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "202": { "description": "Queued for multisig" } }
+      }
+    },
+    "/wallet/gift": {
+      "post": {
+        "tags": ["Wallet"], "summary": "Send Camly Coin gift",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Gift recorded" } }
+      }
+    },
+    "/game/quest/today": {
+      "get": {
+        "tags": ["Game"], "summary": "5 daily light quests assigned today",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Quest list" } }
+      }
+    },
+    "/game/quest/claim": {
+      "post": {
+        "tags": ["Game"], "summary": "Claim quest reward (AI scores evidence first)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Reward granted" } }
+      }
+    },
+    "/game/lantern/{userId}": {
+      "get": {
+        "tags": ["Game"], "summary": "Weekly lantern path progress (7 stages)",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }],
+        "responses": { "200": { "description": "Lantern state" } }
+      }
+    },
+    "/ai/chat": {
+      "post": {
+        "tags": ["AI"], "summary": "Angel Chat (SSE stream, Lovable AI Gateway)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Stream", "content": { "text/event-stream": {} } } }
+      }
+    },
+    "/ai/embed": {
+      "post": {
+        "tags": ["AI"], "summary": "Text embedding for ingest",
+        "security": [{ "apiKeyAuth": [] }],
+        "responses": { "200": { "description": "Vector" } }
+      }
+    },
+    "/admin/mint-cycle/run": {
+      "post": {
+        "tags": ["Admin"], "summary": "Trigger epoch mint cycle",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Cycle started" }, "403": { "description": "Not admin" } }
+      }
+    },
+    "/admin/fraud/resolve": {
+      "post": {
+        "tags": ["Admin"], "summary": "Resolve fraud alert (coordinator+)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Resolved" } }
+      }
+    }
+  }
+}

@@ -1,19 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { lazy } from "react";
+const Index = lazy(() => import("@/pages/Index"));
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Trang trắng" },
-      { name: "description", content: "Một trang trắng hoàn toàn." },
-      { property: "og:title", content: "Trang trắng" },
-      { property: "og:description", content: "Một trang trắng hoàn toàn." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { title: "ANGEL AI — Trang chủ" },
+      { name: "description", content: "ANGEL AI — Trang chủ" },
+      { property: "og:title", content: "ANGEL AI — Trang chủ" },
+      { property: "og:description", content: "ANGEL AI — Trang chủ" },
     ],
   }),
-  component: Index,
+  component: RouteComponent,
 });
 
-function Index() {
-  return <div className="min-h-screen bg-background" />;
+function RouteComponent() {
+  return <Index />;
 }

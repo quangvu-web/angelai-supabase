@@ -1,0 +1,931 @@
+import { useEffect, useState, useRef } from "react";
+import { Link } from "@/lib/router-compat";
+import { Heart, MessageCircle, Share2, Award, Coins, Send, Loader2, MoreHorizontal, Pencil, Trash2, X, Check, Image, ImageOff, Volume2, VolumeX, Download, Gift, Copy, Link as LinkIcon, Sparkles, ArrowRight, ExternalLink } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { getProfilePath, getPostPath } from "@/lib/profileUrl";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea";
+import { motion, AnimatePresence } from "framer-motion";
+import angelAvatar from "@/assets/angel-avatar.png";
+import { CommunityPost, CommunityComment } from "@/hooks/useCommunityPosts";
+import { formatDistanceToNow } from "date-fns";
+import { vi } from "date-fns/locale";
+import { supabase } from "@/integrations/supabase/client";
+import { PostImageGrid } from "./PostImageGrid";
+import { LikeButtonWithReactions, ReactionType } from "./PostReactionPicker";
+import ShareDialog from "@/components/ShareDialog";
+import { LinkifiedContent } from "./LinkifiedContent";
+import { toast } from "sonner";
+import { CelebrationPostCard } from "./CelebrationPostCard";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useTextToSpeech } from "@/hooks/useTextToSpeech";
+import { GiftCoinDialog } from "@/components/gifts/GiftCoinDialog";
+import { PostDeepAnalysisButton } from "./PostDeepAnalysisButton";
+
+interface PostCardProps {
+  post: CommunityPost;
+  currentUserId?: string;
+  onLike: (postId: string) => Promise<any>;
+  onShare: (postId: string) => Promise<any>;
+  onComment: (postId: string, content: string) => Promise<any>;
+  onEdit?: (postId: string, content: string, imageUrls?: string[]) => Promise<any>;
+  onDelete?: (postId: string) => Promise<any>;
+  fetchComments: (postId: string) => Promise<CommunityComment[]>;
+}
+
+export function PostCard({
+  post,
+  currentUserId,
+  onLike,
+  onShare,
+  onComment,
+  onEdit,
+  onDelete,
+  fetchComments,
+}: PostCardProps) {
+  const [isLiking, setIsLiking] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState<CommunityComment[]>([]);
+  const [isLoadingComments, setIsLoadingComments] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [isSubmittingComment, setIsSubmittingComment] = useState(false);
+  
+  // Edit state - support multiple images
+  const [isEditing, setIsEditing] = useState(false);
+  const [editContent, setEditContent] = useState(post.content);
+  const [editImageUrls, setEditImageUrls] = useState<string[]>(
+    post.image_urls && post.image_urls.length > 0 
+      ? post.image_urls 
+      : (post.image_url ? [post.image_url] : [])
+  );
+  const [editNewFiles, setEditNewFiles] = useState<File[]>([]);
+  const [editNewPreviews, setEditNewPreviews] = useState<string[]>([]);
+  const [isSubmittingEdit, setIsSubmittingEdit] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const editFileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Delete state
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Share dialog state
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  
+  // Tip dialog state
+  const [showTipDialog, setShowTipDialog] = useState(false);
+
+  // TTS Hook for audio playback and download
+  const { isLoading: ttsLoading, isPlaying: ttsPlaying, isDownloading: ttsDownloading, currentMessageId: ttsMessageId, playText, stopAudio, downloadAudio } = useTextToSpeech();
+
+  // Per-post reaction (UI-only for now): persist locally so it doesn't revert to ❤️
+  const reactionStorageKey = `community:post-reaction:${post.id}`;
+  const [selectedReaction, setSelectedReaction] = useState<ReactionType | null>(() => {
+    if (typeof window === "undefined") return null;
+    const v = window.localStorage.getItem(reactionStorageKey) as ReactionType | null;
+    return v;
+  });
+
+  const isOwner = currentUserId === post.user_id;
+  
+  // Get images - prefer image_urls array, fallback to single image_url
+  const postImages = post.image_urls && post.image_urls.length > 0 
+    ? post.image_urls 
+    : (post.image_url ? [post.image_url] : []);
+
+  // Keep local reaction state consistent with liked state
+  useEffect(() => {
+    if (!post.is_liked_by_me && selectedReaction) {
+      setSelectedReaction(null);
+      if (typeof window !== "undefined") window.localStorage.removeItem(reactionStorageKey);
+    }
+  }, [post.is_liked_by_me, reactionStorageKey, selectedReaction]);
+
+  const handleLike = (reactionId?: ReactionType) => {
+    const isLiked = post.is_liked_by_me || false;
+    const nextLiked = !isLiked;
+
+    if (nextLiked) {
+      const nextReaction: ReactionType = reactionId ?? selectedReaction ?? "heart";
+      setSelectedReaction(nextReaction);
+      if (typeof window !== "undefined") window.localStorage.setItem(reactionStorageKey, nextReaction);
+    } else {
+      setSelectedReaction(null);
+      if (typeof window !== "undefined") window.localStorage.removeItem(reactionStorageKey);
+    }
+
+    setIsLiking(true);
+    void onLike(post.id).finally(() => setIsLiking(false));
+  };
+
+  const [sharePopoverOpen, setSharePopoverOpen] = useState(false);
+
+  const handleShareClick = () => {
+    setSharePopoverOpen(false);
+    setShowShareDialog(true);
+  };
+
+  const handleCopyPostLink = async () => {
+    const path = getPostPath(post.id, post.slug, post.user_handle);
+    const fullUrl = `https://angel.fun.rich${path}`;
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+      toast.success("Đã sao chép liên kết! 🔗");
+    } catch {
+      toast.error("Không thể sao chép.");
+    }
+    setSharePopoverOpen(false);
+  };
+
+  const handleShareSuccess = async () => {
+    // Only update share count on the post, ShareDialog handles the reward logic
+    setIsSharing(true);
+    try {
+      // Just update the shares_count in community_posts, no reward here
+      await supabase
+        .from('community_posts')
+        .update({ shares_count: (post.shares_count || 0) + 1 })
+        .eq('id', post.id);
+      
+      // Record share in community_shares (for tracking)
+      await supabase
+        .from('community_shares')
+        .insert({
+          post_id: post.id,
+          sharer_id: currentUserId,
+          sharer_rewarded: true, // ShareDialog handles reward
+          post_owner_rewarded: false
+        });
+    } catch (error) {
+      console.error("Error updating share count:", error);
+    }
+    setIsSharing(false);
+    setShowShareDialog(false);
+  };
+
+  const handleToggleComments = async () => {
+    if (!showComments) {
+      setIsLoadingComments(true);
+      const data = await fetchComments(post.id);
+      setComments(data);
+      setIsLoadingComments(false);
+    }
+    setShowComments(!showComments);
+  };
+
+  const handleSubmitComment = async () => {
+    if (!commentText.trim()) return;
+
+    setIsSubmittingComment(true);
+    const result = await onComment(post.id, commentText.trim());
+    
+    if (result.success) {
+      setCommentText("");
+      // Refresh comments
+      const data = await fetchComments(post.id);
+      setComments(data);
+    }
+    setIsSubmittingComment(false);
+  };
+
+  const handleStartEdit = () => {
+    setEditContent(post.content);
+    setEditImageUrls(
+      post.image_urls && post.image_urls.length > 0 
+        ? post.image_urls 
+        : (post.image_url ? [post.image_url] : [])
+    );
+    setEditNewFiles([]);
+    setEditNewPreviews([]);
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setEditContent(post.content);
+    setEditImageUrls(
+      post.image_urls && post.image_urls.length > 0 
+        ? post.image_urls 
+        : (post.image_url ? [post.image_url] : [])
+    );
+    setEditNewFiles([]);
+    setEditNewPreviews([]);
+    setIsEditing(false);
+    if (editFileInputRef.current) {
+      editFileInputRef.current.value = "";
+    }
+  };
+
+  const handleEditImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    const totalImages = editImageUrls.length + editNewFiles.length + files.length;
+    
+    if (totalImages > 30) {
+      alert("Tối đa 30 ảnh cho một bài viết");
+      return;
+    }
+    
+    const validFiles: File[] = [];
+    const newPreviews: string[] = [];
+    
+    files.forEach(file => {
+      if (file.size > 5 * 1024 * 1024) {
+        alert(`Ảnh ${file.name} vượt quá 5MB`);
+        return;
+      }
+      validFiles.push(file);
+      
+      const reader = new FileReader();
+      reader.onload = () => {
+        setEditNewPreviews(prev => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    setEditNewFiles(prev => [...prev, ...validFiles]);
+    
+    if (editFileInputRef.current) {
+      editFileInputRef.current.value = "";
+    }
+  };
+
+  const handleRemoveExistingImage = (index: number) => {
+    setEditImageUrls(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleRemoveNewImage = (index: number) => {
+    setEditNewFiles(prev => prev.filter((_, i) => i !== index));
+    setEditNewPreviews(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleRemoveAllImages = () => {
+    setEditImageUrls([]);
+    setEditNewFiles([]);
+    setEditNewPreviews([]);
+    if (editFileInputRef.current) {
+      editFileInputRef.current.value = "";
+    }
+  };
+
+  const uploadEditImage = async (file: File): Promise<string | null> => {
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `posts/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("community")
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: urlData } = supabase.storage
+        .from("community")
+        .getPublicUrl(filePath);
+
+      return urlData.publicUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    }
+  };
+
+  const handleSubmitEdit = async () => {
+    if (!editContent.trim() || !onEdit) return;
+
+    setIsSubmittingEdit(true);
+    setIsUploadingImage(true);
+    
+    try {
+      // Upload all new files
+      const uploadedUrls: string[] = [];
+      for (const file of editNewFiles) {
+        const url = await uploadEditImage(file);
+        if (url) {
+          uploadedUrls.push(url);
+        }
+      }
+      
+      // Combine existing URLs with newly uploaded URLs
+      const finalImageUrls = [...editImageUrls, ...uploadedUrls];
+      
+      const result = await onEdit(post.id, editContent.trim(), finalImageUrls.length > 0 ? finalImageUrls : undefined);
+      
+      if (result.success) {
+        setIsEditing(false);
+        setEditNewFiles([]);
+        setEditNewPreviews([]);
+      }
+    } finally {
+      setIsSubmittingEdit(false);
+      setIsUploadingImage(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!onDelete) return;
+
+    setIsDeleting(true);
+    await onDelete(post.id);
+    setIsDeleting(false);
+    setShowDeleteDialog(false);
+  };
+
+  const likesCount = post.likes_count || 0;
+  const commentsCount = post.comments_count || 0;
+  const sharesCount = post.shares_count || 0;
+  const isNearThreshold = likesCount >= 3 && likesCount < 5;
+
+  // Celebration post helpers
+  const isCelebration = (post as any).post_type === "celebration";
+  const celebrationMeta = isCelebration ? (post as any).metadata : null;
+  const expiresAt = isCelebration ? (post as any).expires_at : null;
+  const [countdownText, setCountdownText] = useState("");
+
+  useEffect(() => {
+    if (!expiresAt) return;
+    const update = () => {
+      const diff = new Date(expiresAt).getTime() - Date.now();
+      if (diff <= 0) { setCountdownText("Đã hết hạn"); return; }
+      const hours = Math.floor(diff / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      setCountdownText(`${hours}h ${mins}m`);
+    };
+    update();
+    const id = setInterval(update, 60000);
+    return () => clearInterval(id);
+  }, [expiresAt]);
+
+  return (
+    <>
+      <Card className={`
+        overflow-hidden transition-all duration-300 w-full max-w-full
+        ${isCelebration ? 'border-amber-400 bg-gradient-to-br from-amber-50/60 via-yellow-50/40 to-orange-50/30 shadow-[0_0_20px_-5px_rgba(218,165,32,0.2)]' : ''}
+        ${!isCelebration && post.is_rewarded ? 'border-amber-300 bg-gradient-to-r from-amber-50/50 to-orange-50/30' : ''}
+        ${!isCelebration && !post.is_rewarded ? 'border-primary/10' : ''}
+      `}>
+        <CardContent className="p-4 sm:p-5 overflow-hidden">
+          {/* Celebration Badge */}
+          {isCelebration && (
+            <div className="flex items-center justify-between mb-3 pb-2 border-b border-amber-200/60">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-white text-xs font-bold shadow-sm">
+                <Gift className="w-3.5 h-3.5" />
+                Thiệp Tặng Thưởng
+              </span>
+              {expiresAt && countdownText && (
+                <span className="text-xs text-amber-600/80 font-medium">
+                  ⏳ {countdownText}
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Header */}
+          <div className="flex items-start gap-3 mb-4 min-w-0">
+            <Link to={getProfilePath(post.user_id, (post as any).user_handle)}>
+              <Avatar className="w-11 h-11 border-2 border-primary/20 hover:border-primary/50 transition-colors cursor-pointer">
+                <AvatarImage src={post.user_avatar_url || angelAvatar} alt={post.user_display_name} />
+                <AvatarFallback>{post.user_display_name?.charAt(0) || "U"}</AvatarFallback>
+              </Avatar>
+            </Link>
+
+            <div className="flex-1 min-w-0 overflow-hidden">
+              <div className="flex items-center gap-2 flex-wrap">
+                <Link to={getProfilePath(post.user_id, (post as any).user_handle)} className="hover:underline min-w-0">
+                  <span className="font-semibold text-foreground truncate block max-w-[150px] sm:max-w-[200px]">
+                    {post.user_display_name}
+                  </span>
+                </Link>
+                {post.is_rewarded && (
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200 flex items-center gap-1 shrink-0">
+                    <Award className="w-3 h-3" />
+                    <span className="hidden sm:inline">Đã thưởng</span>
+                    <span className="sm:hidden">✓</span>
+                  </span>
+                )}
+              </div>
+              <Link
+                to={getPostPath(post.id, post.slug, post.user_handle)}
+                className="text-xs text-foreground-muted block truncate hover:underline"
+              >
+                {formatDistanceToNow(new Date(post.created_at), { addSuffix: true, locale: vi })}
+              </Link>
+            </div>
+
+            {/* Owner Actions Menu */}
+            {isOwner && !isCelebration && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <MoreHorizontal className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleStartEdit} className="cursor-pointer">
+                    <Pencil className="w-4 h-4 mr-2" />
+                    Chỉnh sửa bài viết
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={() => setShowDeleteDialog(true)} 
+                    className="cursor-pointer text-red-600 focus:text-red-600"
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Xóa bài viết
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          </div>
+
+          {/* Celebration Rich Card */}
+          {isCelebration && celebrationMeta && (
+            <CelebrationPostCard meta={celebrationMeta} />
+          )}
+
+          {/* Content - Normal or Edit Mode */}
+          {isEditing ? (
+            <div className="mb-4 space-y-3">
+              <Textarea
+                value={editContent}
+                onChange={(e) => setEditContent(e.target.value)}
+                className="min-h-[100px] resize-none"
+                placeholder="Nội dung bài viết..."
+              />
+              
+              {/* Edit Image Section - Multi-image support like Facebook */}
+              <div className="space-y-3">
+                {/* Existing images grid */}
+                {editImageUrls.length > 0 && (
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                    {editImageUrls.map((url, index) => (
+                      <div key={`existing-${index}`} className="relative aspect-square">
+                        <img
+                          src={url}
+                          alt={`Image ${index + 1}`}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 h-6 w-6 rounded-full"
+                          onClick={() => handleRemoveExistingImage(index)}
+                          disabled={isSubmittingEdit || isUploadingImage}
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {/* New images previews */}
+                {editNewPreviews.length > 0 && (
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                    {editNewPreviews.map((preview, index) => (
+                      <div key={`new-${index}`} className="relative aspect-square">
+                        <img
+                          src={preview}
+                          alt={`New ${index + 1}`}
+                          className="w-full h-full object-cover rounded-lg border-2 border-primary/30"
+                        />
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 h-6 w-6 rounded-full"
+                          onClick={() => handleRemoveNewImage(index)}
+                          disabled={isSubmittingEdit || isUploadingImage}
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
+                        <span className="absolute bottom-1 left-1 text-xs bg-primary text-primary-foreground px-1 rounded">
+                          Mới
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Image upload input - multiple */}
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleEditImageSelect}
+                  ref={editFileInputRef}
+                  className="hidden"
+                />
+                
+                {/* Image action buttons */}
+                <div className="flex gap-2 flex-wrap">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => editFileInputRef.current?.click()}
+                    disabled={isSubmittingEdit || isUploadingImage || (editImageUrls.length + editNewFiles.length) >= 30}
+                  >
+                    {isUploadingImage ? (
+                      <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                    ) : (
+                      <Image className="w-4 h-4 mr-1" />
+                    )}
+                    Thêm ảnh
+                  </Button>
+                  
+                  {(editImageUrls.length > 0 || editNewPreviews.length > 0) && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleRemoveAllImages}
+                      disabled={isSubmittingEdit || isUploadingImage}
+                      className="text-red-600 hover:text-red-700"
+                    >
+                      <ImageOff className="w-4 h-4 mr-1" />
+                      Xóa tất cả ảnh
+                    </Button>
+                  )}
+                  
+                  {(editImageUrls.length + editNewFiles.length) > 0 && (
+                    <span className="text-xs text-muted-foreground self-center">
+                      {editImageUrls.length + editNewFiles.length}/30 ảnh
+                    </span>
+                  )}
+                </div>
+              </div>
+              
+              <div className="flex justify-end gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleCancelEdit}
+                  disabled={isSubmittingEdit || isUploadingImage}
+                >
+                  <X className="w-4 h-4 mr-1" />
+                  Hủy
+                </Button>
+                <Button 
+                  size="sm" 
+                  onClick={handleSubmitEdit}
+                  disabled={!editContent.trim() || isSubmittingEdit || isUploadingImage}
+                  className="bg-sapphire-gradient"
+                >
+                  {isSubmittingEdit || isUploadingImage ? (
+                    <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                  ) : (
+                    <Check className="w-4 h-4 mr-1" />
+                  )}
+                  Lưu
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <p className="text-base sm:text-lg text-foreground leading-relaxed mb-4 whitespace-pre-wrap break-words overflow-hidden w-full post-content">
+              <LinkifiedContent content={post.content} />
+            </p>
+          )}
+
+          {/* Video Player */}
+          {!isEditing && post.video_url && (
+            <div className="mb-3 rounded-xl overflow-hidden bg-black/5">
+              <video
+                src={post.video_url}
+                className="w-full max-h-[500px] object-contain rounded-xl"
+                controls
+                preload="metadata"
+                playsInline
+              />
+            </div>
+          )}
+
+          {/* Images Grid - only show in non-edit mode */}
+          {!isEditing && postImages.length > 0 && (
+            <PostImageGrid images={postImages} />
+          )}
+
+          {/* Angel AI Deep Analysis (on-demand) */}
+          {!isEditing && post.content && post.content.length >= 30 && (
+            <PostDeepAnalysisButton
+              postId={post.id}
+              cached={(post.metadata as Record<string, unknown> | null)?.deep_analysis as never}
+            />
+          )}
+
+          {/* Stats */}
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-foreground-muted mb-3 pb-3 border-b border-primary/10 flex-wrap">
+            <span>{likesCount} lượt thích</span>
+            <span>{commentsCount} bình luận</span>
+            <span>{sharesCount} chia sẻ</span>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center justify-between gap-1">
+            <LikeButtonWithReactions
+              isLiked={post.is_liked_by_me || false}
+              likesCount={likesCount}
+              isLiking={isLiking}
+              onLike={handleLike}
+              isNearThreshold={isNearThreshold}
+              isRewarded={post.is_rewarded}
+              currentReaction={selectedReaction}
+            />
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleToggleComments}
+              className="flex-1 text-foreground-muted hover:bg-primary/5"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              <span className="hidden sm:inline">Bình luận</span>
+            </Button>
+
+            <Popover open={sharePopoverOpen} onOpenChange={setSharePopoverOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={isSharing || !currentUserId}
+                  className={`flex-1 hover:bg-primary/5 ${post.is_shared_by_me ? 'text-green-600' : 'text-foreground-muted'}`}
+                  title={!currentUserId ? 'Vui lòng đăng nhập để chia sẻ' : ''}
+                >
+                  {isSharing ? (
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  ) : (
+                    <Share2 className={`w-5 h-5 mr-2 ${post.is_shared_by_me ? 'fill-green-200' : ''}`} />
+                  )}
+                  <span className="hidden sm:inline">{post.is_shared_by_me ? 'Đã chia sẻ' : 'Chia sẻ'}</span>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-52 p-1" side="top" align="center">
+                <button
+                  onClick={handleShareClick}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                >
+                  <Share2 className="w-4 h-4" />
+                  Chia sẻ lên trang cá nhân
+                </button>
+                <button
+                  onClick={handleCopyPostLink}
+                  className="flex items-center gap-2 w-full px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                >
+                  <Copy className="w-4 h-4" />
+                  Sao chép liên kết
+                </button>
+              </PopoverContent>
+            </Popover>
+
+            {/* Tip/Reward Button */}
+            {currentUserId && currentUserId !== post.user_id && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowTipDialog(true)}
+                    className="hover:bg-amber-100/70 text-amber-600 hover:text-amber-700"
+                  >
+                    <Gift className="w-5 h-5 mr-1" />
+                    <span className="hidden sm:inline">Thưởng</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top" className="bg-primary-deep text-white border-0">
+                  Tặng thưởng cho tác giả
+                </TooltipContent>
+              </Tooltip>
+            )}
+
+            {/* Audio Button - Listen to post */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const isCurrentPost = ttsMessageId === `post-${post.id}`;
+                    if (isCurrentPost && ttsPlaying) {
+                      stopAudio();
+                    } else {
+                      playText(post.content, `post-${post.id}`);
+                    }
+                  }}
+                  disabled={ttsLoading && ttsMessageId === `post-${post.id}`}
+                  className={`flex-1 hover:bg-primary/5 ${
+                    ttsMessageId === `post-${post.id}` && ttsPlaying 
+                      ? 'text-primary bg-primary/10' 
+                      : 'text-foreground-muted'
+                  }`}
+                >
+                  {ttsLoading && ttsMessageId === `post-${post.id}` ? (
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  ) : ttsMessageId === `post-${post.id}` && ttsPlaying ? (
+                    <VolumeX className="w-5 h-5 mr-2" />
+                  ) : (
+                    <Volume2 className="w-5 h-5 mr-2" />
+                  )}
+                  <span className="hidden sm:inline">
+                    {ttsMessageId === `post-${post.id}` && ttsPlaying ? 'Dừng' : 'Nghe'}
+                  </span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="bg-primary-deep text-white border-0">
+                {ttsLoading && ttsMessageId === `post-${post.id}` 
+                  ? 'Đang tạo giọng đọc...' 
+                  : ttsMessageId === `post-${post.id}` && ttsPlaying 
+                    ? 'Dừng phát' 
+                    : 'Nghe Angel AI đọc bài viết'}
+              </TooltipContent>
+            </Tooltip>
+
+            {/* Download MP3 Button */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    const authorName = post.user_display_name?.replace(/\s+/g, '-') || 'user';
+                    const postDate = new Date(post.created_at).toISOString().split('T')[0];
+                    const filename = `angel-ai-${authorName}-${postDate}.mp3`;
+                    downloadAudio(post.content, filename);
+                  }}
+                  disabled={ttsDownloading}
+                  className="hover:bg-primary/5 text-foreground-muted hover:text-primary"
+                >
+                  {ttsDownloading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Download className="w-5 h-5" />
+                  )}
+                  <span className="hidden sm:inline ml-2">MP3</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="bg-primary-deep text-white border-0">
+                {ttsDownloading ? 'Đang tạo file MP3...' : 'Tải file MP3 để chia sẻ'}
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          {/* Comments Section */}
+          <AnimatePresence>
+            {showComments && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-4 pt-4 border-t border-primary/10"
+              >
+                {/* Comment Input */}
+                <div className="flex gap-3 mb-4">
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src={angelAvatar} />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 flex gap-2">
+                    <Textarea
+                      placeholder="Viết bình luận (tối thiểu 50 ký tự để nhận thưởng)..."
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                      className="min-h-[60px] text-sm resize-none"
+                    />
+                    <Button
+                      size="icon"
+                      onClick={handleSubmitComment}
+                      disabled={commentText.trim().length < 1 || isSubmittingComment}
+                      className="bg-sapphire-gradient"
+                    >
+                      {isSubmittingComment ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Send className="w-4 h-4" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="text-xs text-foreground-muted mb-3">
+                  {commentText.length}/50 ký tự
+                  {commentText.length >= 50 ? (
+                    <span className="text-green-600 ml-2">✓ Đủ điều kiện nhận thưởng 500 Camly Coin</span>
+                  ) : commentText.length > 0 ? (
+                    <span className="text-amber-600 ml-2">Thêm {50 - commentText.length} ký tự để nhận thưởng</span>
+                  ) : null}
+                </div>
+
+                {/* Comments List */}
+                {isLoadingComments ? (
+                  <div className="text-center py-4 text-foreground-muted">
+                    <Loader2 className="w-5 h-5 animate-spin mx-auto mb-2" />
+                    Đang tải...
+                  </div>
+                ) : comments.length === 0 ? (
+                  <div className="text-center py-4 text-foreground-muted text-sm">
+                    Chưa có bình luận nào
+                  </div>
+                ) : (
+                  <div className="space-y-3 max-h-80 overflow-y-auto">
+                    {comments.map((comment) => (
+                      <div key={comment.id} className="flex gap-3">
+                        <Avatar className="w-8 h-8">
+                          <AvatarImage src={comment.user_avatar_url || angelAvatar} />
+                          <AvatarFallback>{comment.user_display_name?.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 bg-primary/5 rounded-xl p-3">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-medium text-sm">{comment.user_display_name}</span>
+                            {comment.is_rewarded && (
+                              <Coins className="w-3 h-3 text-amber-500" />
+                            )}
+                          </div>
+                          <p className="text-sm text-foreground/90">{comment.content}</p>
+                          <span className="text-xs text-foreground-muted mt-1 block">
+                            {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true, locale: vi })}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </CardContent>
+      </Card>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Xóa bài viết?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Bạn có chắc chắn muốn xóa bài viết này? Hành động này không thể hoàn tác.
+              Tất cả bình luận và lượt thích cũng sẽ bị xóa.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Hủy</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              {isDeleting ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Đang xóa...
+                </>
+              ) : (
+                "Xóa bài viết"
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Tip Dialog */}
+      <GiftCoinDialog
+        open={showTipDialog}
+        onOpenChange={setShowTipDialog}
+        preselectedUser={{
+          id: post.user_id,
+          display_name: post.user_display_name,
+          avatar_url: post.user_avatar_url || null,
+        }}
+        contextType="post"
+        contextId={post.id}
+      />
+
+      {/* Share Dialog */}
+      <ShareDialog
+        isOpen={showShareDialog}
+        onClose={() => setShowShareDialog(false)}
+        contentType="post"
+        contentId={post.id}
+        title={`Bài viết từ ${post.user_display_name}`}
+        content={post.content}
+        onShareSuccess={handleShareSuccess}
+        showRewards={!post.is_shared_by_me && post.user_id !== currentUserId}
+        rewardAmount={500}
+      />
+    </>
+  );
+}

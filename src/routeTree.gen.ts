@@ -10,33 +10,1638 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AchievementsRouteImport } from './routes/achievements'
+import { Route as ActivityHistoryRouteImport } from './routes/activity-history'
+import { Route as AscensionRouteImport } from './routes/ascension'
+import { Route as AttesterPanelRouteImport } from './routes/attester-panel'
+import { Route as BountyRouteImport } from './routes/bounty'
+import { Route as ChatRouteImport } from './routes/chat'
+import { Route as CircleRouteImport } from './routes/circle'
+import { Route as ClaimStatusRouteImport } from './routes/claim-status'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as CommunityQuestionsRouteImport } from './routes/community-questions'
+import { Route as ConnectorRouteImport } from './routes/connector'
+import { Route as ContentWriterRouteImport } from './routes/content-writer'
+import { Route as EarnRouteImport } from './routes/earn'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ForgeRouteImport } from './routes/forge'
+import { Route as GamesRouteImport } from './routes/games'
+import { Route as GlossaryRouteImport } from './routes/glossary'
+import { Route as GratitudeRouteImport } from './routes/gratitude'
+import { Route as IdeasRouteImport } from './routes/ideas'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as KnowledgeRouteImport } from './routes/knowledge'
+import { Route as LanternRouteImport } from './routes/lantern'
+import { Route as LightCommunityRouteImport } from './routes/light-community'
+import { Route as LightProfileRouteImport } from './routes/light-profile'
+import { Route as MasteryRouteImport } from './routes/mastery'
+import { Route as MintRouteImport } from './routes/mint'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as PetRouteImport } from './routes/pet'
+import { Route as ProofUploadRouteImport } from './routes/proof-upload'
+import { Route as QuestRouteImport } from './routes/quest'
+import { Route as RaidRouteImport } from './routes/raid'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RiddlesRouteImport } from './routes/riddles'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as SeasonRouteImport } from './routes/season'
+import { Route as SwapRouteImport } from './routes/swap'
+import { Route as UnifiedDashboardRouteImport } from './routes/unified-dashboard'
+import { Route as UnifiedLightScoreRouteImport } from './routes/unified-light-score'
+import { Route as ValidatorsRouteImport } from './routes/validators'
+import { Route as VisionRouteImport } from './routes/vision'
+import { Route as UsernameIndexRouteImport } from './routes/$username.index'
+import { Route as AdminActivityHistoryRouteImport } from './routes/admin.activity-history'
+import { Route as AdminAiUsageRouteImport } from './routes/admin.ai-usage'
+import { Route as AdminBacklogAuditRouteImport } from './routes/admin.backlog-audit'
+import { Route as AdminBountyRouteImport } from './routes/admin.bounty'
+import { Route as AdminCloudUsageRouteImport } from './routes/admin.cloud-usage'
+import { Route as AdminContractStatusRouteImport } from './routes/admin.contract-status'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminEarlyAdoptersRouteImport } from './routes/admin.early-adopters'
+import { Route as AdminFounderDashboardRouteImport } from './routes/admin.founder-dashboard'
+import { Route as AdminFraudAlertsRouteImport } from './routes/admin.fraud-alerts'
+import { Route as AdminGithubSyncCheckRouteImport } from './routes/admin.github-sync-check'
+import { Route as AdminIdeasRouteImport } from './routes/admin.ideas'
+import { Route as AdminImageHistoryRouteImport } from './routes/admin.image-history'
+import { Route as AdminKnowledgeRouteImport } from './routes/admin.knowledge'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminMintApprovalRouteImport } from './routes/admin.mint-approval'
+import { Route as AdminMintStatsRouteImport } from './routes/admin.mint-stats'
+import { Route as AdminMintStuckRouteImport } from './routes/admin.mint-stuck'
+import { Route as AdminNotificationAuditRouteImport } from './routes/admin.notification-audit'
+import { Route as AdminNotificationTemplatesRouteImport } from './routes/admin.notification-templates'
+import { Route as AdminOnchainRouteImport } from './routes/admin.onchain'
+import { Route as AdminProjectFundRouteImport } from './routes/admin.project-fund'
+import { Route as AdminReportRouteImport } from './routes/admin.report'
+import { Route as AdminStatisticsRouteImport } from './routes/admin.statistics'
+import { Route as AdminTetRewardRouteImport } from './routes/admin.tet-reward'
+import { Route as AdminThresholdsRouteImport } from './routes/admin.thresholds'
+import { Route as AdminTipReportsRouteImport } from './routes/admin.tip-reports'
+import { Route as AdminTreasureCluesRouteImport } from './routes/admin.treasure-clues'
+import { Route as AdminTreasuryRouteImport } from './routes/admin.treasury'
+import { Route as AdminTrustEngineRouteImport } from './routes/admin.trust-engine'
+import { Route as AdminTrustListRouteImport } from './routes/admin.trust-list'
+import { Route as AdminUserManagementRouteImport } from './routes/admin.user-management'
+import { Route as AdminWalletManagementRouteImport } from './routes/admin.wallet-management'
+import { Route as AdminWithdrawalsRouteImport } from './routes/admin.withdrawals'
+import { Route as AssistantEmbedRouteImport } from './routes/assistant.embed'
+import { Route as AuthIndexRouteImport } from './routes/auth.index'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as CoordinatorGateIndexRouteImport } from './routes/coordinator-gate.index'
+import { Route as CoordinatorGateProjectIdRouteImport } from './routes/coordinator-gate.$projectId'
+import { Route as CoreIndexRouteImport } from './routes/core.index'
+import { Route as CoreAgentsRouteImport } from './routes/core.agents'
+import { Route as CoreLogsRouteImport } from './routes/core.logs'
+import { Route as CoreMemoryRouteImport } from './routes/core.memory'
+import { Route as CoreOrchestrationRouteImport } from './routes/core.orchestration'
+import { Route as CorePromptsRouteImport } from './routes/core.prompts'
+import { Route as CoreWorkflowsRouteImport } from './routes/core.workflows'
+import { Route as CtoApiRouteImport } from './routes/cto.api'
+import { Route as CtoApiDocsRouteImport } from './routes/cto.api-docs'
+import { Route as CtoCloudCostRouteImport } from './routes/cto.cloud-cost'
+import { Route as CtoHealthRouteImport } from './routes/cto.health'
+import { Route as CtoKnowledgeIngestRouteImport } from './routes/cto.knowledge-ingest'
+import { Route as CtoPlatformsRouteImport } from './routes/cto.platforms'
+import { Route as CtoSecurityRouteImport } from './routes/cto.security'
+import { Route as CtoSystemHealthRouteImport } from './routes/cto.system-health'
+import { Route as DocsAntiWhaleCapRouteImport } from './routes/docs.anti-whale-cap'
+import { Route as DocsApiRouteImport } from './routes/docs.api'
+import { Route as DocsCorePromptRouteImport } from './routes/docs.core-prompt'
+import { Route as DocsDailyCamlyCapRouteImport } from './routes/docs.daily-camly-cap'
+import { Route as DocsDigitalConstitutionRouteImport } from './routes/docs.digital-constitution'
+import { Route as DocsFunGovernanceRouteImport } from './routes/docs.fun-governance'
+import { Route as DocsKnowledgeIngestApiRouteImport } from './routes/docs.knowledge-ingest-api'
+import { Route as DocsLightConstitutionRouteImport } from './routes/docs.light-constitution'
+import { Route as DocsMasterCharterRouteImport } from './routes/docs.master-charter'
+import { Route as DocsPlatformRouteImport } from './routes/docs.platform'
+import { Route as DocsPoplRouteImport } from './routes/docs.popl'
+import { Route as EmbedChatRouteImport } from './routes/embed.chat'
+import { Route as IdentityIndexRouteImport } from './routes/identity.index'
+import { Route as IdentityOnboardingRouteImport } from './routes/identity.onboarding'
+import { Route as MessagesIndexRouteImport } from './routes/messages.index'
+import { Route as MessagesUserIdRouteImport } from './routes/messages.$userId'
+import { Route as OrgDidOrSlugRouteImport } from './routes/org.$didOrSlug'
+import { Route as PostPostIdRouteImport } from './routes/post.$postId'
+import { Route as ProfileIndexRouteImport } from './routes/profile.index'
+import { Route as ProfileTabRouteImport } from './routes/profile.$tab'
+import { Route as ReceiptReceiptIdRouteImport } from './routes/receipt.$receiptId'
+import { Route as TreasureIndexRouteImport } from './routes/treasure.index'
+import { Route as UsernamePostSlugRouteImport } from './routes/$username.post.$slug'
+import { Route as TreasureTeamNewRouteImport } from './routes/treasure.team.new'
+import { Route as UserUserIdIndexRouteImport } from './routes/user.$userId.index'
+import { Route as UserUserIdTransactionsRouteImport } from './routes/user.$userId.transactions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AchievementsRoute = AchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityHistoryRoute = ActivityHistoryRouteImport.update({
+  id: '/activity-history',
+  path: '/activity-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AscensionRoute = AscensionRouteImport.update({
+  id: '/ascension',
+  path: '/ascension',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AttesterPanelRoute = AttesterPanelRouteImport.update({
+  id: '/attester-panel',
+  path: '/attester-panel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BountyRoute = BountyRouteImport.update({
+  id: '/bounty',
+  path: '/bounty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CircleRoute = CircleRouteImport.update({
+  id: '/circle',
+  path: '/circle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaimStatusRoute = ClaimStatusRouteImport.update({
+  id: '/claim-status',
+  path: '/claim-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityQuestionsRoute = CommunityQuestionsRouteImport.update({
+  id: '/community-questions',
+  path: '/community-questions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectorRoute = ConnectorRouteImport.update({
+  id: '/connector',
+  path: '/connector',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContentWriterRoute = ContentWriterRouteImport.update({
+  id: '/content-writer',
+  path: '/content-writer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EarnRoute = EarnRouteImport.update({
+  id: '/earn',
+  path: '/earn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgeRoute = ForgeRouteImport.update({
+  id: '/forge',
+  path: '/forge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlossaryRoute = GlossaryRouteImport.update({
+  id: '/glossary',
+  path: '/glossary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GratitudeRoute = GratitudeRouteImport.update({
+  id: '/gratitude',
+  path: '/gratitude',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdeasRoute = IdeasRouteImport.update({
+  id: '/ideas',
+  path: '/ideas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeRoute = KnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LanternRoute = LanternRouteImport.update({
+  id: '/lantern',
+  path: '/lantern',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LightCommunityRoute = LightCommunityRouteImport.update({
+  id: '/light-community',
+  path: '/light-community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LightProfileRoute = LightProfileRouteImport.update({
+  id: '/light-profile',
+  path: '/light-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MasteryRoute = MasteryRouteImport.update({
+  id: '/mastery',
+  path: '/mastery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MintRoute = MintRouteImport.update({
+  id: '/mint',
+  path: '/mint',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PetRoute = PetRouteImport.update({
+  id: '/pet',
+  path: '/pet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProofUploadRoute = ProofUploadRouteImport.update({
+  id: '/proof-upload',
+  path: '/proof-upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuestRoute = QuestRouteImport.update({
+  id: '/quest',
+  path: '/quest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RaidRoute = RaidRouteImport.update({
+  id: '/raid',
+  path: '/raid',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiddlesRoute = RiddlesRouteImport.update({
+  id: '/riddles',
+  path: '/riddles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeasonRoute = SeasonRouteImport.update({
+  id: '/season',
+  path: '/season',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SwapRoute = SwapRouteImport.update({
+  id: '/swap',
+  path: '/swap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnifiedDashboardRoute = UnifiedDashboardRouteImport.update({
+  id: '/unified-dashboard',
+  path: '/unified-dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnifiedLightScoreRoute = UnifiedLightScoreRouteImport.update({
+  id: '/unified-light-score',
+  path: '/unified-light-score',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ValidatorsRoute = ValidatorsRouteImport.update({
+  id: '/validators',
+  path: '/validators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisionRoute = VisionRouteImport.update({
+  id: '/vision',
+  path: '/vision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsernameIndexRoute = UsernameIndexRouteImport.update({
+  id: '/$username/',
+  path: '/$username/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminActivityHistoryRoute = AdminActivityHistoryRouteImport.update({
+  id: '/admin/activity-history',
+  path: '/admin/activity-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAiUsageRoute = AdminAiUsageRouteImport.update({
+  id: '/admin/ai-usage',
+  path: '/admin/ai-usage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBacklogAuditRoute = AdminBacklogAuditRouteImport.update({
+  id: '/admin/backlog-audit',
+  path: '/admin/backlog-audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBountyRoute = AdminBountyRouteImport.update({
+  id: '/admin/bounty',
+  path: '/admin/bounty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCloudUsageRoute = AdminCloudUsageRouteImport.update({
+  id: '/admin/cloud-usage',
+  path: '/admin/cloud-usage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminContractStatusRoute = AdminContractStatusRouteImport.update({
+  id: '/admin/contract-status',
+  path: '/admin/contract-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEarlyAdoptersRoute = AdminEarlyAdoptersRouteImport.update({
+  id: '/admin/early-adopters',
+  path: '/admin/early-adopters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminFounderDashboardRoute = AdminFounderDashboardRouteImport.update({
+  id: '/admin/founder-dashboard',
+  path: '/admin/founder-dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminFraudAlertsRoute = AdminFraudAlertsRouteImport.update({
+  id: '/admin/fraud-alerts',
+  path: '/admin/fraud-alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminGithubSyncCheckRoute = AdminGithubSyncCheckRouteImport.update({
+  id: '/admin/github-sync-check',
+  path: '/admin/github-sync-check',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIdeasRoute = AdminIdeasRouteImport.update({
+  id: '/admin/ideas',
+  path: '/admin/ideas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminImageHistoryRoute = AdminImageHistoryRouteImport.update({
+  id: '/admin/image-history',
+  path: '/admin/image-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminKnowledgeRoute = AdminKnowledgeRouteImport.update({
+  id: '/admin/knowledge',
+  path: '/admin/knowledge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMintApprovalRoute = AdminMintApprovalRouteImport.update({
+  id: '/admin/mint-approval',
+  path: '/admin/mint-approval',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMintStatsRoute = AdminMintStatsRouteImport.update({
+  id: '/admin/mint-stats',
+  path: '/admin/mint-stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMintStuckRoute = AdminMintStuckRouteImport.update({
+  id: '/admin/mint-stuck',
+  path: '/admin/mint-stuck',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNotificationAuditRoute = AdminNotificationAuditRouteImport.update({
+  id: '/admin/notification-audit',
+  path: '/admin/notification-audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNotificationTemplatesRoute =
+  AdminNotificationTemplatesRouteImport.update({
+    id: '/admin/notification-templates',
+    path: '/admin/notification-templates',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdminOnchainRoute = AdminOnchainRouteImport.update({
+  id: '/admin/onchain',
+  path: '/admin/onchain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminProjectFundRoute = AdminProjectFundRouteImport.update({
+  id: '/admin/project-fund',
+  path: '/admin/project-fund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminReportRoute = AdminReportRouteImport.update({
+  id: '/admin/report',
+  path: '/admin/report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminStatisticsRoute = AdminStatisticsRouteImport.update({
+  id: '/admin/statistics',
+  path: '/admin/statistics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTetRewardRoute = AdminTetRewardRouteImport.update({
+  id: '/admin/tet-reward',
+  path: '/admin/tet-reward',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminThresholdsRoute = AdminThresholdsRouteImport.update({
+  id: '/admin/thresholds',
+  path: '/admin/thresholds',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTipReportsRoute = AdminTipReportsRouteImport.update({
+  id: '/admin/tip-reports',
+  path: '/admin/tip-reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTreasureCluesRoute = AdminTreasureCluesRouteImport.update({
+  id: '/admin/treasure-clues',
+  path: '/admin/treasure-clues',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTreasuryRoute = AdminTreasuryRouteImport.update({
+  id: '/admin/treasury',
+  path: '/admin/treasury',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTrustEngineRoute = AdminTrustEngineRouteImport.update({
+  id: '/admin/trust-engine',
+  path: '/admin/trust-engine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminTrustListRoute = AdminTrustListRouteImport.update({
+  id: '/admin/trust-list',
+  path: '/admin/trust-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUserManagementRoute = AdminUserManagementRouteImport.update({
+  id: '/admin/user-management',
+  path: '/admin/user-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminWalletManagementRoute = AdminWalletManagementRouteImport.update({
+  id: '/admin/wallet-management',
+  path: '/admin/wallet-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminWithdrawalsRoute = AdminWithdrawalsRouteImport.update({
+  id: '/admin/withdrawals',
+  path: '/admin/withdrawals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantEmbedRoute = AssistantEmbedRouteImport.update({
+  id: '/assistant/embed',
+  path: '/assistant/embed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/auth/',
+  path: '/auth/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoordinatorGateIndexRoute = CoordinatorGateIndexRouteImport.update({
+  id: '/coordinator-gate/',
+  path: '/coordinator-gate/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoordinatorGateProjectIdRoute =
+  CoordinatorGateProjectIdRouteImport.update({
+    id: '/coordinator-gate/$projectId',
+    path: '/coordinator-gate/$projectId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CoreIndexRoute = CoreIndexRouteImport.update({
+  id: '/core/',
+  path: '/core/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoreAgentsRoute = CoreAgentsRouteImport.update({
+  id: '/core/agents',
+  path: '/core/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoreLogsRoute = CoreLogsRouteImport.update({
+  id: '/core/logs',
+  path: '/core/logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoreMemoryRoute = CoreMemoryRouteImport.update({
+  id: '/core/memory',
+  path: '/core/memory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoreOrchestrationRoute = CoreOrchestrationRouteImport.update({
+  id: '/core/orchestration',
+  path: '/core/orchestration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorePromptsRoute = CorePromptsRouteImport.update({
+  id: '/core/prompts',
+  path: '/core/prompts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoreWorkflowsRoute = CoreWorkflowsRouteImport.update({
+  id: '/core/workflows',
+  path: '/core/workflows',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoApiRoute = CtoApiRouteImport.update({
+  id: '/cto/api',
+  path: '/cto/api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoApiDocsRoute = CtoApiDocsRouteImport.update({
+  id: '/cto/api-docs',
+  path: '/cto/api-docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoCloudCostRoute = CtoCloudCostRouteImport.update({
+  id: '/cto/cloud-cost',
+  path: '/cto/cloud-cost',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoHealthRoute = CtoHealthRouteImport.update({
+  id: '/cto/health',
+  path: '/cto/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoKnowledgeIngestRoute = CtoKnowledgeIngestRouteImport.update({
+  id: '/cto/knowledge-ingest',
+  path: '/cto/knowledge-ingest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoPlatformsRoute = CtoPlatformsRouteImport.update({
+  id: '/cto/platforms',
+  path: '/cto/platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoSecurityRoute = CtoSecurityRouteImport.update({
+  id: '/cto/security',
+  path: '/cto/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtoSystemHealthRoute = CtoSystemHealthRouteImport.update({
+  id: '/cto/system-health',
+  path: '/cto/system-health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsAntiWhaleCapRoute = DocsAntiWhaleCapRouteImport.update({
+  id: '/docs/anti-whale-cap',
+  path: '/docs/anti-whale-cap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsApiRoute = DocsApiRouteImport.update({
+  id: '/docs/api',
+  path: '/docs/api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsCorePromptRoute = DocsCorePromptRouteImport.update({
+  id: '/docs/core-prompt',
+  path: '/docs/core-prompt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsDailyCamlyCapRoute = DocsDailyCamlyCapRouteImport.update({
+  id: '/docs/daily-camly-cap',
+  path: '/docs/daily-camly-cap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsDigitalConstitutionRoute = DocsDigitalConstitutionRouteImport.update({
+  id: '/docs/digital-constitution',
+  path: '/docs/digital-constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsFunGovernanceRoute = DocsFunGovernanceRouteImport.update({
+  id: '/docs/fun-governance',
+  path: '/docs/fun-governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsKnowledgeIngestApiRoute = DocsKnowledgeIngestApiRouteImport.update({
+  id: '/docs/knowledge-ingest-api',
+  path: '/docs/knowledge-ingest-api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsLightConstitutionRoute = DocsLightConstitutionRouteImport.update({
+  id: '/docs/light-constitution',
+  path: '/docs/light-constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsMasterCharterRoute = DocsMasterCharterRouteImport.update({
+  id: '/docs/master-charter',
+  path: '/docs/master-charter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsPlatformRoute = DocsPlatformRouteImport.update({
+  id: '/docs/platform',
+  path: '/docs/platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsPoplRoute = DocsPoplRouteImport.update({
+  id: '/docs/popl',
+  path: '/docs/popl',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmbedChatRoute = EmbedChatRouteImport.update({
+  id: '/embed/chat',
+  path: '/embed/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdentityIndexRoute = IdentityIndexRouteImport.update({
+  id: '/identity/',
+  path: '/identity/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdentityOnboardingRoute = IdentityOnboardingRouteImport.update({
+  id: '/identity/onboarding',
+  path: '/identity/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesIndexRoute = MessagesIndexRouteImport.update({
+  id: '/messages/',
+  path: '/messages/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesUserIdRoute = MessagesUserIdRouteImport.update({
+  id: '/messages/$userId',
+  path: '/messages/$userId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrgDidOrSlugRoute = OrgDidOrSlugRouteImport.update({
+  id: '/org/$didOrSlug',
+  path: '/org/$didOrSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostPostIdRoute = PostPostIdRouteImport.update({
+  id: '/post/$postId',
+  path: '/post/$postId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileTabRoute = ProfileTabRouteImport.update({
+  id: '/profile/$tab',
+  path: '/profile/$tab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReceiptReceiptIdRoute = ReceiptReceiptIdRouteImport.update({
+  id: '/receipt/$receiptId',
+  path: '/receipt/$receiptId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TreasureIndexRoute = TreasureIndexRouteImport.update({
+  id: '/treasure/',
+  path: '/treasure/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsernamePostSlugRoute = UsernamePostSlugRouteImport.update({
+  id: '/$username/post/$slug',
+  path: '/$username/post/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TreasureTeamNewRoute = TreasureTeamNewRouteImport.update({
+  id: '/treasure/team/new',
+  path: '/treasure/team/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserUserIdIndexRoute = UserUserIdIndexRouteImport.update({
+  id: '/user/$userId/',
+  path: '/user/$userId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserUserIdTransactionsRoute = UserUserIdTransactionsRouteImport.update({
+  id: '/user/$userId/transactions',
+  path: '/user/$userId/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/achievements': typeof AchievementsRoute
+  '/activity-history': typeof ActivityHistoryRoute
+  '/ascension': typeof AscensionRoute
+  '/attester-panel': typeof AttesterPanelRoute
+  '/bounty': typeof BountyRoute
+  '/chat': typeof ChatRoute
+  '/circle': typeof CircleRoute
+  '/claim-status': typeof ClaimStatusRoute
+  '/community': typeof CommunityRoute
+  '/community-questions': typeof CommunityQuestionsRoute
+  '/connector': typeof ConnectorRoute
+  '/content-writer': typeof ContentWriterRoute
+  '/earn': typeof EarnRoute
+  '/faq': typeof FaqRoute
+  '/forge': typeof ForgeRoute
+  '/games': typeof GamesRoute
+  '/glossary': typeof GlossaryRoute
+  '/gratitude': typeof GratitudeRoute
+  '/ideas': typeof IdeasRoute
+  '/inventory': typeof InventoryRoute
+  '/knowledge': typeof KnowledgeRoute
+  '/lantern': typeof LanternRoute
+  '/light-community': typeof LightCommunityRoute
+  '/light-profile': typeof LightProfileRoute
+  '/mastery': typeof MasteryRoute
+  '/mint': typeof MintRoute
+  '/notifications': typeof NotificationsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/pet': typeof PetRoute
+  '/proof-upload': typeof ProofUploadRoute
+  '/quest': typeof QuestRoute
+  '/raid': typeof RaidRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/riddles': typeof RiddlesRoute
+  '/roadmap': typeof RoadmapRoute
+  '/season': typeof SeasonRoute
+  '/swap': typeof SwapRoute
+  '/unified-dashboard': typeof UnifiedDashboardRoute
+  '/unified-light-score': typeof UnifiedLightScoreRoute
+  '/validators': typeof ValidatorsRoute
+  '/vision': typeof VisionRoute
+  '/admin/activity-history': typeof AdminActivityHistoryRoute
+  '/admin/ai-usage': typeof AdminAiUsageRoute
+  '/admin/backlog-audit': typeof AdminBacklogAuditRoute
+  '/admin/bounty': typeof AdminBountyRoute
+  '/admin/cloud-usage': typeof AdminCloudUsageRoute
+  '/admin/contract-status': typeof AdminContractStatusRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/early-adopters': typeof AdminEarlyAdoptersRoute
+  '/admin/founder-dashboard': typeof AdminFounderDashboardRoute
+  '/admin/fraud-alerts': typeof AdminFraudAlertsRoute
+  '/admin/github-sync-check': typeof AdminGithubSyncCheckRoute
+  '/admin/ideas': typeof AdminIdeasRoute
+  '/admin/image-history': typeof AdminImageHistoryRoute
+  '/admin/knowledge': typeof AdminKnowledgeRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/mint-approval': typeof AdminMintApprovalRoute
+  '/admin/mint-stats': typeof AdminMintStatsRoute
+  '/admin/mint-stuck': typeof AdminMintStuckRoute
+  '/admin/notification-audit': typeof AdminNotificationAuditRoute
+  '/admin/notification-templates': typeof AdminNotificationTemplatesRoute
+  '/admin/onchain': typeof AdminOnchainRoute
+  '/admin/project-fund': typeof AdminProjectFundRoute
+  '/admin/report': typeof AdminReportRoute
+  '/admin/statistics': typeof AdminStatisticsRoute
+  '/admin/tet-reward': typeof AdminTetRewardRoute
+  '/admin/thresholds': typeof AdminThresholdsRoute
+  '/admin/tip-reports': typeof AdminTipReportsRoute
+  '/admin/treasure-clues': typeof AdminTreasureCluesRoute
+  '/admin/treasury': typeof AdminTreasuryRoute
+  '/admin/trust-engine': typeof AdminTrustEngineRoute
+  '/admin/trust-list': typeof AdminTrustListRoute
+  '/admin/user-management': typeof AdminUserManagementRoute
+  '/admin/wallet-management': typeof AdminWalletManagementRoute
+  '/admin/withdrawals': typeof AdminWithdrawalsRoute
+  '/assistant/embed': typeof AssistantEmbedRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/coordinator-gate/$projectId': typeof CoordinatorGateProjectIdRoute
+  '/core/agents': typeof CoreAgentsRoute
+  '/core/logs': typeof CoreLogsRoute
+  '/core/memory': typeof CoreMemoryRoute
+  '/core/orchestration': typeof CoreOrchestrationRoute
+  '/core/prompts': typeof CorePromptsRoute
+  '/core/workflows': typeof CoreWorkflowsRoute
+  '/cto/api': typeof CtoApiRoute
+  '/cto/api-docs': typeof CtoApiDocsRoute
+  '/cto/cloud-cost': typeof CtoCloudCostRoute
+  '/cto/health': typeof CtoHealthRoute
+  '/cto/knowledge-ingest': typeof CtoKnowledgeIngestRoute
+  '/cto/platforms': typeof CtoPlatformsRoute
+  '/cto/security': typeof CtoSecurityRoute
+  '/cto/system-health': typeof CtoSystemHealthRoute
+  '/docs/anti-whale-cap': typeof DocsAntiWhaleCapRoute
+  '/docs/api': typeof DocsApiRoute
+  '/docs/core-prompt': typeof DocsCorePromptRoute
+  '/docs/daily-camly-cap': typeof DocsDailyCamlyCapRoute
+  '/docs/digital-constitution': typeof DocsDigitalConstitutionRoute
+  '/docs/fun-governance': typeof DocsFunGovernanceRoute
+  '/docs/knowledge-ingest-api': typeof DocsKnowledgeIngestApiRoute
+  '/docs/light-constitution': typeof DocsLightConstitutionRoute
+  '/docs/master-charter': typeof DocsMasterCharterRoute
+  '/docs/platform': typeof DocsPlatformRoute
+  '/docs/popl': typeof DocsPoplRoute
+  '/embed/chat': typeof EmbedChatRoute
+  '/identity/onboarding': typeof IdentityOnboardingRoute
+  '/messages/$userId': typeof MessagesUserIdRoute
+  '/org/$didOrSlug': typeof OrgDidOrSlugRoute
+  '/post/$postId': typeof PostPostIdRoute
+  '/profile/$tab': typeof ProfileTabRoute
+  '/receipt/$receiptId': typeof ReceiptReceiptIdRoute
+  '/$username/': typeof UsernameIndexRoute
+  '/auth/': typeof AuthIndexRoute
+  '/coordinator-gate/': typeof CoordinatorGateIndexRoute
+  '/core/': typeof CoreIndexRoute
+  '/identity/': typeof IdentityIndexRoute
+  '/messages/': typeof MessagesIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/treasure/': typeof TreasureIndexRoute
+  '/$username/post/$slug': typeof UsernamePostSlugRoute
+  '/treasure/team/new': typeof TreasureTeamNewRoute
+  '/user/$userId/transactions': typeof UserUserIdTransactionsRoute
+  '/user/$userId/': typeof UserUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/achievements': typeof AchievementsRoute
+  '/activity-history': typeof ActivityHistoryRoute
+  '/ascension': typeof AscensionRoute
+  '/attester-panel': typeof AttesterPanelRoute
+  '/bounty': typeof BountyRoute
+  '/chat': typeof ChatRoute
+  '/circle': typeof CircleRoute
+  '/claim-status': typeof ClaimStatusRoute
+  '/community': typeof CommunityRoute
+  '/community-questions': typeof CommunityQuestionsRoute
+  '/connector': typeof ConnectorRoute
+  '/content-writer': typeof ContentWriterRoute
+  '/earn': typeof EarnRoute
+  '/faq': typeof FaqRoute
+  '/forge': typeof ForgeRoute
+  '/games': typeof GamesRoute
+  '/glossary': typeof GlossaryRoute
+  '/gratitude': typeof GratitudeRoute
+  '/ideas': typeof IdeasRoute
+  '/inventory': typeof InventoryRoute
+  '/knowledge': typeof KnowledgeRoute
+  '/lantern': typeof LanternRoute
+  '/light-community': typeof LightCommunityRoute
+  '/light-profile': typeof LightProfileRoute
+  '/mastery': typeof MasteryRoute
+  '/mint': typeof MintRoute
+  '/notifications': typeof NotificationsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/pet': typeof PetRoute
+  '/proof-upload': typeof ProofUploadRoute
+  '/quest': typeof QuestRoute
+  '/raid': typeof RaidRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/riddles': typeof RiddlesRoute
+  '/roadmap': typeof RoadmapRoute
+  '/season': typeof SeasonRoute
+  '/swap': typeof SwapRoute
+  '/unified-dashboard': typeof UnifiedDashboardRoute
+  '/unified-light-score': typeof UnifiedLightScoreRoute
+  '/validators': typeof ValidatorsRoute
+  '/vision': typeof VisionRoute
+  '/admin/activity-history': typeof AdminActivityHistoryRoute
+  '/admin/ai-usage': typeof AdminAiUsageRoute
+  '/admin/backlog-audit': typeof AdminBacklogAuditRoute
+  '/admin/bounty': typeof AdminBountyRoute
+  '/admin/cloud-usage': typeof AdminCloudUsageRoute
+  '/admin/contract-status': typeof AdminContractStatusRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/early-adopters': typeof AdminEarlyAdoptersRoute
+  '/admin/founder-dashboard': typeof AdminFounderDashboardRoute
+  '/admin/fraud-alerts': typeof AdminFraudAlertsRoute
+  '/admin/github-sync-check': typeof AdminGithubSyncCheckRoute
+  '/admin/ideas': typeof AdminIdeasRoute
+  '/admin/image-history': typeof AdminImageHistoryRoute
+  '/admin/knowledge': typeof AdminKnowledgeRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/mint-approval': typeof AdminMintApprovalRoute
+  '/admin/mint-stats': typeof AdminMintStatsRoute
+  '/admin/mint-stuck': typeof AdminMintStuckRoute
+  '/admin/notification-audit': typeof AdminNotificationAuditRoute
+  '/admin/notification-templates': typeof AdminNotificationTemplatesRoute
+  '/admin/onchain': typeof AdminOnchainRoute
+  '/admin/project-fund': typeof AdminProjectFundRoute
+  '/admin/report': typeof AdminReportRoute
+  '/admin/statistics': typeof AdminStatisticsRoute
+  '/admin/tet-reward': typeof AdminTetRewardRoute
+  '/admin/thresholds': typeof AdminThresholdsRoute
+  '/admin/tip-reports': typeof AdminTipReportsRoute
+  '/admin/treasure-clues': typeof AdminTreasureCluesRoute
+  '/admin/treasury': typeof AdminTreasuryRoute
+  '/admin/trust-engine': typeof AdminTrustEngineRoute
+  '/admin/trust-list': typeof AdminTrustListRoute
+  '/admin/user-management': typeof AdminUserManagementRoute
+  '/admin/wallet-management': typeof AdminWalletManagementRoute
+  '/admin/withdrawals': typeof AdminWithdrawalsRoute
+  '/assistant/embed': typeof AssistantEmbedRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/coordinator-gate/$projectId': typeof CoordinatorGateProjectIdRoute
+  '/core/agents': typeof CoreAgentsRoute
+  '/core/logs': typeof CoreLogsRoute
+  '/core/memory': typeof CoreMemoryRoute
+  '/core/orchestration': typeof CoreOrchestrationRoute
+  '/core/prompts': typeof CorePromptsRoute
+  '/core/workflows': typeof CoreWorkflowsRoute
+  '/cto/api': typeof CtoApiRoute
+  '/cto/api-docs': typeof CtoApiDocsRoute
+  '/cto/cloud-cost': typeof CtoCloudCostRoute
+  '/cto/health': typeof CtoHealthRoute
+  '/cto/knowledge-ingest': typeof CtoKnowledgeIngestRoute
+  '/cto/platforms': typeof CtoPlatformsRoute
+  '/cto/security': typeof CtoSecurityRoute
+  '/cto/system-health': typeof CtoSystemHealthRoute
+  '/docs/anti-whale-cap': typeof DocsAntiWhaleCapRoute
+  '/docs/api': typeof DocsApiRoute
+  '/docs/core-prompt': typeof DocsCorePromptRoute
+  '/docs/daily-camly-cap': typeof DocsDailyCamlyCapRoute
+  '/docs/digital-constitution': typeof DocsDigitalConstitutionRoute
+  '/docs/fun-governance': typeof DocsFunGovernanceRoute
+  '/docs/knowledge-ingest-api': typeof DocsKnowledgeIngestApiRoute
+  '/docs/light-constitution': typeof DocsLightConstitutionRoute
+  '/docs/master-charter': typeof DocsMasterCharterRoute
+  '/docs/platform': typeof DocsPlatformRoute
+  '/docs/popl': typeof DocsPoplRoute
+  '/embed/chat': typeof EmbedChatRoute
+  '/identity/onboarding': typeof IdentityOnboardingRoute
+  '/messages/$userId': typeof MessagesUserIdRoute
+  '/org/$didOrSlug': typeof OrgDidOrSlugRoute
+  '/post/$postId': typeof PostPostIdRoute
+  '/profile/$tab': typeof ProfileTabRoute
+  '/receipt/$receiptId': typeof ReceiptReceiptIdRoute
+  '/$username': typeof UsernameIndexRoute
+  '/auth': typeof AuthIndexRoute
+  '/coordinator-gate': typeof CoordinatorGateIndexRoute
+  '/core': typeof CoreIndexRoute
+  '/identity': typeof IdentityIndexRoute
+  '/messages': typeof MessagesIndexRoute
+  '/profile': typeof ProfileIndexRoute
+  '/treasure': typeof TreasureIndexRoute
+  '/$username/post/$slug': typeof UsernamePostSlugRoute
+  '/treasure/team/new': typeof TreasureTeamNewRoute
+  '/user/$userId/transactions': typeof UserUserIdTransactionsRoute
+  '/user/$userId': typeof UserUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/achievements': typeof AchievementsRoute
+  '/activity-history': typeof ActivityHistoryRoute
+  '/ascension': typeof AscensionRoute
+  '/attester-panel': typeof AttesterPanelRoute
+  '/bounty': typeof BountyRoute
+  '/chat': typeof ChatRoute
+  '/circle': typeof CircleRoute
+  '/claim-status': typeof ClaimStatusRoute
+  '/community': typeof CommunityRoute
+  '/community-questions': typeof CommunityQuestionsRoute
+  '/connector': typeof ConnectorRoute
+  '/content-writer': typeof ContentWriterRoute
+  '/earn': typeof EarnRoute
+  '/faq': typeof FaqRoute
+  '/forge': typeof ForgeRoute
+  '/games': typeof GamesRoute
+  '/glossary': typeof GlossaryRoute
+  '/gratitude': typeof GratitudeRoute
+  '/ideas': typeof IdeasRoute
+  '/inventory': typeof InventoryRoute
+  '/knowledge': typeof KnowledgeRoute
+  '/lantern': typeof LanternRoute
+  '/light-community': typeof LightCommunityRoute
+  '/light-profile': typeof LightProfileRoute
+  '/mastery': typeof MasteryRoute
+  '/mint': typeof MintRoute
+  '/notifications': typeof NotificationsRoute
+  '/onboarding': typeof OnboardingRoute
+  '/pet': typeof PetRoute
+  '/proof-upload': typeof ProofUploadRoute
+  '/quest': typeof QuestRoute
+  '/raid': typeof RaidRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/riddles': typeof RiddlesRoute
+  '/roadmap': typeof RoadmapRoute
+  '/season': typeof SeasonRoute
+  '/swap': typeof SwapRoute
+  '/unified-dashboard': typeof UnifiedDashboardRoute
+  '/unified-light-score': typeof UnifiedLightScoreRoute
+  '/validators': typeof ValidatorsRoute
+  '/vision': typeof VisionRoute
+  '/admin/activity-history': typeof AdminActivityHistoryRoute
+  '/admin/ai-usage': typeof AdminAiUsageRoute
+  '/admin/backlog-audit': typeof AdminBacklogAuditRoute
+  '/admin/bounty': typeof AdminBountyRoute
+  '/admin/cloud-usage': typeof AdminCloudUsageRoute
+  '/admin/contract-status': typeof AdminContractStatusRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/early-adopters': typeof AdminEarlyAdoptersRoute
+  '/admin/founder-dashboard': typeof AdminFounderDashboardRoute
+  '/admin/fraud-alerts': typeof AdminFraudAlertsRoute
+  '/admin/github-sync-check': typeof AdminGithubSyncCheckRoute
+  '/admin/ideas': typeof AdminIdeasRoute
+  '/admin/image-history': typeof AdminImageHistoryRoute
+  '/admin/knowledge': typeof AdminKnowledgeRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/mint-approval': typeof AdminMintApprovalRoute
+  '/admin/mint-stats': typeof AdminMintStatsRoute
+  '/admin/mint-stuck': typeof AdminMintStuckRoute
+  '/admin/notification-audit': typeof AdminNotificationAuditRoute
+  '/admin/notification-templates': typeof AdminNotificationTemplatesRoute
+  '/admin/onchain': typeof AdminOnchainRoute
+  '/admin/project-fund': typeof AdminProjectFundRoute
+  '/admin/report': typeof AdminReportRoute
+  '/admin/statistics': typeof AdminStatisticsRoute
+  '/admin/tet-reward': typeof AdminTetRewardRoute
+  '/admin/thresholds': typeof AdminThresholdsRoute
+  '/admin/tip-reports': typeof AdminTipReportsRoute
+  '/admin/treasure-clues': typeof AdminTreasureCluesRoute
+  '/admin/treasury': typeof AdminTreasuryRoute
+  '/admin/trust-engine': typeof AdminTrustEngineRoute
+  '/admin/trust-list': typeof AdminTrustListRoute
+  '/admin/user-management': typeof AdminUserManagementRoute
+  '/admin/wallet-management': typeof AdminWalletManagementRoute
+  '/admin/withdrawals': typeof AdminWithdrawalsRoute
+  '/assistant/embed': typeof AssistantEmbedRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/coordinator-gate/$projectId': typeof CoordinatorGateProjectIdRoute
+  '/core/agents': typeof CoreAgentsRoute
+  '/core/logs': typeof CoreLogsRoute
+  '/core/memory': typeof CoreMemoryRoute
+  '/core/orchestration': typeof CoreOrchestrationRoute
+  '/core/prompts': typeof CorePromptsRoute
+  '/core/workflows': typeof CoreWorkflowsRoute
+  '/cto/api': typeof CtoApiRoute
+  '/cto/api-docs': typeof CtoApiDocsRoute
+  '/cto/cloud-cost': typeof CtoCloudCostRoute
+  '/cto/health': typeof CtoHealthRoute
+  '/cto/knowledge-ingest': typeof CtoKnowledgeIngestRoute
+  '/cto/platforms': typeof CtoPlatformsRoute
+  '/cto/security': typeof CtoSecurityRoute
+  '/cto/system-health': typeof CtoSystemHealthRoute
+  '/docs/anti-whale-cap': typeof DocsAntiWhaleCapRoute
+  '/docs/api': typeof DocsApiRoute
+  '/docs/core-prompt': typeof DocsCorePromptRoute
+  '/docs/daily-camly-cap': typeof DocsDailyCamlyCapRoute
+  '/docs/digital-constitution': typeof DocsDigitalConstitutionRoute
+  '/docs/fun-governance': typeof DocsFunGovernanceRoute
+  '/docs/knowledge-ingest-api': typeof DocsKnowledgeIngestApiRoute
+  '/docs/light-constitution': typeof DocsLightConstitutionRoute
+  '/docs/master-charter': typeof DocsMasterCharterRoute
+  '/docs/platform': typeof DocsPlatformRoute
+  '/docs/popl': typeof DocsPoplRoute
+  '/embed/chat': typeof EmbedChatRoute
+  '/identity/onboarding': typeof IdentityOnboardingRoute
+  '/messages/$userId': typeof MessagesUserIdRoute
+  '/org/$didOrSlug': typeof OrgDidOrSlugRoute
+  '/post/$postId': typeof PostPostIdRoute
+  '/profile/$tab': typeof ProfileTabRoute
+  '/receipt/$receiptId': typeof ReceiptReceiptIdRoute
+  '/$username/': typeof UsernameIndexRoute
+  '/auth/': typeof AuthIndexRoute
+  '/coordinator-gate/': typeof CoordinatorGateIndexRoute
+  '/core/': typeof CoreIndexRoute
+  '/identity/': typeof IdentityIndexRoute
+  '/messages/': typeof MessagesIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/treasure/': typeof TreasureIndexRoute
+  '/$username/post/$slug': typeof UsernamePostSlugRoute
+  '/treasure/team/new': typeof TreasureTeamNewRoute
+  '/user/$userId/transactions': typeof UserUserIdTransactionsRoute
+  '/user/$userId/': typeof UserUserIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/achievements'
+    | '/activity-history'
+    | '/ascension'
+    | '/attester-panel'
+    | '/bounty'
+    | '/chat'
+    | '/circle'
+    | '/claim-status'
+    | '/community'
+    | '/community-questions'
+    | '/connector'
+    | '/content-writer'
+    | '/earn'
+    | '/faq'
+    | '/forge'
+    | '/games'
+    | '/glossary'
+    | '/gratitude'
+    | '/ideas'
+    | '/inventory'
+    | '/knowledge'
+    | '/lantern'
+    | '/light-community'
+    | '/light-profile'
+    | '/mastery'
+    | '/mint'
+    | '/notifications'
+    | '/onboarding'
+    | '/pet'
+    | '/proof-upload'
+    | '/quest'
+    | '/raid'
+    | '/reset-password'
+    | '/riddles'
+    | '/roadmap'
+    | '/season'
+    | '/swap'
+    | '/unified-dashboard'
+    | '/unified-light-score'
+    | '/validators'
+    | '/vision'
+    | '/admin/activity-history'
+    | '/admin/ai-usage'
+    | '/admin/backlog-audit'
+    | '/admin/bounty'
+    | '/admin/cloud-usage'
+    | '/admin/contract-status'
+    | '/admin/dashboard'
+    | '/admin/early-adopters'
+    | '/admin/founder-dashboard'
+    | '/admin/fraud-alerts'
+    | '/admin/github-sync-check'
+    | '/admin/ideas'
+    | '/admin/image-history'
+    | '/admin/knowledge'
+    | '/admin/login'
+    | '/admin/mint-approval'
+    | '/admin/mint-stats'
+    | '/admin/mint-stuck'
+    | '/admin/notification-audit'
+    | '/admin/notification-templates'
+    | '/admin/onchain'
+    | '/admin/project-fund'
+    | '/admin/report'
+    | '/admin/statistics'
+    | '/admin/tet-reward'
+    | '/admin/thresholds'
+    | '/admin/tip-reports'
+    | '/admin/treasure-clues'
+    | '/admin/treasury'
+    | '/admin/trust-engine'
+    | '/admin/trust-list'
+    | '/admin/user-management'
+    | '/admin/wallet-management'
+    | '/admin/withdrawals'
+    | '/assistant/embed'
+    | '/auth/callback'
+    | '/coordinator-gate/$projectId'
+    | '/core/agents'
+    | '/core/logs'
+    | '/core/memory'
+    | '/core/orchestration'
+    | '/core/prompts'
+    | '/core/workflows'
+    | '/cto/api'
+    | '/cto/api-docs'
+    | '/cto/cloud-cost'
+    | '/cto/health'
+    | '/cto/knowledge-ingest'
+    | '/cto/platforms'
+    | '/cto/security'
+    | '/cto/system-health'
+    | '/docs/anti-whale-cap'
+    | '/docs/api'
+    | '/docs/core-prompt'
+    | '/docs/daily-camly-cap'
+    | '/docs/digital-constitution'
+    | '/docs/fun-governance'
+    | '/docs/knowledge-ingest-api'
+    | '/docs/light-constitution'
+    | '/docs/master-charter'
+    | '/docs/platform'
+    | '/docs/popl'
+    | '/embed/chat'
+    | '/identity/onboarding'
+    | '/messages/$userId'
+    | '/org/$didOrSlug'
+    | '/post/$postId'
+    | '/profile/$tab'
+    | '/receipt/$receiptId'
+    | '/$username/'
+    | '/auth/'
+    | '/coordinator-gate/'
+    | '/core/'
+    | '/identity/'
+    | '/messages/'
+    | '/profile/'
+    | '/treasure/'
+    | '/$username/post/$slug'
+    | '/treasure/team/new'
+    | '/user/$userId/transactions'
+    | '/user/$userId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/achievements'
+    | '/activity-history'
+    | '/ascension'
+    | '/attester-panel'
+    | '/bounty'
+    | '/chat'
+    | '/circle'
+    | '/claim-status'
+    | '/community'
+    | '/community-questions'
+    | '/connector'
+    | '/content-writer'
+    | '/earn'
+    | '/faq'
+    | '/forge'
+    | '/games'
+    | '/glossary'
+    | '/gratitude'
+    | '/ideas'
+    | '/inventory'
+    | '/knowledge'
+    | '/lantern'
+    | '/light-community'
+    | '/light-profile'
+    | '/mastery'
+    | '/mint'
+    | '/notifications'
+    | '/onboarding'
+    | '/pet'
+    | '/proof-upload'
+    | '/quest'
+    | '/raid'
+    | '/reset-password'
+    | '/riddles'
+    | '/roadmap'
+    | '/season'
+    | '/swap'
+    | '/unified-dashboard'
+    | '/unified-light-score'
+    | '/validators'
+    | '/vision'
+    | '/admin/activity-history'
+    | '/admin/ai-usage'
+    | '/admin/backlog-audit'
+    | '/admin/bounty'
+    | '/admin/cloud-usage'
+    | '/admin/contract-status'
+    | '/admin/dashboard'
+    | '/admin/early-adopters'
+    | '/admin/founder-dashboard'
+    | '/admin/fraud-alerts'
+    | '/admin/github-sync-check'
+    | '/admin/ideas'
+    | '/admin/image-history'
+    | '/admin/knowledge'
+    | '/admin/login'
+    | '/admin/mint-approval'
+    | '/admin/mint-stats'
+    | '/admin/mint-stuck'
+    | '/admin/notification-audit'
+    | '/admin/notification-templates'
+    | '/admin/onchain'
+    | '/admin/project-fund'
+    | '/admin/report'
+    | '/admin/statistics'
+    | '/admin/tet-reward'
+    | '/admin/thresholds'
+    | '/admin/tip-reports'
+    | '/admin/treasure-clues'
+    | '/admin/treasury'
+    | '/admin/trust-engine'
+    | '/admin/trust-list'
+    | '/admin/user-management'
+    | '/admin/wallet-management'
+    | '/admin/withdrawals'
+    | '/assistant/embed'
+    | '/auth/callback'
+    | '/coordinator-gate/$projectId'
+    | '/core/agents'
+    | '/core/logs'
+    | '/core/memory'
+    | '/core/orchestration'
+    | '/core/prompts'
+    | '/core/workflows'
+    | '/cto/api'
+    | '/cto/api-docs'
+    | '/cto/cloud-cost'
+    | '/cto/health'
+    | '/cto/knowledge-ingest'
+    | '/cto/platforms'
+    | '/cto/security'
+    | '/cto/system-health'
+    | '/docs/anti-whale-cap'
+    | '/docs/api'
+    | '/docs/core-prompt'
+    | '/docs/daily-camly-cap'
+    | '/docs/digital-constitution'
+    | '/docs/fun-governance'
+    | '/docs/knowledge-ingest-api'
+    | '/docs/light-constitution'
+    | '/docs/master-charter'
+    | '/docs/platform'
+    | '/docs/popl'
+    | '/embed/chat'
+    | '/identity/onboarding'
+    | '/messages/$userId'
+    | '/org/$didOrSlug'
+    | '/post/$postId'
+    | '/profile/$tab'
+    | '/receipt/$receiptId'
+    | '/$username'
+    | '/auth'
+    | '/coordinator-gate'
+    | '/core'
+    | '/identity'
+    | '/messages'
+    | '/profile'
+    | '/treasure'
+    | '/$username/post/$slug'
+    | '/treasure/team/new'
+    | '/user/$userId/transactions'
+    | '/user/$userId'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/achievements'
+    | '/activity-history'
+    | '/ascension'
+    | '/attester-panel'
+    | '/bounty'
+    | '/chat'
+    | '/circle'
+    | '/claim-status'
+    | '/community'
+    | '/community-questions'
+    | '/connector'
+    | '/content-writer'
+    | '/earn'
+    | '/faq'
+    | '/forge'
+    | '/games'
+    | '/glossary'
+    | '/gratitude'
+    | '/ideas'
+    | '/inventory'
+    | '/knowledge'
+    | '/lantern'
+    | '/light-community'
+    | '/light-profile'
+    | '/mastery'
+    | '/mint'
+    | '/notifications'
+    | '/onboarding'
+    | '/pet'
+    | '/proof-upload'
+    | '/quest'
+    | '/raid'
+    | '/reset-password'
+    | '/riddles'
+    | '/roadmap'
+    | '/season'
+    | '/swap'
+    | '/unified-dashboard'
+    | '/unified-light-score'
+    | '/validators'
+    | '/vision'
+    | '/admin/activity-history'
+    | '/admin/ai-usage'
+    | '/admin/backlog-audit'
+    | '/admin/bounty'
+    | '/admin/cloud-usage'
+    | '/admin/contract-status'
+    | '/admin/dashboard'
+    | '/admin/early-adopters'
+    | '/admin/founder-dashboard'
+    | '/admin/fraud-alerts'
+    | '/admin/github-sync-check'
+    | '/admin/ideas'
+    | '/admin/image-history'
+    | '/admin/knowledge'
+    | '/admin/login'
+    | '/admin/mint-approval'
+    | '/admin/mint-stats'
+    | '/admin/mint-stuck'
+    | '/admin/notification-audit'
+    | '/admin/notification-templates'
+    | '/admin/onchain'
+    | '/admin/project-fund'
+    | '/admin/report'
+    | '/admin/statistics'
+    | '/admin/tet-reward'
+    | '/admin/thresholds'
+    | '/admin/tip-reports'
+    | '/admin/treasure-clues'
+    | '/admin/treasury'
+    | '/admin/trust-engine'
+    | '/admin/trust-list'
+    | '/admin/user-management'
+    | '/admin/wallet-management'
+    | '/admin/withdrawals'
+    | '/assistant/embed'
+    | '/auth/callback'
+    | '/coordinator-gate/$projectId'
+    | '/core/agents'
+    | '/core/logs'
+    | '/core/memory'
+    | '/core/orchestration'
+    | '/core/prompts'
+    | '/core/workflows'
+    | '/cto/api'
+    | '/cto/api-docs'
+    | '/cto/cloud-cost'
+    | '/cto/health'
+    | '/cto/knowledge-ingest'
+    | '/cto/platforms'
+    | '/cto/security'
+    | '/cto/system-health'
+    | '/docs/anti-whale-cap'
+    | '/docs/api'
+    | '/docs/core-prompt'
+    | '/docs/daily-camly-cap'
+    | '/docs/digital-constitution'
+    | '/docs/fun-governance'
+    | '/docs/knowledge-ingest-api'
+    | '/docs/light-constitution'
+    | '/docs/master-charter'
+    | '/docs/platform'
+    | '/docs/popl'
+    | '/embed/chat'
+    | '/identity/onboarding'
+    | '/messages/$userId'
+    | '/org/$didOrSlug'
+    | '/post/$postId'
+    | '/profile/$tab'
+    | '/receipt/$receiptId'
+    | '/$username/'
+    | '/auth/'
+    | '/coordinator-gate/'
+    | '/core/'
+    | '/identity/'
+    | '/messages/'
+    | '/profile/'
+    | '/treasure/'
+    | '/$username/post/$slug'
+    | '/treasure/team/new'
+    | '/user/$userId/transactions'
+    | '/user/$userId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AchievementsRoute: typeof AchievementsRoute
+  ActivityHistoryRoute: typeof ActivityHistoryRoute
+  AscensionRoute: typeof AscensionRoute
+  AttesterPanelRoute: typeof AttesterPanelRoute
+  BountyRoute: typeof BountyRoute
+  ChatRoute: typeof ChatRoute
+  CircleRoute: typeof CircleRoute
+  ClaimStatusRoute: typeof ClaimStatusRoute
+  CommunityRoute: typeof CommunityRoute
+  CommunityQuestionsRoute: typeof CommunityQuestionsRoute
+  ConnectorRoute: typeof ConnectorRoute
+  ContentWriterRoute: typeof ContentWriterRoute
+  EarnRoute: typeof EarnRoute
+  FaqRoute: typeof FaqRoute
+  ForgeRoute: typeof ForgeRoute
+  GamesRoute: typeof GamesRoute
+  GlossaryRoute: typeof GlossaryRoute
+  GratitudeRoute: typeof GratitudeRoute
+  IdeasRoute: typeof IdeasRoute
+  InventoryRoute: typeof InventoryRoute
+  KnowledgeRoute: typeof KnowledgeRoute
+  LanternRoute: typeof LanternRoute
+  LightCommunityRoute: typeof LightCommunityRoute
+  LightProfileRoute: typeof LightProfileRoute
+  MasteryRoute: typeof MasteryRoute
+  MintRoute: typeof MintRoute
+  NotificationsRoute: typeof NotificationsRoute
+  OnboardingRoute: typeof OnboardingRoute
+  PetRoute: typeof PetRoute
+  ProofUploadRoute: typeof ProofUploadRoute
+  QuestRoute: typeof QuestRoute
+  RaidRoute: typeof RaidRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  RiddlesRoute: typeof RiddlesRoute
+  RoadmapRoute: typeof RoadmapRoute
+  SeasonRoute: typeof SeasonRoute
+  SwapRoute: typeof SwapRoute
+  UnifiedDashboardRoute: typeof UnifiedDashboardRoute
+  UnifiedLightScoreRoute: typeof UnifiedLightScoreRoute
+  ValidatorsRoute: typeof ValidatorsRoute
+  VisionRoute: typeof VisionRoute
+  AdminActivityHistoryRoute: typeof AdminActivityHistoryRoute
+  AdminAiUsageRoute: typeof AdminAiUsageRoute
+  AdminBacklogAuditRoute: typeof AdminBacklogAuditRoute
+  AdminBountyRoute: typeof AdminBountyRoute
+  AdminCloudUsageRoute: typeof AdminCloudUsageRoute
+  AdminContractStatusRoute: typeof AdminContractStatusRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminEarlyAdoptersRoute: typeof AdminEarlyAdoptersRoute
+  AdminFounderDashboardRoute: typeof AdminFounderDashboardRoute
+  AdminFraudAlertsRoute: typeof AdminFraudAlertsRoute
+  AdminGithubSyncCheckRoute: typeof AdminGithubSyncCheckRoute
+  AdminIdeasRoute: typeof AdminIdeasRoute
+  AdminImageHistoryRoute: typeof AdminImageHistoryRoute
+  AdminKnowledgeRoute: typeof AdminKnowledgeRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminMintApprovalRoute: typeof AdminMintApprovalRoute
+  AdminMintStatsRoute: typeof AdminMintStatsRoute
+  AdminMintStuckRoute: typeof AdminMintStuckRoute
+  AdminNotificationAuditRoute: typeof AdminNotificationAuditRoute
+  AdminNotificationTemplatesRoute: typeof AdminNotificationTemplatesRoute
+  AdminOnchainRoute: typeof AdminOnchainRoute
+  AdminProjectFundRoute: typeof AdminProjectFundRoute
+  AdminReportRoute: typeof AdminReportRoute
+  AdminStatisticsRoute: typeof AdminStatisticsRoute
+  AdminTetRewardRoute: typeof AdminTetRewardRoute
+  AdminThresholdsRoute: typeof AdminThresholdsRoute
+  AdminTipReportsRoute: typeof AdminTipReportsRoute
+  AdminTreasureCluesRoute: typeof AdminTreasureCluesRoute
+  AdminTreasuryRoute: typeof AdminTreasuryRoute
+  AdminTrustEngineRoute: typeof AdminTrustEngineRoute
+  AdminTrustListRoute: typeof AdminTrustListRoute
+  AdminUserManagementRoute: typeof AdminUserManagementRoute
+  AdminWalletManagementRoute: typeof AdminWalletManagementRoute
+  AdminWithdrawalsRoute: typeof AdminWithdrawalsRoute
+  AssistantEmbedRoute: typeof AssistantEmbedRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
+  CoordinatorGateProjectIdRoute: typeof CoordinatorGateProjectIdRoute
+  CoreAgentsRoute: typeof CoreAgentsRoute
+  CoreLogsRoute: typeof CoreLogsRoute
+  CoreMemoryRoute: typeof CoreMemoryRoute
+  CoreOrchestrationRoute: typeof CoreOrchestrationRoute
+  CorePromptsRoute: typeof CorePromptsRoute
+  CoreWorkflowsRoute: typeof CoreWorkflowsRoute
+  CtoApiRoute: typeof CtoApiRoute
+  CtoApiDocsRoute: typeof CtoApiDocsRoute
+  CtoCloudCostRoute: typeof CtoCloudCostRoute
+  CtoHealthRoute: typeof CtoHealthRoute
+  CtoKnowledgeIngestRoute: typeof CtoKnowledgeIngestRoute
+  CtoPlatformsRoute: typeof CtoPlatformsRoute
+  CtoSecurityRoute: typeof CtoSecurityRoute
+  CtoSystemHealthRoute: typeof CtoSystemHealthRoute
+  DocsAntiWhaleCapRoute: typeof DocsAntiWhaleCapRoute
+  DocsApiRoute: typeof DocsApiRoute
+  DocsCorePromptRoute: typeof DocsCorePromptRoute
+  DocsDailyCamlyCapRoute: typeof DocsDailyCamlyCapRoute
+  DocsDigitalConstitutionRoute: typeof DocsDigitalConstitutionRoute
+  DocsFunGovernanceRoute: typeof DocsFunGovernanceRoute
+  DocsKnowledgeIngestApiRoute: typeof DocsKnowledgeIngestApiRoute
+  DocsLightConstitutionRoute: typeof DocsLightConstitutionRoute
+  DocsMasterCharterRoute: typeof DocsMasterCharterRoute
+  DocsPlatformRoute: typeof DocsPlatformRoute
+  DocsPoplRoute: typeof DocsPoplRoute
+  EmbedChatRoute: typeof EmbedChatRoute
+  IdentityOnboardingRoute: typeof IdentityOnboardingRoute
+  MessagesUserIdRoute: typeof MessagesUserIdRoute
+  OrgDidOrSlugRoute: typeof OrgDidOrSlugRoute
+  PostPostIdRoute: typeof PostPostIdRoute
+  ProfileTabRoute: typeof ProfileTabRoute
+  ReceiptReceiptIdRoute: typeof ReceiptReceiptIdRoute
+  UsernameIndexRoute: typeof UsernameIndexRoute
+  AuthIndexRoute: typeof AuthIndexRoute
+  CoordinatorGateIndexRoute: typeof CoordinatorGateIndexRoute
+  CoreIndexRoute: typeof CoreIndexRoute
+  IdentityIndexRoute: typeof IdentityIndexRoute
+  MessagesIndexRoute: typeof MessagesIndexRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+  TreasureIndexRoute: typeof TreasureIndexRoute
+  UsernamePostSlugRoute: typeof UsernamePostSlugRoute
+  TreasureTeamNewRoute: typeof TreasureTeamNewRoute
+  UserUserIdTransactionsRoute: typeof UserUserIdTransactionsRoute
+  UserUserIdIndexRoute: typeof UserUserIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +1653,995 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/achievements': {
+      id: '/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AchievementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activity-history': {
+      id: '/activity-history'
+      path: '/activity-history'
+      fullPath: '/activity-history'
+      preLoaderRoute: typeof ActivityHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ascension': {
+      id: '/ascension'
+      path: '/ascension'
+      fullPath: '/ascension'
+      preLoaderRoute: typeof AscensionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/attester-panel': {
+      id: '/attester-panel'
+      path: '/attester-panel'
+      fullPath: '/attester-panel'
+      preLoaderRoute: typeof AttesterPanelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bounty': {
+      id: '/bounty'
+      path: '/bounty'
+      fullPath: '/bounty'
+      preLoaderRoute: typeof BountyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/circle': {
+      id: '/circle'
+      path: '/circle'
+      fullPath: '/circle'
+      preLoaderRoute: typeof CircleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/claim-status': {
+      id: '/claim-status'
+      path: '/claim-status'
+      fullPath: '/claim-status'
+      preLoaderRoute: typeof ClaimStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community-questions': {
+      id: '/community-questions'
+      path: '/community-questions'
+      fullPath: '/community-questions'
+      preLoaderRoute: typeof CommunityQuestionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connector': {
+      id: '/connector'
+      path: '/connector'
+      fullPath: '/connector'
+      preLoaderRoute: typeof ConnectorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/content-writer': {
+      id: '/content-writer'
+      path: '/content-writer'
+      fullPath: '/content-writer'
+      preLoaderRoute: typeof ContentWriterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/earn': {
+      id: '/earn'
+      path: '/earn'
+      fullPath: '/earn'
+      preLoaderRoute: typeof EarnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forge': {
+      id: '/forge'
+      path: '/forge'
+      fullPath: '/forge'
+      preLoaderRoute: typeof ForgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glossary': {
+      id: '/glossary'
+      path: '/glossary'
+      fullPath: '/glossary'
+      preLoaderRoute: typeof GlossaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gratitude': {
+      id: '/gratitude'
+      path: '/gratitude'
+      fullPath: '/gratitude'
+      preLoaderRoute: typeof GratitudeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ideas': {
+      id: '/ideas'
+      path: '/ideas'
+      fullPath: '/ideas'
+      preLoaderRoute: typeof IdeasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge': {
+      id: '/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof KnowledgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lantern': {
+      id: '/lantern'
+      path: '/lantern'
+      fullPath: '/lantern'
+      preLoaderRoute: typeof LanternRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/light-community': {
+      id: '/light-community'
+      path: '/light-community'
+      fullPath: '/light-community'
+      preLoaderRoute: typeof LightCommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/light-profile': {
+      id: '/light-profile'
+      path: '/light-profile'
+      fullPath: '/light-profile'
+      preLoaderRoute: typeof LightProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mastery': {
+      id: '/mastery'
+      path: '/mastery'
+      fullPath: '/mastery'
+      preLoaderRoute: typeof MasteryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mint': {
+      id: '/mint'
+      path: '/mint'
+      fullPath: '/mint'
+      preLoaderRoute: typeof MintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pet': {
+      id: '/pet'
+      path: '/pet'
+      fullPath: '/pet'
+      preLoaderRoute: typeof PetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proof-upload': {
+      id: '/proof-upload'
+      path: '/proof-upload'
+      fullPath: '/proof-upload'
+      preLoaderRoute: typeof ProofUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quest': {
+      id: '/quest'
+      path: '/quest'
+      fullPath: '/quest'
+      preLoaderRoute: typeof QuestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/raid': {
+      id: '/raid'
+      path: '/raid'
+      fullPath: '/raid'
+      preLoaderRoute: typeof RaidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/riddles': {
+      id: '/riddles'
+      path: '/riddles'
+      fullPath: '/riddles'
+      preLoaderRoute: typeof RiddlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/season': {
+      id: '/season'
+      path: '/season'
+      fullPath: '/season'
+      preLoaderRoute: typeof SeasonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/swap': {
+      id: '/swap'
+      path: '/swap'
+      fullPath: '/swap'
+      preLoaderRoute: typeof SwapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unified-dashboard': {
+      id: '/unified-dashboard'
+      path: '/unified-dashboard'
+      fullPath: '/unified-dashboard'
+      preLoaderRoute: typeof UnifiedDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unified-light-score': {
+      id: '/unified-light-score'
+      path: '/unified-light-score'
+      fullPath: '/unified-light-score'
+      preLoaderRoute: typeof UnifiedLightScoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/validators': {
+      id: '/validators'
+      path: '/validators'
+      fullPath: '/validators'
+      preLoaderRoute: typeof ValidatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vision': {
+      id: '/vision'
+      path: '/vision'
+      fullPath: '/vision'
+      preLoaderRoute: typeof VisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$username/': {
+      id: '/$username/'
+      path: '/$username'
+      fullPath: '/$username/'
+      preLoaderRoute: typeof UsernameIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/activity-history': {
+      id: '/admin/activity-history'
+      path: '/admin/activity-history'
+      fullPath: '/admin/activity-history'
+      preLoaderRoute: typeof AdminActivityHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/ai-usage': {
+      id: '/admin/ai-usage'
+      path: '/admin/ai-usage'
+      fullPath: '/admin/ai-usage'
+      preLoaderRoute: typeof AdminAiUsageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/backlog-audit': {
+      id: '/admin/backlog-audit'
+      path: '/admin/backlog-audit'
+      fullPath: '/admin/backlog-audit'
+      preLoaderRoute: typeof AdminBacklogAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/bounty': {
+      id: '/admin/bounty'
+      path: '/admin/bounty'
+      fullPath: '/admin/bounty'
+      preLoaderRoute: typeof AdminBountyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/cloud-usage': {
+      id: '/admin/cloud-usage'
+      path: '/admin/cloud-usage'
+      fullPath: '/admin/cloud-usage'
+      preLoaderRoute: typeof AdminCloudUsageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/contract-status': {
+      id: '/admin/contract-status'
+      path: '/admin/contract-status'
+      fullPath: '/admin/contract-status'
+      preLoaderRoute: typeof AdminContractStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/early-adopters': {
+      id: '/admin/early-adopters'
+      path: '/admin/early-adopters'
+      fullPath: '/admin/early-adopters'
+      preLoaderRoute: typeof AdminEarlyAdoptersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/founder-dashboard': {
+      id: '/admin/founder-dashboard'
+      path: '/admin/founder-dashboard'
+      fullPath: '/admin/founder-dashboard'
+      preLoaderRoute: typeof AdminFounderDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/fraud-alerts': {
+      id: '/admin/fraud-alerts'
+      path: '/admin/fraud-alerts'
+      fullPath: '/admin/fraud-alerts'
+      preLoaderRoute: typeof AdminFraudAlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/github-sync-check': {
+      id: '/admin/github-sync-check'
+      path: '/admin/github-sync-check'
+      fullPath: '/admin/github-sync-check'
+      preLoaderRoute: typeof AdminGithubSyncCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/ideas': {
+      id: '/admin/ideas'
+      path: '/admin/ideas'
+      fullPath: '/admin/ideas'
+      preLoaderRoute: typeof AdminIdeasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/image-history': {
+      id: '/admin/image-history'
+      path: '/admin/image-history'
+      fullPath: '/admin/image-history'
+      preLoaderRoute: typeof AdminImageHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/knowledge': {
+      id: '/admin/knowledge'
+      path: '/admin/knowledge'
+      fullPath: '/admin/knowledge'
+      preLoaderRoute: typeof AdminKnowledgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/mint-approval': {
+      id: '/admin/mint-approval'
+      path: '/admin/mint-approval'
+      fullPath: '/admin/mint-approval'
+      preLoaderRoute: typeof AdminMintApprovalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/mint-stats': {
+      id: '/admin/mint-stats'
+      path: '/admin/mint-stats'
+      fullPath: '/admin/mint-stats'
+      preLoaderRoute: typeof AdminMintStatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/mint-stuck': {
+      id: '/admin/mint-stuck'
+      path: '/admin/mint-stuck'
+      fullPath: '/admin/mint-stuck'
+      preLoaderRoute: typeof AdminMintStuckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/notification-audit': {
+      id: '/admin/notification-audit'
+      path: '/admin/notification-audit'
+      fullPath: '/admin/notification-audit'
+      preLoaderRoute: typeof AdminNotificationAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/notification-templates': {
+      id: '/admin/notification-templates'
+      path: '/admin/notification-templates'
+      fullPath: '/admin/notification-templates'
+      preLoaderRoute: typeof AdminNotificationTemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/onchain': {
+      id: '/admin/onchain'
+      path: '/admin/onchain'
+      fullPath: '/admin/onchain'
+      preLoaderRoute: typeof AdminOnchainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/project-fund': {
+      id: '/admin/project-fund'
+      path: '/admin/project-fund'
+      fullPath: '/admin/project-fund'
+      preLoaderRoute: typeof AdminProjectFundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/report': {
+      id: '/admin/report'
+      path: '/admin/report'
+      fullPath: '/admin/report'
+      preLoaderRoute: typeof AdminReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/statistics': {
+      id: '/admin/statistics'
+      path: '/admin/statistics'
+      fullPath: '/admin/statistics'
+      preLoaderRoute: typeof AdminStatisticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/tet-reward': {
+      id: '/admin/tet-reward'
+      path: '/admin/tet-reward'
+      fullPath: '/admin/tet-reward'
+      preLoaderRoute: typeof AdminTetRewardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/thresholds': {
+      id: '/admin/thresholds'
+      path: '/admin/thresholds'
+      fullPath: '/admin/thresholds'
+      preLoaderRoute: typeof AdminThresholdsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/tip-reports': {
+      id: '/admin/tip-reports'
+      path: '/admin/tip-reports'
+      fullPath: '/admin/tip-reports'
+      preLoaderRoute: typeof AdminTipReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/treasure-clues': {
+      id: '/admin/treasure-clues'
+      path: '/admin/treasure-clues'
+      fullPath: '/admin/treasure-clues'
+      preLoaderRoute: typeof AdminTreasureCluesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/treasury': {
+      id: '/admin/treasury'
+      path: '/admin/treasury'
+      fullPath: '/admin/treasury'
+      preLoaderRoute: typeof AdminTreasuryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/trust-engine': {
+      id: '/admin/trust-engine'
+      path: '/admin/trust-engine'
+      fullPath: '/admin/trust-engine'
+      preLoaderRoute: typeof AdminTrustEngineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/trust-list': {
+      id: '/admin/trust-list'
+      path: '/admin/trust-list'
+      fullPath: '/admin/trust-list'
+      preLoaderRoute: typeof AdminTrustListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/user-management': {
+      id: '/admin/user-management'
+      path: '/admin/user-management'
+      fullPath: '/admin/user-management'
+      preLoaderRoute: typeof AdminUserManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/wallet-management': {
+      id: '/admin/wallet-management'
+      path: '/admin/wallet-management'
+      fullPath: '/admin/wallet-management'
+      preLoaderRoute: typeof AdminWalletManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/withdrawals': {
+      id: '/admin/withdrawals'
+      path: '/admin/withdrawals'
+      fullPath: '/admin/withdrawals'
+      preLoaderRoute: typeof AdminWithdrawalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant/embed': {
+      id: '/assistant/embed'
+      path: '/assistant/embed'
+      fullPath: '/assistant/embed'
+      preLoaderRoute: typeof AssistantEmbedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/': {
+      id: '/auth/'
+      path: '/auth'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coordinator-gate/': {
+      id: '/coordinator-gate/'
+      path: '/coordinator-gate'
+      fullPath: '/coordinator-gate/'
+      preLoaderRoute: typeof CoordinatorGateIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coordinator-gate/$projectId': {
+      id: '/coordinator-gate/$projectId'
+      path: '/coordinator-gate/$projectId'
+      fullPath: '/coordinator-gate/$projectId'
+      preLoaderRoute: typeof CoordinatorGateProjectIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/': {
+      id: '/core/'
+      path: '/core'
+      fullPath: '/core/'
+      preLoaderRoute: typeof CoreIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/agents': {
+      id: '/core/agents'
+      path: '/core/agents'
+      fullPath: '/core/agents'
+      preLoaderRoute: typeof CoreAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/logs': {
+      id: '/core/logs'
+      path: '/core/logs'
+      fullPath: '/core/logs'
+      preLoaderRoute: typeof CoreLogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/memory': {
+      id: '/core/memory'
+      path: '/core/memory'
+      fullPath: '/core/memory'
+      preLoaderRoute: typeof CoreMemoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/orchestration': {
+      id: '/core/orchestration'
+      path: '/core/orchestration'
+      fullPath: '/core/orchestration'
+      preLoaderRoute: typeof CoreOrchestrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/prompts': {
+      id: '/core/prompts'
+      path: '/core/prompts'
+      fullPath: '/core/prompts'
+      preLoaderRoute: typeof CorePromptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/core/workflows': {
+      id: '/core/workflows'
+      path: '/core/workflows'
+      fullPath: '/core/workflows'
+      preLoaderRoute: typeof CoreWorkflowsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/api': {
+      id: '/cto/api'
+      path: '/cto/api'
+      fullPath: '/cto/api'
+      preLoaderRoute: typeof CtoApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/api-docs': {
+      id: '/cto/api-docs'
+      path: '/cto/api-docs'
+      fullPath: '/cto/api-docs'
+      preLoaderRoute: typeof CtoApiDocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/cloud-cost': {
+      id: '/cto/cloud-cost'
+      path: '/cto/cloud-cost'
+      fullPath: '/cto/cloud-cost'
+      preLoaderRoute: typeof CtoCloudCostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/health': {
+      id: '/cto/health'
+      path: '/cto/health'
+      fullPath: '/cto/health'
+      preLoaderRoute: typeof CtoHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/knowledge-ingest': {
+      id: '/cto/knowledge-ingest'
+      path: '/cto/knowledge-ingest'
+      fullPath: '/cto/knowledge-ingest'
+      preLoaderRoute: typeof CtoKnowledgeIngestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/platforms': {
+      id: '/cto/platforms'
+      path: '/cto/platforms'
+      fullPath: '/cto/platforms'
+      preLoaderRoute: typeof CtoPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/security': {
+      id: '/cto/security'
+      path: '/cto/security'
+      fullPath: '/cto/security'
+      preLoaderRoute: typeof CtoSecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cto/system-health': {
+      id: '/cto/system-health'
+      path: '/cto/system-health'
+      fullPath: '/cto/system-health'
+      preLoaderRoute: typeof CtoSystemHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/anti-whale-cap': {
+      id: '/docs/anti-whale-cap'
+      path: '/docs/anti-whale-cap'
+      fullPath: '/docs/anti-whale-cap'
+      preLoaderRoute: typeof DocsAntiWhaleCapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/api': {
+      id: '/docs/api'
+      path: '/docs/api'
+      fullPath: '/docs/api'
+      preLoaderRoute: typeof DocsApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/core-prompt': {
+      id: '/docs/core-prompt'
+      path: '/docs/core-prompt'
+      fullPath: '/docs/core-prompt'
+      preLoaderRoute: typeof DocsCorePromptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/daily-camly-cap': {
+      id: '/docs/daily-camly-cap'
+      path: '/docs/daily-camly-cap'
+      fullPath: '/docs/daily-camly-cap'
+      preLoaderRoute: typeof DocsDailyCamlyCapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/digital-constitution': {
+      id: '/docs/digital-constitution'
+      path: '/docs/digital-constitution'
+      fullPath: '/docs/digital-constitution'
+      preLoaderRoute: typeof DocsDigitalConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/fun-governance': {
+      id: '/docs/fun-governance'
+      path: '/docs/fun-governance'
+      fullPath: '/docs/fun-governance'
+      preLoaderRoute: typeof DocsFunGovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/knowledge-ingest-api': {
+      id: '/docs/knowledge-ingest-api'
+      path: '/docs/knowledge-ingest-api'
+      fullPath: '/docs/knowledge-ingest-api'
+      preLoaderRoute: typeof DocsKnowledgeIngestApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/light-constitution': {
+      id: '/docs/light-constitution'
+      path: '/docs/light-constitution'
+      fullPath: '/docs/light-constitution'
+      preLoaderRoute: typeof DocsLightConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/master-charter': {
+      id: '/docs/master-charter'
+      path: '/docs/master-charter'
+      fullPath: '/docs/master-charter'
+      preLoaderRoute: typeof DocsMasterCharterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/platform': {
+      id: '/docs/platform'
+      path: '/docs/platform'
+      fullPath: '/docs/platform'
+      preLoaderRoute: typeof DocsPlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/popl': {
+      id: '/docs/popl'
+      path: '/docs/popl'
+      fullPath: '/docs/popl'
+      preLoaderRoute: typeof DocsPoplRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/embed/chat': {
+      id: '/embed/chat'
+      path: '/embed/chat'
+      fullPath: '/embed/chat'
+      preLoaderRoute: typeof EmbedChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/identity/': {
+      id: '/identity/'
+      path: '/identity'
+      fullPath: '/identity/'
+      preLoaderRoute: typeof IdentityIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/identity/onboarding': {
+      id: '/identity/onboarding'
+      path: '/identity/onboarding'
+      fullPath: '/identity/onboarding'
+      preLoaderRoute: typeof IdentityOnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages/': {
+      id: '/messages/'
+      path: '/messages'
+      fullPath: '/messages/'
+      preLoaderRoute: typeof MessagesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages/$userId': {
+      id: '/messages/$userId'
+      path: '/messages/$userId'
+      fullPath: '/messages/$userId'
+      preLoaderRoute: typeof MessagesUserIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/org/$didOrSlug': {
+      id: '/org/$didOrSlug'
+      path: '/org/$didOrSlug'
+      fullPath: '/org/$didOrSlug'
+      preLoaderRoute: typeof OrgDidOrSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/post/$postId': {
+      id: '/post/$postId'
+      path: '/post/$postId'
+      fullPath: '/post/$postId'
+      preLoaderRoute: typeof PostPostIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/$tab': {
+      id: '/profile/$tab'
+      path: '/profile/$tab'
+      fullPath: '/profile/$tab'
+      preLoaderRoute: typeof ProfileTabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/receipt/$receiptId': {
+      id: '/receipt/$receiptId'
+      path: '/receipt/$receiptId'
+      fullPath: '/receipt/$receiptId'
+      preLoaderRoute: typeof ReceiptReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/treasure/': {
+      id: '/treasure/'
+      path: '/treasure'
+      fullPath: '/treasure/'
+      preLoaderRoute: typeof TreasureIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$username/post/$slug': {
+      id: '/$username/post/$slug'
+      path: '/$username/post/$slug'
+      fullPath: '/$username/post/$slug'
+      preLoaderRoute: typeof UsernamePostSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/treasure/team/new': {
+      id: '/treasure/team/new'
+      path: '/treasure/team/new'
+      fullPath: '/treasure/team/new'
+      preLoaderRoute: typeof TreasureTeamNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/user/$userId/': {
+      id: '/user/$userId/'
+      path: '/user/$userId'
+      fullPath: '/user/$userId/'
+      preLoaderRoute: typeof UserUserIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/user/$userId/transactions': {
+      id: '/user/$userId/transactions'
+      path: '/user/$userId/transactions'
+      fullPath: '/user/$userId/transactions'
+      preLoaderRoute: typeof UserUserIdTransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AchievementsRoute: AchievementsRoute,
+  ActivityHistoryRoute: ActivityHistoryRoute,
+  AscensionRoute: AscensionRoute,
+  AttesterPanelRoute: AttesterPanelRoute,
+  BountyRoute: BountyRoute,
+  ChatRoute: ChatRoute,
+  CircleRoute: CircleRoute,
+  ClaimStatusRoute: ClaimStatusRoute,
+  CommunityRoute: CommunityRoute,
+  CommunityQuestionsRoute: CommunityQuestionsRoute,
+  ConnectorRoute: ConnectorRoute,
+  ContentWriterRoute: ContentWriterRoute,
+  EarnRoute: EarnRoute,
+  FaqRoute: FaqRoute,
+  ForgeRoute: ForgeRoute,
+  GamesRoute: GamesRoute,
+  GlossaryRoute: GlossaryRoute,
+  GratitudeRoute: GratitudeRoute,
+  IdeasRoute: IdeasRoute,
+  InventoryRoute: InventoryRoute,
+  KnowledgeRoute: KnowledgeRoute,
+  LanternRoute: LanternRoute,
+  LightCommunityRoute: LightCommunityRoute,
+  LightProfileRoute: LightProfileRoute,
+  MasteryRoute: MasteryRoute,
+  MintRoute: MintRoute,
+  NotificationsRoute: NotificationsRoute,
+  OnboardingRoute: OnboardingRoute,
+  PetRoute: PetRoute,
+  ProofUploadRoute: ProofUploadRoute,
+  QuestRoute: QuestRoute,
+  RaidRoute: RaidRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  RiddlesRoute: RiddlesRoute,
+  RoadmapRoute: RoadmapRoute,
+  SeasonRoute: SeasonRoute,
+  SwapRoute: SwapRoute,
+  UnifiedDashboardRoute: UnifiedDashboardRoute,
+  UnifiedLightScoreRoute: UnifiedLightScoreRoute,
+  ValidatorsRoute: ValidatorsRoute,
+  VisionRoute: VisionRoute,
+  AdminActivityHistoryRoute: AdminActivityHistoryRoute,
+  AdminAiUsageRoute: AdminAiUsageRoute,
+  AdminBacklogAuditRoute: AdminBacklogAuditRoute,
+  AdminBountyRoute: AdminBountyRoute,
+  AdminCloudUsageRoute: AdminCloudUsageRoute,
+  AdminContractStatusRoute: AdminContractStatusRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminEarlyAdoptersRoute: AdminEarlyAdoptersRoute,
+  AdminFounderDashboardRoute: AdminFounderDashboardRoute,
+  AdminFraudAlertsRoute: AdminFraudAlertsRoute,
+  AdminGithubSyncCheckRoute: AdminGithubSyncCheckRoute,
+  AdminIdeasRoute: AdminIdeasRoute,
+  AdminImageHistoryRoute: AdminImageHistoryRoute,
+  AdminKnowledgeRoute: AdminKnowledgeRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminMintApprovalRoute: AdminMintApprovalRoute,
+  AdminMintStatsRoute: AdminMintStatsRoute,
+  AdminMintStuckRoute: AdminMintStuckRoute,
+  AdminNotificationAuditRoute: AdminNotificationAuditRoute,
+  AdminNotificationTemplatesRoute: AdminNotificationTemplatesRoute,
+  AdminOnchainRoute: AdminOnchainRoute,
+  AdminProjectFundRoute: AdminProjectFundRoute,
+  AdminReportRoute: AdminReportRoute,
+  AdminStatisticsRoute: AdminStatisticsRoute,
+  AdminTetRewardRoute: AdminTetRewardRoute,
+  AdminThresholdsRoute: AdminThresholdsRoute,
+  AdminTipReportsRoute: AdminTipReportsRoute,
+  AdminTreasureCluesRoute: AdminTreasureCluesRoute,
+  AdminTreasuryRoute: AdminTreasuryRoute,
+  AdminTrustEngineRoute: AdminTrustEngineRoute,
+  AdminTrustListRoute: AdminTrustListRoute,
+  AdminUserManagementRoute: AdminUserManagementRoute,
+  AdminWalletManagementRoute: AdminWalletManagementRoute,
+  AdminWithdrawalsRoute: AdminWithdrawalsRoute,
+  AssistantEmbedRoute: AssistantEmbedRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
+  CoordinatorGateProjectIdRoute: CoordinatorGateProjectIdRoute,
+  CoreAgentsRoute: CoreAgentsRoute,
+  CoreLogsRoute: CoreLogsRoute,
+  CoreMemoryRoute: CoreMemoryRoute,
+  CoreOrchestrationRoute: CoreOrchestrationRoute,
+  CorePromptsRoute: CorePromptsRoute,
+  CoreWorkflowsRoute: CoreWorkflowsRoute,
+  CtoApiRoute: CtoApiRoute,
+  CtoApiDocsRoute: CtoApiDocsRoute,
+  CtoCloudCostRoute: CtoCloudCostRoute,
+  CtoHealthRoute: CtoHealthRoute,
+  CtoKnowledgeIngestRoute: CtoKnowledgeIngestRoute,
+  CtoPlatformsRoute: CtoPlatformsRoute,
+  CtoSecurityRoute: CtoSecurityRoute,
+  CtoSystemHealthRoute: CtoSystemHealthRoute,
+  DocsAntiWhaleCapRoute: DocsAntiWhaleCapRoute,
+  DocsApiRoute: DocsApiRoute,
+  DocsCorePromptRoute: DocsCorePromptRoute,
+  DocsDailyCamlyCapRoute: DocsDailyCamlyCapRoute,
+  DocsDigitalConstitutionRoute: DocsDigitalConstitutionRoute,
+  DocsFunGovernanceRoute: DocsFunGovernanceRoute,
+  DocsKnowledgeIngestApiRoute: DocsKnowledgeIngestApiRoute,
+  DocsLightConstitutionRoute: DocsLightConstitutionRoute,
+  DocsMasterCharterRoute: DocsMasterCharterRoute,
+  DocsPlatformRoute: DocsPlatformRoute,
+  DocsPoplRoute: DocsPoplRoute,
+  EmbedChatRoute: EmbedChatRoute,
+  IdentityOnboardingRoute: IdentityOnboardingRoute,
+  MessagesUserIdRoute: MessagesUserIdRoute,
+  OrgDidOrSlugRoute: OrgDidOrSlugRoute,
+  PostPostIdRoute: PostPostIdRoute,
+  ProfileTabRoute: ProfileTabRoute,
+  ReceiptReceiptIdRoute: ReceiptReceiptIdRoute,
+  UsernameIndexRoute: UsernameIndexRoute,
+  AuthIndexRoute: AuthIndexRoute,
+  CoordinatorGateIndexRoute: CoordinatorGateIndexRoute,
+  CoreIndexRoute: CoreIndexRoute,
+  IdentityIndexRoute: IdentityIndexRoute,
+  MessagesIndexRoute: MessagesIndexRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+  TreasureIndexRoute: TreasureIndexRoute,
+  UsernamePostSlugRoute: UsernamePostSlugRoute,
+  TreasureTeamNewRoute: TreasureTeamNewRoute,
+  UserUserIdTransactionsRoute: UserUserIdTransactionsRoute,
+  UserUserIdIndexRoute: UserUserIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
