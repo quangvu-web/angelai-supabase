@@ -88,7 +88,7 @@ export function CreateApiKeyDialog({ open, onOpenChange }: CreateApiKeyDialogPro
   };
 
   // Get the edge function URL for the example
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://your-project.supabase.co";
+  const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL ?? "") || "https://your-project.supabase.co";
   const exampleUrl = `${supabaseUrl}/functions/v1/angel-chat`;
 
   return (

@@ -159,7 +159,7 @@ export function useLiXiCelebration() {
       // Call edge function to process on-chain transfer
       const { data: session } = await supabase.auth.getSession();
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/process-lixi-claim`,
+        `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/process-lixi-claim`,
         {
           method: "POST",
           headers: {

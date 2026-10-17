@@ -550,7 +550,7 @@ const AdminWalletManagement = () => {
     setSuspending(true);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/suspend-user`,
+        `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/suspend-user`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${session.access_token}`, "Content-Type": "application/json" },

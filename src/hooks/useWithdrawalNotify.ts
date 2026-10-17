@@ -63,13 +63,13 @@ export const useWithdrawalNotify = () => {
     setIsLoadingAudio(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-coin-sound`,
+        `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/generate-coin-sound`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            apikey: (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? ""),
+            Authorization: `Bearer ${(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "")}`,
           },
           body: JSON.stringify({}),
         }

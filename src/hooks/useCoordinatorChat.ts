@@ -79,7 +79,7 @@ export function useCoordinatorChat(projectId: string | undefined) {
       intent: CoordinatorIntent,
     ): Promise<string> => {
       if (!session?.access_token) throw new Error("Not authenticated");
-      const endpointUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/coordinator-chat`;
+      const endpointUrl = `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/coordinator-chat`;
       const resp = await fetch(endpointUrl, {
         method: "POST",
         headers: {

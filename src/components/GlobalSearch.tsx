@@ -218,7 +218,7 @@ export function GlobalSearch({
         const accessToken = sessionData.session?.access_token;
         if (!accessToken) throw new Error("Authentication required");
 
-        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/global-search`, {
+        const response = await fetch(`${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/global-search`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

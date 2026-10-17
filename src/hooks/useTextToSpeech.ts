@@ -63,7 +63,7 @@ const speakWithBrowser = (
 
 // Helper to fetch audio from TTS API
 const fetchTTSAudio = async (text: string): Promise<Blob> => {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL ?? "");
   const { data: sessionData } = await supabase.auth.getSession();
   const accessToken = sessionData.session?.access_token;
   if (!accessToken) {

@@ -34,7 +34,7 @@ export const CosmicCaptionAI = ({ onCaptionGenerated, currentContent = "" }: Cos
       const accessToken = sessionData.session?.access_token;
       if (!accessToken) throw new Error("Authentication required");
 
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-content`, {
+      const response = await fetch(`${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/generate-content`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

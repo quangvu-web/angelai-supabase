@@ -15,9 +15,9 @@ function decodeToken(token: string | null): { exp?: number; client_id?: string }
   }
 }
 
-const FN_URL = angelChatUrl(import.meta.env.VITE_SUPABASE_URL);
-const ANALYZE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-image`;
-const PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const FN_URL = angelChatUrl((import.meta.env.VITE_SUPABASE_URL ?? ""));
+const ANALYZE_URL = `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/analyze-image`;
+const PUBLISHABLE_KEY = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "");
 
 export default function EmbedChat() {
   const [params] = useSearchParams();

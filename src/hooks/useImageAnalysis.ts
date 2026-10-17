@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-const ANALYZE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-image`;
+const ANALYZE_URL = `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/analyze-image`;
 
 function hasTextCorruption(text: string): boolean {
   if (text.includes("\uFFFD")) return true;

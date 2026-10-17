@@ -33,7 +33,7 @@ const AuthCallback = () => {
 
         // Send token to bridge-login edge function
         // SECURITY: never send hint_email — server must derive identity only from verified token
-        const bridgeUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bridge-login`;
+        const bridgeUrl = `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/bridge-login`;
         const res = await fetch(bridgeUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },

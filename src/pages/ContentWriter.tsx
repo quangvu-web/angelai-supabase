@@ -128,7 +128,7 @@ Hãy viết content hoàn chỉnh, sẵn sàng sử dụng. Không cần giải 
         return;
       }
 
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-content`, {
+      const response = await fetch(`${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/generate-content`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

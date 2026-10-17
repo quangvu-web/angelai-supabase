@@ -42,7 +42,7 @@ export function useImageGeneration() {
         throw new Error("Vui long dang nhap de tao hinh anh");
       }
 
-      const resp = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-image`, {
+      const resp = await fetch(`${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/generate-image`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

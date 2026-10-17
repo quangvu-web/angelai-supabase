@@ -592,7 +592,7 @@ const AdminFraudAlerts = () => {
     setConfirmBulkBan(false);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bulk-suspend-users`,
+        `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/bulk-suspend-users`,
         {
           method: "POST",
           headers: {
@@ -632,7 +632,7 @@ const AdminFraudAlerts = () => {
     setBanning(true);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/bulk-suspend-users`,
+        `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/bulk-suspend-users`,
         {
           method: "POST",
           headers: {
@@ -694,7 +694,7 @@ const AdminFraudAlerts = () => {
     setConfirmConvertTemp(false);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/convert-temp-to-permanent`,
+        `${(import.meta.env.VITE_SUPABASE_URL ?? "")}/functions/v1/convert-temp-to-permanent`,
         {
           method: "POST",
           headers: {

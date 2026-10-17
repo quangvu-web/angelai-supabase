@@ -97,7 +97,7 @@ interface ShareDialogState {
 
 type ChatMode = "chat" | "generate-image" | "analyze-image" | "edit-image";
 
-const CHAT_URL = angelChatUrl(import.meta.env.VITE_SUPABASE_URL);
+const CHAT_URL = angelChatUrl((import.meta.env.VITE_SUPABASE_URL ?? ""));
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -1098,7 +1098,7 @@ const Chat = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        Authorization: `Bearer ${session?.access_token || (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "")}`,
       },
       body: JSON.stringify(body),
       signal: controller.signal,
@@ -1215,7 +1215,7 @@ const Chat = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            Authorization: `Bearer ${session?.access_token || (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "")}`,
           },
           body: JSON.stringify({ 
             messages: userMessages.map(m => ({ role: m.role, content: m.content })),
