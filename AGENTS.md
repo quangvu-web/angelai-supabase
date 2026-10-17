@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Code copied from ANGEL AI imports routing helpers from `@/lib/router-compat` (react-router-style API on TanStack Router); keep using it instead of adding react-router-dom.
+- `@/integrations/supabase/client` is an offline stub returning empty data, because the app is intentionally not connected to a database yet.
+- Root layout renders app providers inside `<ClientOnly>` because the copied code relies on browser-only APIs.
