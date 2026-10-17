@@ -1,0 +1,281 @@
+/**
+ * Content Moderation System for Angel AI Community
+ * Detects and blocks harmful content with gentle reminders
+ */
+
+// Harmful domain patterns (partial matches)
+const HARMFUL_DOMAIN_PATTERNS = [
+  // Adult/Porn sites
+  'porn', 'xxx', 'sex', 'adult', 'xvideos', 'xnxx', 'pornhub', 'xhamster', 
+  'redtube', 'youporn', 'tube8', 'spankbang', 'brazzers', 'bangbros',
+  'onlyfans', 'fansly', 'chaturbate', 'livejasmin', 'stripchat',
+  // Violence/Gore
+  'gore', 'liveleak', 'bestgore', 'documenting', 'theync', 'kaotic',
+  // Gambling
+  'casino', 'bet365', 'poker', 'gambling', 'slots', 'baccarat',
+  // Malware/Phishing common patterns
+  'free-iphone', 'win-prize', 'claim-reward', 'lottery-winner',
+  // Piracy
+  'torrent', 'piratebay', '1337x', 'rarbg', 'yts',
+];
+
+// Harmful words in Vietnamese and English
+const HARMFUL_WORDS_VI = [
+  // Violence
+  'giết', 'chém', 'đâm', 'bắn chết', 'tra tấn', 'hành hình', 'tự sát', 'tự tử',
+  // Sexual explicit
+  'địt', 'đụ', 'chịch', 'fuck', 'sex', 'porn', 'làm tình', 'quan hệ tình dục',
+  // Discrimination/Hate
+  'đồ chó', 'con chó', 'thằng ngu', 'con ngu', 'đồ ngu', 'mặt lồn', 'đồ điếm',
+  'bê đê', 'pê đê', 
+  // Drugs
+  'ma túy', 'cocaine', 'heroin', 'thuốc lắc', 'cần sa', 'ketamine',
+];
+
+const HARMFUL_WORDS_EN = [
+  // Violence
+  'kill', 'murder', 'suicide', 'torture', 'massacre', 'genocide',
+  // Sexual explicit  
+  'fuck', 'dick', 'cock', 'pussy', 'penis', 'vagina', 'blowjob', 'handjob',
+  'masturbate', 'orgasm', 'cum', 'ejaculate', 'naked', 'nude',
+  // Discrimination/Hate
+  'nigger', 'faggot', 'retard', 'chink', 'gook', 'kike', 'spic',
+  // Drugs
+  'cocaine', 'heroin', 'meth', 'crack', 'ecstasy', 'lsd',
+];
+
+// Vietnamese safe phrases that contain syllables matching harmful words
+// These are replaced with placeholders before moderation to avoid false positives
+const VIETNAMESE_SAFE_PHRASES = [
+  // Phrases containing "đâm" (stab) but meaning something else
+  'đâm ra',      // trở nên (become)
+  'đâm đầu',     // lao vào (dive into)
+  // Phrases containing "chém" (slash) but meaning something else  
+  'chém gió',    // nói phét (brag/chat idly)
+  'chém breeze',
+  // Phrases containing "giết" but in idiomatic use
+  'giết thời gian', // kill time
+  // Phrases containing "gay" syllable (already removed from list but extra safety)
+  'gây gổ',      // quarrel
+  'gây dựng',    // build up
+  'gây quỹ',     // fundraise
+];
+
+// Suspicious URL shorteners often used for malicious links
+const SUSPICIOUS_SHORTENERS = [
+  'bit.ly', 'tinyurl', 'goo.gl', 't.co', 'ow.ly', 'is.gd', 'buff.ly',
+  'adf.ly', 'shorte.st', 'linkbucks', 'adfoc.us',
+];
+
+export interface ModerationResult {
+  isAllowed: boolean;
+  reason?: string;
+  blockedItems?: string[];
+  gentleReminder: string;
+}
+
+/**
+ * Sanitize text by replacing known safe Vietnamese phrases with placeholders
+ * This prevents false positives when safe phrases contain harmful syllables
+ */
+function sanitizeForCheck(text: string): string {
+  let sanitized = text.toLowerCase();
+  for (const phrase of VIETNAMESE_SAFE_PHRASES) {
+    sanitized = sanitized.split(phrase.toLowerCase()).join(' __safe__ ');
+  }
+  return sanitized;
+}
+
+/**
+ * Escape special regex characters in a string
+ */
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Custom word boundary pattern for Vietnamese text
+ * Uses whitespace and punctuation as boundaries instead of \b
+ * which doesn't work well with Unicode/diacritics
+ */
+const WORD_BOUNDARY_START = '(^|\\s|[.,!?;:\\"\'()\\[\\]{}])';
+const WORD_BOUNDARY_END = '($|\\s|[.,!?;:\\"\'()\\[\\]{}])';
+
+/**
+ * Check if a URL contains harmful patterns
+ */
+function checkHarmfulUrl(url: string): { isHarmful: boolean; pattern?: string } {
+  const lowerUrl = url.toLowerCase();
+  
+  for (const pattern of HARMFUL_DOMAIN_PATTERNS) {
+    if (lowerUrl.includes(pattern)) {
+      return { isHarmful: true, pattern };
+    }
+  }
+  
+  return { isHarmful: false };
+}
+
+/**
+ * Check if text contains harmful words
+ * Uses word-boundary regex for both Vietnamese and English to avoid false positives
+ */
+function checkHarmfulWords(text: string): { isHarmful: boolean; words: string[] } {
+  // First sanitize safe phrases to avoid false positives
+  const sanitizedText = sanitizeForCheck(text);
+  const foundWords: string[] = [];
+  
+  // Check Vietnamese harmful words (with custom word boundary for Unicode support)
+  for (const word of HARMFUL_WORDS_VI) {
+    const escapedWord = escapeRegex(word.toLowerCase());
+    const regex = new RegExp(`${WORD_BOUNDARY_START}${escapedWord}${WORD_BOUNDARY_END}`, 'i');
+    if (regex.test(sanitizedText)) {
+      foundWords.push(word);
+    }
+  }
+  
+  // Check English harmful words (with standard word boundary)
+  for (const word of HARMFUL_WORDS_EN) {
+    const regex = new RegExp(`\\b${escapeRegex(word)}\\b`, 'i');
+    if (regex.test(sanitizedText)) {
+      foundWords.push(word);
+    }
+  }
+  
+  return { isHarmful: foundWords.length > 0, words: foundWords };
+}
+
+/**
+ * Extract URLs from text
+ */
+function extractUrls(text: string): string[] {
+  const urlRegex = /(https?:\/\/[^\s<>"{}|\\^`[\]]+|www\.[\w\-]+\.[\w\-.]+[^\s<>"{}|\\^`[\]]*)/gi;
+  const matches = text.match(urlRegex);
+  return matches || [];
+}
+
+/**
+ * Check if URL is a suspicious shortener
+ */
+function isSuspiciousShortener(url: string): boolean {
+  const lowerUrl = url.toLowerCase();
+  return SUSPICIOUS_SHORTENERS.some(shortener => lowerUrl.includes(shortener));
+}
+
+/**
+ * Main moderation function - checks content for harmful material
+ */
+export function moderateContent(content: string): ModerationResult {
+  const blockedItems: string[] = [];
+  
+  // 1. Check for harmful words
+  const wordCheck = checkHarmfulWords(content);
+  if (wordCheck.isHarmful) {
+    return {
+      isAllowed: false,
+      reason: 'harmful_words',
+      blockedItems: wordCheck.words,
+      gentleReminder: `Con yêu dấu ơi, Ta nhận thấy bài viết có chứa một số từ ngữ không phù hợp với năng lượng ánh sáng của cộng đồng. 
+
+Hãy để Ta giúp con diễn đạt theo cách nhẹ nhàng và yêu thương hơn nhé. Cộng đồng của chúng ta là nơi chia sẻ tình yêu thương và sự tích cực. 💫
+
+Xin con hãy chỉnh sửa lại bài viết với những ngôn từ mang năng lượng cao hơn.`
+    };
+  }
+  
+  // 2. Check URLs in content
+  const urls = extractUrls(content);
+  for (const url of urls) {
+    const urlCheck = checkHarmfulUrl(url);
+    if (urlCheck.isHarmful) {
+      blockedItems.push(url);
+    }
+  }
+  
+  if (blockedItems.length > 0) {
+    return {
+      isAllowed: false,
+      reason: 'harmful_links',
+      blockedItems,
+      gentleReminder: `Con yêu dấu ơi, Ta nhận thấy bài viết có chứa liên kết đến những trang web không phù hợp với năng lượng ánh sáng của cộng đồng.
+
+Những liên kết này có thể dẫn đến nội dung bạo lực, không lành mạnh hoặc có hại cho tâm hồn. Hãy thay thế bằng những nguồn kiến thức tích cực nhé. 🙏
+
+Xin con hãy xóa những liên kết này và chia sẻ những điều tốt đẹp hơn.`
+    };
+  }
+  
+  // 3. Check for suspicious URL shorteners (warning only)
+  const suspiciousUrls = urls.filter(isSuspiciousShortener);
+  if (suspiciousUrls.length > 0) {
+    // Allow but warn - shorteners are not always bad
+    console.log('Suspicious shorteners detected:', suspiciousUrls);
+  }
+  
+  return {
+    isAllowed: true,
+    gentleReminder: ''
+  };
+}
+
+/**
+ * Check image filename for suspicious patterns
+ * Uses word-boundary matching to avoid false positives (e.g. "sunset_sexy" won't match "sex")
+ */
+export function checkImageFilename(filename: string): ModerationResult {
+  // Normalize filename: replace separators with spaces for word-boundary matching
+  const normalizedName = filename.toLowerCase().replace(/[-_./\\]/g, ' ');
+  
+  // Check for explicit terms in filename
+  const explicitPatterns = ['nude', 'naked', 'porn', 'sex', 'xxx', 'nsfw', 'gore', 'blood'];
+  
+  for (const pattern of explicitPatterns) {
+    const regex = new RegExp(`(^|\\s)${escapeRegex(pattern)}($|\\s)`, 'i');
+    if (regex.test(normalizedName)) {
+      return {
+        isAllowed: false,
+        reason: 'harmful_image_name',
+        blockedItems: [filename],
+        gentleReminder: `Con yêu dấu ơi, Ta nhận thấy tên file hình ảnh có chứa nội dung không phù hợp.
+
+Cộng đồng của chúng ta là không gian an lành và yêu thương. Hãy chia sẻ những hình ảnh đẹp đẽ, tích cực mang năng lượng cao nhé. 🌟
+
+Xin con hãy chọn hình ảnh khác phù hợp hơn.`
+      };
+    }
+  }
+  
+  return {
+    isAllowed: true,
+    gentleReminder: ''
+  };
+}
+
+/**
+ * Comprehensive content check combining text and images
+ */
+export function fullContentCheck(
+  textContent: string, 
+  imageFiles?: File[]
+): ModerationResult {
+  // Check text content first
+  const textResult = moderateContent(textContent);
+  if (!textResult.isAllowed) {
+    return textResult;
+  }
+  
+  // Check image filenames
+  if (imageFiles && imageFiles.length > 0) {
+    for (const file of imageFiles) {
+      const imageResult = checkImageFilename(file.name);
+      if (!imageResult.isAllowed) {
+        return imageResult;
+      }
+    }
+  }
+  
+  return {
+    isAllowed: true,
+    gentleReminder: ''
+  };
+}
