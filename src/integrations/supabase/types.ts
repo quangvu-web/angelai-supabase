@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.1"
+    PostgrestVersion: "14.18"
   }
   public: {
     Tables: {
@@ -3553,6 +3553,7 @@ export type Database = {
       knowledge_chunks: {
         Row: {
           category: string | null
+          chunk_content_hash: string | null
           chunk_order: number | null
           chunk_text: string
           chunk_type: string
@@ -3565,10 +3566,18 @@ export type Database = {
           folder_name: string | null
           id: string
           keywords: string[] | null
+          paragraph_end: string | null
+          paragraph_ids: string[] | null
+          paragraph_start: string | null
+          section_number: number | null
+          section_title: string | null
+          staging_status: string | null
           token_count: number | null
+          version_id: string | null
         }
         Insert: {
           category?: string | null
+          chunk_content_hash?: string | null
           chunk_order?: number | null
           chunk_text: string
           chunk_type?: string
@@ -3581,10 +3590,18 @@ export type Database = {
           folder_name?: string | null
           id?: string
           keywords?: string[] | null
+          paragraph_end?: string | null
+          paragraph_ids?: string[] | null
+          paragraph_start?: string | null
+          section_number?: number | null
+          section_title?: string | null
+          staging_status?: string | null
           token_count?: number | null
+          version_id?: string | null
         }
         Update: {
           category?: string | null
+          chunk_content_hash?: string | null
           chunk_order?: number | null
           chunk_text?: string
           chunk_type?: string
@@ -3597,7 +3614,14 @@ export type Database = {
           folder_name?: string | null
           id?: string
           keywords?: string[] | null
+          paragraph_end?: string | null
+          paragraph_ids?: string[] | null
+          paragraph_start?: string | null
+          section_number?: number | null
+          section_title?: string | null
+          staging_status?: string | null
           token_count?: number | null
+          version_id?: string | null
         }
         Relationships: [
           {
@@ -3607,7 +3631,121 @@ export type Database = {
             referencedRelation: "knowledge_documents"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "knowledge_chunks_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_collections"
+            referencedColumns: ["id"]
+          },
         ]
+      }
+      knowledge_collection_audit: {
+        Row: {
+          action: string
+          actor_id: string | null
+          collection_id: string | null
+          created_at: string
+          id: number
+          reason_code: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          collection_id?: string | null
+          created_at?: string
+          id?: never
+          reason_code: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          collection_id?: string | null
+          created_at?: string
+          id?: never
+          reason_code?: string
+        }
+        Relationships: []
+      }
+      knowledge_collection_evaluations: {
+        Row: {
+          collection_id: string
+          evaluated_at: string
+          evaluation_type: string
+          evaluator_version: string
+          evidence_hash: string
+          id: string
+          status: string
+        }
+        Insert: {
+          collection_id: string
+          evaluated_at?: string
+          evaluation_type: string
+          evaluator_version: string
+          evidence_hash: string
+          id?: string
+          status: string
+        }
+        Update: {
+          collection_id?: string
+          evaluated_at?: string
+          evaluation_type?: string
+          evaluator_version?: string
+          evidence_hash?: string
+          id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_collection_evaluations_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_collections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_collections: {
+        Row: {
+          activated_at: string | null
+          corpus: string
+          created_at: string
+          created_by: string | null
+          edition: string
+          id: string
+          is_active: boolean
+          language: string
+          source_version: string
+          updated_at: string
+          version_status: string
+        }
+        Insert: {
+          activated_at?: string | null
+          corpus: string
+          created_at?: string
+          created_by?: string | null
+          edition: string
+          id?: string
+          is_active?: boolean
+          language: string
+          source_version: string
+          updated_at?: string
+          version_status?: string
+        }
+        Update: {
+          activated_at?: string | null
+          corpus?: string
+          created_at?: string
+          created_by?: string | null
+          edition?: string
+          id?: string
+          is_active?: boolean
+          language?: string
+          source_version?: string
+          updated_at?: string
+          version_status?: string
+        }
+        Relationships: []
       }
       knowledge_document_backups: {
         Row: {
@@ -3653,6 +3791,7 @@ export type Database = {
           approved_at: string | null
           approved_by: string | null
           chunk_count: number | null
+          collection_id: string | null
           content_hash: string | null
           created_at: string
           created_by: string | null
@@ -3672,15 +3811,23 @@ export type Database = {
           ingest_error: string | null
           ingest_status: string | null
           ingested_at: string | null
+          ingestion_batch_id: string | null
           is_processed: boolean
           knowledge_status: string
           language: string | null
           metadata: Json
+          paper_number: number | null
+          paper_title: string | null
+          part_number: number | null
           reviewed_at: string | null
           reviewed_by: string | null
           source: string | null
+          source_hash: string | null
+          source_name: string | null
           source_ref: string | null
+          source_uri: string | null
           source_url: string | null
+          source_version: string | null
           supersedes_document_id: string | null
           title: string
           updated_at: string
@@ -3692,6 +3839,7 @@ export type Database = {
           approved_at?: string | null
           approved_by?: string | null
           chunk_count?: number | null
+          collection_id?: string | null
           content_hash?: string | null
           created_at?: string
           created_by?: string | null
@@ -3711,15 +3859,23 @@ export type Database = {
           ingest_error?: string | null
           ingest_status?: string | null
           ingested_at?: string | null
+          ingestion_batch_id?: string | null
           is_processed?: boolean
           knowledge_status?: string
           language?: string | null
           metadata?: Json
+          paper_number?: number | null
+          paper_title?: string | null
+          part_number?: number | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           source?: string | null
+          source_hash?: string | null
+          source_name?: string | null
           source_ref?: string | null
+          source_uri?: string | null
           source_url?: string | null
+          source_version?: string | null
           supersedes_document_id?: string | null
           title: string
           updated_at?: string
@@ -3731,6 +3887,7 @@ export type Database = {
           approved_at?: string | null
           approved_by?: string | null
           chunk_count?: number | null
+          collection_id?: string | null
           content_hash?: string | null
           created_at?: string
           created_by?: string | null
@@ -3750,15 +3907,23 @@ export type Database = {
           ingest_error?: string | null
           ingest_status?: string | null
           ingested_at?: string | null
+          ingestion_batch_id?: string | null
           is_processed?: boolean
           knowledge_status?: string
           language?: string | null
           metadata?: Json
+          paper_number?: number | null
+          paper_title?: string | null
+          part_number?: number | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           source?: string | null
+          source_hash?: string | null
+          source_name?: string | null
           source_ref?: string | null
+          source_uri?: string | null
           source_url?: string | null
+          source_version?: string | null
           supersedes_document_id?: string | null
           title?: string
           updated_at?: string
@@ -3768,10 +3933,24 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "knowledge_documents_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_collections"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "knowledge_documents_folder_id_fkey"
             columns: ["folder_id"]
             isOneToOne: false
             referencedRelation: "knowledge_folders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "knowledge_documents_ingestion_batch_id_fkey"
+            columns: ["ingestion_batch_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_ingestion_batches"
             referencedColumns: ["id"]
           },
           {
@@ -3955,6 +4134,56 @@ export type Database = {
           source?: string | null
         }
         Relationships: []
+      }
+      knowledge_ingestion_batches: {
+        Row: {
+          checkpoint: Json
+          collection_id: string
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          manifest: Json
+          retry_count: number
+          safe_error_code: string | null
+          started_at: string | null
+          status: string
+        }
+        Insert: {
+          checkpoint?: Json
+          collection_id: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          manifest?: Json
+          retry_count?: number
+          safe_error_code?: string | null
+          started_at?: string | null
+          status?: string
+        }
+        Update: {
+          checkpoint?: Json
+          collection_id?: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          manifest?: Json
+          retry_count?: number
+          safe_error_code?: string | null
+          started_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_ingestion_batches_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_collections"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       knowledge_source_routing: {
         Row: {
@@ -11133,6 +11362,10 @@ export type Database = {
         Args: { _relationship_id: string }
         Returns: boolean
       }
+      activate_knowledge_collection: {
+        Args: { _collection_id: string }
+        Returns: Json
+      }
       activate_knowledge_doc: { Args: { _id: string }; Returns: undefined }
       add_camly_coins: {
         Args: {
@@ -11248,6 +11481,50 @@ export type Database = {
           updated_at: string
           words: string[]
         }[]
+      }
+      admin_list_urantia_batches: {
+        Args: never
+        Returns: {
+          checkpoint: Json
+          collection_id: string
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          manifest: Json
+          retry_count: number
+          safe_error_code: string | null
+          started_at: string | null
+          status: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "knowledge_ingestion_batches"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      admin_list_urantia_collections: {
+        Args: never
+        Returns: {
+          activated_at: string | null
+          corpus: string
+          created_at: string
+          created_by: string | null
+          edition: string
+          id: string
+          is_active: boolean
+          language: string
+          source_version: string
+          updated_at: string
+          version_status: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "knowledge_collections"
+          isOneToOne: false
+          isSetofReturn: true
+        }
       }
       admin_resolve_recovery: {
         Args: { _decision: string; _reason?: string; _request_id: string }
@@ -11457,6 +11734,7 @@ export type Database = {
       claim_treasure_jackpot: { Args: { p_event_id: string }; Returns: Json }
       claim_validator_rewards: { Args: never; Returns: Json }
       claim_weekly_quest: { Args: { _template_id: string }; Returns: Json }
+      cleanup_cost_control_storage: { Args: never; Returns: undefined }
       cleanup_expired_posts: { Args: never; Returns: undefined }
       cleanup_expired_stories: { Args: never; Returns: undefined }
       cleanup_old_temp_storage_objects: { Args: never; Returns: number }
@@ -12316,6 +12594,12 @@ export type Database = {
       }
       is_admin: { Args: never; Returns: boolean }
       is_coordinator_or_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_knowledge_document_active: {
+        Args: {
+          _doc: Database["public"]["Tables"]["knowledge_documents"]["Row"]
+        }
+        Returns: boolean
+      }
       is_light_circle_member: {
         Args: { _circle: string; _user: string }
         Returns: boolean
@@ -12465,6 +12749,34 @@ export type Database = {
           is_authoritative: boolean
           rrf_score: number
           similarity: number
+        }[]
+      }
+      match_urantia_chunks: {
+        Args: {
+          match_count?: number
+          min_similarity?: number
+          query_embedding: string
+          query_text: string
+          requested_language: string
+        }
+        Returns: {
+          chunk_id: string
+          chunk_text: string
+          corpus: string
+          document_id: string
+          edition: string
+          language: string
+          paper_number: number
+          paper_title: string
+          paragraph_end: string
+          paragraph_ids: string[]
+          paragraph_start: string
+          part_number: number
+          section_number: number
+          section_title: string
+          similarity: number
+          source_version: string
+          version_id: string
         }[]
       }
       notify_attesters: { Args: { p_request_id: string }; Returns: Json }
@@ -12624,6 +12936,10 @@ export type Database = {
           p_riddle_id: string
           p_user_id: string
         }
+        Returns: Json
+      }
+      rollback_knowledge_collection: {
+        Args: { _previous_collection_id: string }
         Returns: Json
       }
       run_cross_account_scan: { Args: never; Returns: Json }
