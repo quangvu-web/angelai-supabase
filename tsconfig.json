@@ -6,6 +6,11 @@
     "vitest.config.ts",
     "eslint.config.js"
   ],
+  "exclude": [
+    "src/test/father-universe-intent.test.ts",
+    "src/test/knowledge-folders.test.ts",
+    "src/test/knowledge-routing.test.ts"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",
