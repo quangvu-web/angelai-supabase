@@ -1,0 +1,13 @@
+# Current task
+- [x] Automatically route new Angel documents at insert time via approved canonical folder names and existing source routing; no title guessing or historical updates. SQL transactional checks and authenticated Preview upload/read-back verified; 15 tests passed. Database rule live, folder-alias form Preview only; no Publish.
+- [x] Add disabled Angel admin “Sync now” control and explicit disconnected status; four policy tests and authenticated Preview UI verified; no Publish.
+- [ ] Enable Angel run-now execution and authoritative results; blocked on Docs scoped control/status endpoint; handoff in docs/ANGEL_DOCS_SYNC_CONTROL_HANDOFF.md.
+- [ ] Verify docs.fun.rich daily scheduler; user reports daily setting published, but live telemetry remains unavailable.
+- [x] Show requested daily cadence separately from unverified partner schedule/last/next run in Angel /admin/knowledge; authenticated Vietnamese/English UI and six tests passed; Preview only.
+- [x] Normalize knowledge to the 20 exact docs.fun.rich folder names; approved meditation/Telegram/miscellaneous merges applied, 2,912 documents and 43,293 embeddings retained; authenticated admin UI verified.
+- [ ] Verify exact-name synchronization and uploads end-to-end; blocked on writable access to docs.fun.rich and its live scheduler; follow docs/KNOWLEDGE_NORMALIZATION_AUDIT.md.
+- [x] Standardize language formatting and a shared interface-key baseline across all 12 languages.
+- [x] Localize shared Angel AI navigation, header controls, loading states, and document reader chrome.
+- [ ] Localize all Angel AI Core and CTO Console pages.
+- [ ] Audit remaining Chat, Home, About, Knowledge, Profile, and shared dialogs for hardcoded interface text.
+- [ ] Verify Vietnamese, English, Chinese, and Arabic on desktop and mobile, including RTL.
