@@ -1,0 +1,218 @@
+flowchart TD
+
+%% ============================================
+%% STYLE DEFINITIONS
+%% ============================================
+classDef engine fill:#1e40af,stroke:#1e3a8a,color:#ffffff,stroke-width:2px
+classDef gate fill:#d97706,stroke:#b45309,color:#ffffff,stroke-width:2px
+classDef pass fill:#16a34a,stroke:#15803d,color:#ffffff,stroke-width:2px
+classDef block fill:#dc2626,stroke:#b91c1c,color:#ffffff,stroke-width:2px
+classDef platform fill:#7c3aed,stroke:#6d28d9,color:#ffffff,stroke-width:2px
+classDef data fill:#475569,stroke:#334155,color:#ffffff,stroke-width:1px
+classDef loop fill:#0891b2,stroke:#0e7490,color:#ffffff,stroke-width:2px
+
+%% ============================================
+%% LAYER 1: USER ACTIONS
+%% ============================================
+subgraph L1["LAYER 1: USER ACTIONS (Raw Data)"]
+    direction LR
+    FB["Facebook\nLivestream / Post"]:::platform
+    TG["Telegram\nChat / Activity"]:::platform
+    ZM["Zoom\nThien / Camera"]:::platform
+    FP["FUN Profile\nPost / Connect"]:::platform
+    FA["FUN Academy\nLearn / Teach"]:::platform
+    FC["FUN Charity\nDonate / Help"]:::platform
+    FM["FUN Market\nBuy / Sell"]:::platform
+    FPL["FUN Play\nEngage / Create"]:::platform
+end
+
+FB & TG & ZM & FP & FA & FC & FM & FPL --> INGEST
+
+INGEST["Ingestion API\nNormalize to LightAction"]:::engine
+
+INGEST --> |"{ user_id, action_type,\ncontent, timestamp, metadata }"| PPLP_CHECK
+
+%% ============================================
+%% LAYER 2: PPLP ENGINE
+%% ============================================
+subgraph L2["LAYER 2: PPLP ENGINE (PureLove Protocol)"]
+    PPLP_CHECK{"PPLP Accepted?"}:::gate
+    PPLP_PROC["PPLP Processor\nClassify action type"]:::engine
+    PROOF_GEN["Proof Generator\nCreate Proof Object"]:::engine
+end
+
+PPLP_CHECK -->|"NO"| PPLP_BLOCK["BLOCKED\nNo Score / No Mint"]:::block
+PPLP_CHECK -->|"YES"| PPLP_PROC
+PPLP_PROC --> PROOF_GEN
+
+PROOF_GEN --> |"Proof Object:\n{ proof_id, user_id,\ntype: repentance/gratitude/\ngiving/presence,\nverified: bool }"| TRUST_LAYER
+
+%% ============================================
+%% LAYER 3: TRUST & ANTI-FAKE
+%% ============================================
+subgraph L3["LAYER 3: TRUST and ANTI-FAKE (Critical Layer)"]
+    direction TB
+    ID_CHECK["Identity Check\n1 person = 1 soul"]:::engine
+    BHV_CHECK["Behavior Pattern\nAnti-spam / Anti-bot"]:::engine
+    VID_CHECK["Video/Voice Verify\nLiveness detection"]:::engine
+    CON_CHECK["Consistency Track\nPattern analysis"]:::engine
+    SYBIL["Sybil Detection\nWallet cluster / Device FP"]:::engine
+    
+    ID_CHECK & BHV_CHECK & VID_CHECK & CON_CHECK & SYBIL --> TRUST_CALC
+    TRUST_CALC["Trust Score Calculator\nOutput: 0.0 to 1.0"]:::engine
+end
+
+TRUST_LAYER["Trust Filter Entry"] --> ID_CHECK & BHV_CHECK & VID_CHECK & CON_CHECK & SYBIL
+
+TRUST_CALC --> TRUST_GATE{"Trust Score\n> Threshold?"}:::gate
+TRUST_GATE -->|"BLOCKED\nTrust < 0.3"| TRUST_BLOCK["FROZEN\nNo mint / Flag fraud"]:::block
+TRUST_GATE -->|"RISKY\n0.3 - 0.6"| SCORE_REDUCE["Reduced Score\nPenalty applied"]:::data
+TRUST_GATE -->|"TRUSTED\n> 0.6"| SCORE_FULL["Full Score\nNo penalty"]:::pass
+
+SCORE_REDUCE & SCORE_FULL --> LS_ENGINE
+
+%% ============================================
+%% LAYER 4: LIGHT SCORE ENGINE
+%% ============================================
+subgraph L4["LAYER 4: LIGHT SCORE ENGINE v2"]
+    direction TB
+    
+    subgraph PILLARS["3 Score Pillars"]
+        INNER["Inner Score\nSam Hoi + Biet On\nWeight: A"]:::engine
+        IMPACT["Impact Score\nCho di + Lan toa\nWeight: B"]:::engine
+        FIELD["Field Score\nHien dien + Consistency\nWeight: C"]:::engine
+    end
+    
+    LS_CALC["Light Score = Inner*A + Impact*B + Field*C"]:::engine
+    LEVEL_MULT["Level Multiplier\nBased on user tier"]:::engine
+    FINAL_LS["Final Light Score\n= LS * Level Multiplier * Trust Score"]:::engine
+    
+    INNER & IMPACT & FIELD --> LS_CALC
+    LS_CALC --> LEVEL_MULT --> FINAL_LS
+end
+
+LS_ENGINE["Light Score Entry"] --> INNER & IMPACT & FIELD
+
+FINAL_LS --> VV_CHECK
+
+%% ============================================
+%% LAYER 5: VERIFIED VALUE DETECTION
+%% ============================================
+subgraph L5["LAYER 5: VERIFIED VALUE DETECTION"]
+    VV_CHECK{"Verified Value\n= TRUE?"}:::gate
+    VV_RULES["Rules:\n- Action completed\n- Result measurable\n- Impact confirmed"]:::data
+end
+
+VV_CHECK -->|"NO\nUnverified"| VV_BLOCK["NO MINT\nValue not proven"]:::block
+VV_CHECK -->|"YES\nVerified"| REWARD_ENG
+
+%% ============================================
+%% LAYER 6: REWARD ENGINE
+%% ============================================
+subgraph L6["LAYER 5: REWARD ENGINE (Flow-based, not task-based)"]
+    REWARD_ENG["Reward Weight Calculator"]:::engine
+    REWARD_INPUT["Inputs:\n- Light Score\n- Rank in system\n- Role weight"]:::data
+    REWARD_OUT["Output:\nReward Weight per user"]:::data
+    
+    REWARD_INPUT --> REWARD_ENG --> REWARD_OUT
+end
+
+REWARD_OUT --> MINT_ENGINE
+
+%% ============================================
+%% LAYER 7: MINT ENGINE
+%% ============================================
+subgraph L7["LAYER 6: FUN MONEY MINT ENGINE v2"]
+    direction TB
+    MINT_ENGINE["Epoch-based Mint Calculator"]:::engine
+    MINT_FORMULA["Total Mint per Epoch =\nf(Total System Light Score)"]:::data
+    
+    MINT_RULES["Rules:\n- NO mint per action\n- Mint per system value\n- Max cap per epoch\n- Anti-whale limit"]:::data
+    
+    MINT_CALC["User Mint =\n(User Score / Total Score)\n* Epoch Mint Pool\n* Weight"]:::engine
+    
+    MINT_ENGINE --> MINT_FORMULA
+    MINT_FORMULA --> MINT_RULES --> MINT_CALC
+end
+
+MINT_CALC --> VEST_SPLIT
+
+%% ============================================
+%% LAYER 8: DISTRIBUTION + VESTING
+%% ============================================
+subgraph L8["LAYER 7: DISTRIBUTION ENGINE"]
+    direction TB
+    VEST_SPLIT["Vesting Split"]:::engine
+    CLAIM_NOW["25% Claim Now\nImmediate"]:::pass
+    LOCKED["75% Locked\nTime + Activity unlock"]:::data
+    
+    DIST_SPLIT["Distribution Split"]:::engine
+    USER_70["User: 70%"]:::pass
+    PLATFORM_15["Platform Ops: 15%"]:::data
+    GENESIS_10["Genesis Fund: 10%"]:::data
+    PARTNER_5["Partner Fund: 5%"]:::data
+    
+    BONUS["Bonuses:\n- Field holder\n- Long-term consistency"]:::data
+    
+    VEST_SPLIT --> CLAIM_NOW & LOCKED
+    CLAIM_NOW --> DIST_SPLIT
+    LOCKED -->|"Unlock conditions met"| DIST_SPLIT
+    DIST_SPLIT --> USER_70 & PLATFORM_15 & GENESIS_10 & PARTNER_5
+    USER_70 --> BONUS
+end
+
+BONUS --> WALLET_DELIVER
+WALLET_DELIVER["FUN Money to User Wallet\nSmart Contract on BNB Chain"]:::pass
+
+WALLET_DELIVER --> ECONOMY
+
+%% ============================================
+%% LAYER 9: FUN ECOSYSTEM ECONOMY
+%% ============================================
+subgraph L9["LAYER 8: FUN ECOSYSTEM ECONOMY"]
+    direction LR
+    ECONOMY["FUN Money Utility"]:::engine
+    USE_PROFILE["FUN Profile\nBoost / Premium"]:::platform
+    USE_PLAY["FUN Play\nPlay and Earn"]:::platform
+    USE_ACADEMY["FUN Academy\nLearn and Earn"]:::platform
+    USE_CHARITY["FUN Charity\nGive and Gain"]:::platform
+    USE_MARKET["FUN Market\nTrade / Buy"]:::platform
+    USE_WALLET["FUN Wallet\nStake / Govern"]:::platform
+    
+    ECONOMY --> USE_PROFILE & USE_PLAY & USE_ACADEMY & USE_CHARITY & USE_MARKET & USE_WALLET
+end
+
+USE_PROFILE & USE_PLAY & USE_ACADEMY & USE_CHARITY & USE_MARKET & USE_WALLET --> FEEDBACK
+
+%% ============================================
+%% LAYER 10: FEEDBACK LOOP
+%% ============================================
+subgraph L10["LAYER 9: FEEDBACK LOOP + AI LEARNING"]
+    direction TB
+    FEEDBACK["System Tracker"]:::loop
+    TRACK_RET["User Retention"]:::loop
+    TRACK_VEL["Token Velocity"]:::loop
+    TRACK_USE["Usage Frequency"]:::loop
+    TRACK_VAL["Value Creation"]:::loop
+    
+    AI_LEARN["AI Learning Engine\nAdjust weights dynamically"]:::loop
+    ADJUST["Auto-adjust:\n- Score weights\n- Fraud detection\n- Mint rate\n- Trust thresholds"]:::loop
+    
+    FEEDBACK --> TRACK_RET & TRACK_VEL & TRACK_USE & TRACK_VAL
+    TRACK_RET & TRACK_VEL & TRACK_USE & TRACK_VAL --> AI_LEARN
+    AI_LEARN --> ADJUST
+end
+
+ADJUST -->|"LOOP BACK\nClosed-loop adaptive system"| INGEST
+
+%% ============================================
+%% FAILURE POINTS (annotations)
+%% ============================================
+subgraph FAILURES["CRITICAL FAILURE POINTS"]
+    direction LR
+    F1["No PPLP = Trash enters"]:::block
+    F2["No Trust = Sybil destroys"]:::block
+    F3["No Verified Value = Wrong mint"]:::block
+    F4["No Utility = Token worthless"]:::block
+    F5["No Feedback = System stagnates"]:::block
+end
