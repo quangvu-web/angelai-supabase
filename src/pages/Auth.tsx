@@ -12,7 +12,6 @@ import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { Mail, Lock, ArrowLeft, Sparkles, Eye, EyeOff, Check, Search, Gem, Heart, Leaf, Star, Sun, Globe } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { smartBack } from "@/lib/smartBack";
 
 
@@ -308,26 +307,20 @@ const Auth = () => {
   const handleGoogleSignInDirect = async () => {
     setIsGoogleLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.origin }
       });
-      if (result.redirected) return;
-      if (result.error) {
-        if (result.error.message?.toLowerCase().includes("failed to fetch")) {
+      if (error) {
+        if (error.message?.toLowerCase().includes("failed to fetch")) {
           showAuthNetworkToast();
           return;
         }
-        toast({ title: "Lỗi đăng nhập Google", description: result.error.message, variant: "destructive" });
-        return;
-      }
-
-      const { data: { session: currentSession } } = await supabase.auth.getSession();
-      if (currentSession?.user) {
-        await checkLightAgreementAndRedirect(currentSession.user.id);
+        toast({ title: "Lỗi đăng nhập Google", description: error.message, variant: "destructive" });
       }
     } catch (error) {
       if (isNetworkFetchError(error)) {showAuthNetworkToast();return;}
-      toast({ title: "Đã có lỗi xảy ra", description: "Không thể kết nối với Google. Vui lòng thử lại.", variant: "destructive" });
+      toast({ title: "Lỗi đăng nhập Google", description: error instanceof Error ? error.message : String(error), variant: "destructive" });
     } finally {
       setIsGoogleLoading(false);
     }
