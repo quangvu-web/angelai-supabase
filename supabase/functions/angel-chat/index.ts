@@ -2365,6 +2365,14 @@ const _angelHandler = async (req: Request): Promise<Response> => {
       console.log(`[RAG] SKIP — short follow-up in multi-turn ("${actualQuestion.trim().slice(0,40)}"), lean on conversation history`);
     }
 
+    const baseQ = searchIntent && searchKeyword ? searchKeyword : actualQuestion;
+    const entityLookupTermsRe =
+      /(?<![\p{L}\p{N}_])(?:t[àa]i\s*kho[ảa]n|v[íi]|link|fun\.?rich|handle|profile|trang\s*c[áa]\s*nh[âa]n)(?![\p{L}\p{N}_])/iu;
+    const entityLookupPeopleRe =
+      /(?<![\p{L}\p{N}_])(?:b[ée]|anh|ch[ịi]|em|c[ôo]|ch[úu]|founder|camly|angel)(?![\p{L}\p{N}_])/iu;
+    const entityLookupIntent = (question: string) =>
+      entityLookupTermsRe.test(question) && entityLookupPeopleRe.test(question);
+
     // ===== EXACT PAPER LOOKUP (Sách Urantia) =====
     // "tóm tắt bài 56", "paper 56", "bài số 56", "bài 56 nói gì" → nạp thẳng
     // đúng tài liệu Bài N, không phụ thuộc vector similarity.
@@ -2398,25 +2406,99 @@ const _angelHandler = async (req: Request): Promise<Response> => {
       }
     }
 
-    if (!exactPaperUsed && !isShortFollowUp && supabase && actualQuestion && actualQuestion.trim().length >= 8) {
+    const AUTH_HEAD = "[OFFICIAL FOUNDER — AUTHORITATIVE]";
+    let authoritativeLookupUsed = false;
+    const accountLookupTermsRe =
+      /(?<![\p{L}\p{N}_])(?:t[àa]i\s*kho[ảa]n|v[íi]|link|fun\.?rich|profile|trang\s*c[áa]\s*nh[âa]n)(?![\p{L}\p{N}_])/iu;
+    const accountLookupEntityTermsRe = new RegExp(accountLookupTermsRe.source, "giu");
+    const officialAccountLookupIntent =
+      accountLookupTermsRe.test(actualQuestion) && entityLookupIntent(actualQuestion);
 
+    if (
+      !exactPaperUsed &&
+      !isShortFollowUp &&
+      supabase &&
+      actualQuestion &&
+      officialAccountLookupIntent
+    ) {
+      try {
+        const entity = actualQuestion
+          .replace(accountLookupEntityTermsRe, " ")
+          .replace(/(?<![\p{L}\p{N}_])(?:của|cho|là|gì|xin|tôi|mình)(?![\p{L}\p{N}_])/giu, " ")
+          .replace(/[^\p{L}\p{N}\s'-]/gu, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        if (entity) {
+          const { data: authDocs, error: authLookupError } = await supabase
+            .from("knowledge_documents")
+            .select("id, title, extracted_content, created_at")
+            .eq("metadata->>authoritative", "true")
+            .eq("knowledge_status", "active")
+            .eq("ingest_status", "ready")
+            .is("deleted_at", null)
+            .ilike("title", `%${entity}%`)
+            .order("created_at", { ascending: false });
+          if (authLookupError) throw authLookupError;
+
+          const accountTitle = (title: string) => {
+            const normalizedTitle = title.toLocaleLowerCase();
+            return (
+              normalizedTitle.includes("tài khoản") ||
+              normalizedTitle.includes("ví") ||
+              normalizedTitle.includes("link")
+            );
+          };
+          const docs = (authDocs ?? []) as Array<{
+            id: string;
+            title: string;
+            extracted_content: string | null;
+            created_at: string;
+          }>;
+          const doc = docs.sort(
+            (a, b) => Number(accountTitle(b.title)) - Number(accountTitle(a.title)),
+          )[0];
+          const content: string = doc?.extracted_content || "";
+
+          if (doc && content) {
+            const CAP = 12000;
+            let excerpt = content;
+            if (content.length > CAP) {
+              excerpt = `${content.slice(0, Math.floor(CAP * 0.6))}\n\n[...phần giữa tài liệu được tóm lược để tiết kiệm không gian, tổng độ dài ${content.length} ký tự...]\n\n${content.slice(-Math.floor(CAP * 0.4))}`;
+            }
+            knowledgeContext = `\n\n--- ${AUTH_HEAD} TÀI LIỆU CHÍNH: ${doc.title} ---\n\n${excerpt}`;
+            ragUsed = true;
+            ragAnyOk = true;
+            ragTopSim = 1;
+            ragTopDocTitle = doc.title;
+            authoritativeLookupUsed = true;
+            console.log(`[RAG] AUTH-LOOKUP hit: doc=${doc.id}, title=${doc.title}`);
+          } else {
+            console.log("[RAG] AUTH-LOOKUP miss");
+          }
+        } else {
+          console.log("[RAG] AUTH-LOOKUP miss");
+        }
+      } catch (e) {
+        console.warn("[RAG] AUTH-LOOKUP error:", e);
+        console.log("[RAG] AUTH-LOOKUP miss");
+      }
+    }
+
+    if (!exactPaperUsed && !authoritativeLookupUsed && !isShortFollowUp && supabase && actualQuestion && actualQuestion.trim().length >= 8) {
 
       try {
-        const baseQ = searchIntent && searchKeyword ? searchKeyword : actualQuestion;
         const deepAnalysisIntent = /phân\s*t[ií]ch|tóm\s*t[ắa]t|nội\s*dung|ý\s*ngh[iĩ]a|dẫn\s*thi[eề]n|bài\s*thi[eề]n|giải\s*th[ií]ch|chi\s*ti[eế]t/i.test(actualQuestion);
 
         // 1) Query rewrite — SKIP for short/simple queries (Phase 1 speedup)
         // Chỉ chạy rewrite khi câu dài (>40 char), có dấu hiệu đa thực thể/phức tạp,
         // HOẶC là câu tra cứu entity kiểu "tài khoản/ví/link của bé/anh/chị/founder <tên>"
         // (cần rewrite để trích entity + tạo variants khớp doc chính thức).
-        const entityLookupIntent =
-          /\b(t[àa]i\s*kho[ảa]n|v[íi]|link|fun\.?rich|handle|profile|trang\s*c[áa]\s*nh[âa]n)\b/i.test(baseQ) &&
-          /\b(b[ée]|anh|ch[ịi]|em|c[ôo]|ch[úu]|founder|camly|angel)\b/i.test(baseQ);
         const needsRewrite =
           baseQ.length > 40 ||
           /\bvà\b|\bhoặc\b|,|;|\?.*\?/.test(baseQ) ||
           deepAnalysisIntent ||
-          entityLookupIntent;
+          entityLookupIntent(baseQ);
         if (needsRewrite) {
           try {
             const rwCtrl = new AbortController();
@@ -2494,7 +2576,6 @@ const _angelHandler = async (req: Request): Promise<Response> => {
           ragTopSim = topSim;
           ragTopDocTitle = topDocTitle;
 
-          const AUTH_HEAD = "[OFFICIAL FOUNDER — AUTHORITATIVE]";
           const tagTitle = (c: any) => c?.is_authoritative
             ? `${AUTH_HEAD} ${c.doc_title}`
             : c?.corpus === "urantia" && Number.isInteger(c.paper_number) && Number.isInteger(c.section_number) && /^\d{1,3}:\d+\.\d+$/.test(c.paragraph_start ?? "") && /^\d{1,3}:\d+\.\d+$/.test(c.paragraph_end ?? "")
