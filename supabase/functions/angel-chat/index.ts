@@ -1799,9 +1799,10 @@ const _angelHandler = async (req: Request): Promise<Response> => {
       console.log("🎮 Demo mode activated - bypassing auth and rewards");
       
       const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-      if (!LOVABLE_API_KEY) {
-        throw new Error("AI service is not configured");
-      }
+      const CF_API_TOKEN = Deno.env.get("CF_API_TOKEN");
+      const GOOGLE_AI_API_KEY = Deno.env.get("GOOGLE_AI_API_KEY");
+      if (!CF_API_TOKEN) console.warn("[demo] Cloudflare AI Gateway unavailable: CF_API_TOKEN is not configured");
+      if (!GOOGLE_AI_API_KEY) console.warn("[demo] Google AI Studio direct unavailable: GOOGLE_AI_API_KEY is not configured");
 
       // Get the last user message
       const lastUserMessage = messages.filter((m: { role: string }) => m.role === "user").pop();
@@ -1818,6 +1819,11 @@ const _angelHandler = async (req: Request): Promise<Response> => {
         });
       }
 
+      if (!CF_API_TOKEN && !GOOGLE_AI_API_KEY) {
+        console.error("[demo] AI service is not configured: CF_API_TOKEN and GOOGLE_AI_API_KEY are both missing");
+        throw new Error("AI service is not configured");
+      }
+
       // Use concise style for demo (faster, lower token usage)
       const demoStyleConfig = RESPONSE_STYLES['concise'];
       
@@ -1830,7 +1836,6 @@ const _angelHandler = async (req: Request): Promise<Response> => {
 
       // --- AI Gateway Config (Cloudflare BYOK primary → Lovable fallback) ---
       const CF_GATEWAY_URL_DEMO = "https://gateway.ai.cloudflare.com/v1/6083e34ad429331916b93ba8a5ede81d/angel-ai/compat/chat/completions";
-      const CF_API_TOKEN = Deno.env.get("CF_API_TOKEN");
       const aiHeaders: Record<string, string> = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${CF_API_TOKEN || ""}`,
@@ -1847,15 +1852,27 @@ const _angelHandler = async (req: Request): Promise<Response> => {
         max_tokens: demoStyleConfig.maxTokens,
       });
 
-      let response = await fetch(CF_GATEWAY_URL_DEMO, {
-        method: "POST",
-        headers: aiHeaders,
-        body: demoBody,
-      });
+      let response: Response | null = null;
+      if (CF_API_TOKEN) {
+        response = await fetch(CF_GATEWAY_URL_DEMO, {
+          method: "POST",
+          headers: aiHeaders,
+          body: demoBody,
+        }).catch((error) => {
+          console.error("Cloudflare demo fetch failed:", error?.message ?? error);
+          return null;
+        });
+      }
 
-      // Fallback to Lovable Gateway if Cloudflare fails
-      if (!response.ok && LOVABLE_API_KEY && response.status !== 429 && response.status !== 402) {
-        console.error("Cloudflare demo failed:", response.status, "- falling back to Lovable Gateway");
+      // Tier 2: Google AI Studio trực tiếp (BYOK, không tốn credit Lovable)
+      if (!response || !response.ok) {
+        if (response) console.error("Cloudflare demo failed:", response.status, "- falling back to Google direct");
+        response = await googleDirectFetch(JSON.parse(demoBody), { model: "gemini-2.5-flash" });
+      }
+
+      // Tier 3: Lovable Gateway — chỉ khi fallback được cho phép
+      if ((!response || !response.ok) && LOVABLE_API_KEY && (await allowLovableFallback())) {
+        console.error("Google demo failed - falling back to Lovable Gateway");
         response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
           method: "POST",
           headers: { Authorization: `Bearer ${LOVABLE_API_KEY}`, "Content-Type": "application/json" },
@@ -1863,8 +1880,8 @@ const _angelHandler = async (req: Request): Promise<Response> => {
         });
       }
 
-      if (!response.ok) {
-        console.error("Demo AI error:", response.status);
+      if (!response || !response.ok) {
+        console.error("Demo AI error:", response?.status ?? "no response");
         throw new Error("AI service error");
       }
 
@@ -1936,9 +1953,13 @@ const _angelHandler = async (req: Request): Promise<Response> => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const CF_API_TOKEN = Deno.env.get("CF_API_TOKEN");
+    const GOOGLE_AI_API_KEY = Deno.env.get("GOOGLE_AI_API_KEY");
+    if (!CF_API_TOKEN) console.warn("[angel-chat] Cloudflare AI Gateway unavailable: CF_API_TOKEN is not configured");
+    if (!GOOGLE_AI_API_KEY) console.warn("[angel-chat] Google AI Studio direct unavailable: GOOGLE_AI_API_KEY is not configured");
 
-    if (!LOVABLE_API_KEY) {
-      console.error("LOVABLE_API_KEY is not configured");
+    if (!CF_API_TOKEN && !GOOGLE_AI_API_KEY) {
+      console.error("[angel-chat] AI service is not configured: CF_API_TOKEN and GOOGLE_AI_API_KEY are both missing");
       throw new Error("AI service is not configured");
     }
 
@@ -3141,15 +3162,18 @@ HƯỚNG DẪN XỬ LÝ:
     // Timeout theo độ dài phản hồi mong đợi (stream: chỉ tính tới byte đầu tiên)
     const cfTimeoutMs = styleConfig.maxTokens >= 8000 ? 20000 : 12000;
     let providerUsed: "cloudflare" | "google_direct" | "lovable" = "cloudflare";
-    let response = await fetch(AI_GATEWAY_URL_MAIN, {
-      method: "POST",
-      headers: aiHeadersMain,
-      body: mainBody,
-      signal: AbortSignal.timeout(cfTimeoutMs),
-    }).catch((e) => {
-      console.warn("Cloudflare fetch failed/timeout:", e?.message ?? e);
-      return null as unknown as Response;
-    });
+    let response: Response | null = null;
+    if (CF_API_TOKEN_MAIN) {
+      response = await fetch(AI_GATEWAY_URL_MAIN, {
+        method: "POST",
+        headers: aiHeadersMain,
+        body: mainBody,
+        signal: AbortSignal.timeout(cfTimeoutMs),
+      }).catch((e) => {
+        console.warn("Cloudflare fetch failed/timeout:", e?.message ?? e);
+        return null;
+      });
+    }
 
     // Tier 2: Google AI Studio trực tiếp (BYOK, không tốn credit Lovable)
     if (!response || !response.ok) {
