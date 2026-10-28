@@ -1,0 +1,1 @@
+ALTER TABLE public.treasure_teams ADD COLUMN IF NOT EXISTS max_size integer NOT NULL DEFAULT 5 CHECK (max_size BETWEEN 2 AND 20);

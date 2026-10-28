@@ -1,0 +1,1927 @@
+{
+  "version": 1,
+  "captured_from": "legacy-snapshot.ts",
+  "count": 30,
+  "cases": [
+    {
+      "case_id": "F01_QUESTION_ASK_basic::A_null_ai",
+      "fixture": "F01_QUESTION_ASK_basic",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 52,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 16.53,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.53
+        },
+        "multipliers": {
+          "Q": 1.85,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 2,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 1.09
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 50,
+        "finalLightScore": 16.53,
+        "finalReward": 50,
+        "lightContribution": 1.09
+      }
+    },
+    {
+      "case_id": "F01_QUESTION_ASK_basic::B_pinned_ai",
+      "fixture": "F01_QUESTION_ASK_basic",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 20,
+          "H": 80,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.4,
+          "repentance_score": 0,
+          "ego_signal": 0.2,
+          "authenticity": 0.8,
+          "love_tone": 0.6,
+          "depth": 0.85
+        },
+        "v2Score": {
+          "lightScore": 20.8,
+          "intent": 0.52,
+          "depth": 0.75,
+          "impact": 0.53
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 2,
+          "quality": 1.31,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F02_JOURNAL_WRITE_gratitude::A_null_ai",
+      "fixture": "F02_JOURNAL_WRITE_gratitude",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 53,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 16.53,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.53
+        },
+        "multipliers": {
+          "Q": 1.86,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 2.5,
+          "quality": 1.18,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 1.64
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 20,
+        "finalLightScore": 16.53,
+        "finalReward": 20,
+        "lightContribution": 1.64
+      }
+    },
+    {
+      "case_id": "F02_JOURNAL_WRITE_gratitude::B_pinned_ai",
+      "fixture": "F02_JOURNAL_WRITE_gratitude",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 20,
+          "H": 50,
+          "C": 80,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 2,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.9,
+          "repentance_score": 0,
+          "ego_signal": 0.1,
+          "authenticity": 0.85,
+          "love_tone": 0.9,
+          "depth": 0.6
+        },
+        "v2Score": {
+          "lightScore": 21.21,
+          "intent": 0.71,
+          "depth": 0.56,
+          "impact": 0.53
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 2.5,
+          "quality": 1.3,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F03_POST_CREATE_educational::A_null_ai",
+      "fixture": "F03_POST_CREATE_educational",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 56,
+          "H": 50,
+          "C": 66,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 2.03,
+          "I": 4.1,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.18,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 2,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 6.05
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 70,
+        "finalLightScore": 20.67,
+        "finalReward": 70,
+        "lightContribution": 6.05
+      }
+    },
+    {
+      "case_id": "F03_POST_CREATE_educational::B_pinned_ai",
+      "fixture": "F03_POST_CREATE_educational",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 20,
+          "H": 80,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.4,
+          "repentance_score": 0,
+          "ego_signal": 0.2,
+          "authenticity": 0.8,
+          "love_tone": 0.6,
+          "depth": 0.85
+        },
+        "v2Score": {
+          "lightScore": 26,
+          "intent": 0.52,
+          "depth": 0.75,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.51,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F04_COMMENT_CREATE_short::A_null_ai",
+      "fixture": "F04_COMMENT_CREATE_short",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 17.57,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.57
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 1.5,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0.82
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 40,
+        "finalLightScore": 17.57,
+        "finalReward": 40,
+        "lightContribution": 0.82
+      }
+    },
+    {
+      "case_id": "F04_COMMENT_CREATE_short::B_pinned_ai",
+      "fixture": "F04_COMMENT_CREATE_short",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 20,
+          "H": 50,
+          "C": 80,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 2,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.9,
+          "repentance_score": 0,
+          "ego_signal": 0.1,
+          "authenticity": 0.85,
+          "love_tone": 0.9,
+          "depth": 0.6
+        },
+        "v2Score": {
+          "lightScore": 22.53,
+          "intent": 0.71,
+          "depth": 0.56,
+          "impact": 0.57
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 1.5,
+          "quality": 1.1,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F05_CONTENT_CREATE_asset::A_null_ai",
+      "fixture": "F05_CONTENT_CREATE_asset",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 68,
+          "H": 50,
+          "C": 72,
+          "U": 68
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 24.8,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.8
+        },
+        "multipliers": {
+          "Q": 2.25,
+          "I": 5,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 4,
+          "quality": 1.48,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 2,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 10.12
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 70,
+        "finalLightScore": 24.8,
+        "finalReward": 70,
+        "lightContribution": 10.12
+      }
+    },
+    {
+      "case_id": "F05_CONTENT_CREATE_asset::B_pinned_ai",
+      "fixture": "F05_CONTENT_CREATE_asset",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 20,
+          "H": 80,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.4,
+          "repentance_score": 0,
+          "ego_signal": 0.2,
+          "authenticity": 0.8,
+          "love_tone": 0.6,
+          "depth": 0.85
+        },
+        "v2Score": {
+          "lightScore": 31.2,
+          "intent": 0.52,
+          "depth": 0.75,
+          "impact": 0.8
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 4,
+          "quality": 1.8,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F06_HELP_GIVEN_service::A_null_ai",
+      "fixture": "F06_HELP_GIVEN_service",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 71,
+          "T": 65,
+          "H": 65,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 26.87,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.87
+        },
+        "multipliers": {
+          "Q": 1.94,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 4.5,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 1.25,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 4.71
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 26.87,
+        "finalReward": 100,
+        "lightContribution": 4.71
+      }
+    },
+    {
+      "case_id": "F06_HELP_GIVEN_service::B_pinned_ai",
+      "fixture": "F06_HELP_GIVEN_service",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 20,
+          "H": 80,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.4,
+          "repentance_score": 0,
+          "ego_signal": 0.2,
+          "authenticity": 0.8,
+          "love_tone": 0.6,
+          "depth": 0.85
+        },
+        "v2Score": {
+          "lightScore": 33.8,
+          "intent": 0.52,
+          "depth": 0.75,
+          "impact": 0.87
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 4.5,
+          "quality": 1.31,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F07_GRATITUDE_PRACTICE::A_null_ai",
+      "fixture": "F07_GRATITUDE_PRACTICE",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 1,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0.54
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 20,
+        "finalLightScore": 20.67,
+        "finalReward": 20,
+        "lightContribution": 0.54
+      }
+    },
+    {
+      "case_id": "F07_GRATITUDE_PRACTICE::B_pinned_ai",
+      "fixture": "F07_GRATITUDE_PRACTICE",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 20,
+          "H": 50,
+          "C": 80,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 2,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.9,
+          "repentance_score": 0,
+          "ego_signal": 0.1,
+          "authenticity": 0.85,
+          "love_tone": 0.9,
+          "depth": 0.6
+        },
+        "v2Score": {
+          "lightScore": 26.51,
+          "intent": 0.71,
+          "depth": 0.56,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 1,
+          "quality": 1.1,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F08_DONATE_giving::A_null_ai",
+      "fixture": "F08_DONATE_giving",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 5,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 5,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 2.75,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 11.52
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 20.67,
+        "finalReward": 100,
+        "lightContribution": 11.52
+      }
+    },
+    {
+      "case_id": "F08_DONATE_giving::B_pinned_ai",
+      "fixture": "F08_DONATE_giving",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 20,
+          "H": 50,
+          "C": 80,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 2,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.9,
+          "repentance_score": 0,
+          "ego_signal": 0.1,
+          "authenticity": 0.85,
+          "love_tone": 0.9,
+          "depth": 0.6
+        },
+        "v2Score": {
+          "lightScore": 26.51,
+          "intent": 0.71,
+          "depth": 0.56,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 5,
+          "quality": 1.1,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F09_GOV_VOTE_governance::A_null_ai",
+      "fixture": "F09_GOV_VOTE_governance",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 2,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.9,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 1.51
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 20.67,
+        "finalReward": 100,
+        "lightContribution": 1.51
+      }
+    },
+    {
+      "case_id": "F09_GOV_VOTE_governance::B_pinned_ai",
+      "fixture": "F09_GOV_VOTE_governance",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 20,
+          "H": 80,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.4,
+          "repentance_score": 0,
+          "ego_signal": 0.2,
+          "authenticity": 0.8,
+          "love_tone": 0.6,
+          "depth": 0.85
+        },
+        "v2Score": {
+          "lightScore": 26,
+          "intent": 0.52,
+          "depth": 0.75,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 2,
+          "quality": 1.31,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F10_ANALYSIS_POST_father_voice::A_null_ai",
+      "fixture": "F10_ANALYSIS_POST_father_voice",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 68,
+          "H": 50,
+          "C": 55,
+          "U": 68
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 31,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 1
+        },
+        "multipliers": {
+          "Q": 2.04,
+          "I": 5,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 5,
+          "quality": 1.48,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 2,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 12.65
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 31,
+        "finalReward": 100,
+        "lightContribution": 12.65
+      }
+    },
+    {
+      "case_id": "F10_ANALYSIS_POST_father_voice::B_pinned_ai",
+      "fixture": "F10_ANALYSIS_POST_father_voice",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 56,
+          "T": 20,
+          "H": 56,
+          "C": 38,
+          "U": 56
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 2
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.6,
+          "repentance_score": 0,
+          "ego_signal": 0.8,
+          "authenticity": 0.7,
+          "love_tone": 0.8,
+          "depth": 0.7
+        },
+        "v2Score": {
+          "lightScore": 32.2,
+          "intent": 0.46,
+          "depth": 0.7,
+          "impact": 1
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 5,
+          "quality": 1.76,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F11_MEDITATION_daily::A_null_ai",
+      "fixture": "F11_MEDITATION_daily",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 1.63
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 20.67,
+        "finalReward": 100,
+        "lightContribution": 1.63
+      }
+    },
+    {
+      "case_id": "F11_MEDITATION_daily::B_pinned_ai",
+      "fixture": "F11_MEDITATION_daily",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 0.98,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 1.63
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 20.67,
+        "finalReward": 100,
+        "lightContribution": 1.63
+      }
+    },
+    {
+      "case_id": "F12_epoch_mint_reward_nocontent::A_null_ai",
+      "fixture": "F12_epoch_mint_reward_nocontent",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 0,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "fail",
+        "failReasons": [
+          "LIGHTSCORE_BELOW_15",
+          "LIGHTSCORE_BELOW_GLOBAL_MIN"
+        ],
+        "vvu": {
+          "baseValue": 0,
+          "quality": 0.98,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "F12_epoch_mint_reward_nocontent::B_pinned_ai",
+      "fixture": "F12_epoch_mint_reward_nocontent",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 0,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0
+        },
+        "multipliers": {
+          "Q": 1.83,
+          "I": 1.85,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "fail",
+        "failReasons": [
+          "LIGHTSCORE_BELOW_15",
+          "LIGHTSCORE_BELOW_GLOBAL_MIN"
+        ],
+        "vvu": {
+          "baseValue": 0,
+          "quality": 0.98,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "G01_repentance_gaming::A_null_ai",
+      "fixture": "G01_repentance_gaming",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 65,
+          "T": 56,
+          "H": 50,
+          "C": 52,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.85,
+          "I": 2.75,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.18,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.9,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 2.72
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 70,
+        "finalLightScore": 20.67,
+        "finalReward": 70,
+        "lightContribution": 2.72
+      }
+    },
+    {
+      "case_id": "G01_repentance_gaming::B_pinned_ai",
+      "fixture": "G01_repentance_gaming",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 80,
+          "H": 50,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 2,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.95,
+          "ego_signal": 0.1,
+          "authenticity": 0.5,
+          "love_tone": 0.5,
+          "depth": 0.4
+        },
+        "v2Score": {
+          "lightScore": 21.44,
+          "intent": 0.67,
+          "depth": 0.48,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 2.13,
+          "I": 2.75,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.1199999999999999,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.9,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 2.59
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 70,
+        "finalLightScore": 21.44,
+        "finalReward": 70,
+        "lightContribution": 2.59
+      }
+    },
+    {
+      "case_id": "G02_fraud_signals_heavy::A_null_ai",
+      "fixture": "G02_fraud_signals_heavy",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 62,
+          "T": 56,
+          "H": 50,
+          "C": 52,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.85,
+          "I": 2.3,
+          "K": 0.7
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.18,
+          "trustContext": 0.9,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.9,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0.95
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 45,
+        "trustMultiplier": 0.55,
+        "baseReward": 70,
+        "finalLightScore": 11.37,
+        "finalReward": 70,
+        "lightContribution": 0.95
+      }
+    },
+    {
+      "case_id": "G02_fraud_signals_heavy::B_pinned_ai",
+      "fixture": "G02_fraud_signals_heavy",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 80,
+          "T": 20,
+          "H": 80,
+          "C": 50,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 1,
+          "service": 2,
+          "helping": 2,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.4,
+          "repentance_score": 0,
+          "ego_signal": 0.2,
+          "authenticity": 0.8,
+          "love_tone": 0.6,
+          "depth": 0.85
+        },
+        "v2Score": {
+          "lightScore": 26,
+          "intent": 0.52,
+          "depth": 0.75,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.51,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    },
+    {
+      "case_id": "G03_toxic_suspended::A_null_ai",
+      "fixture": "G03_toxic_suspended",
+      "mode": "A_null_ai",
+      "result": {
+        "pillars": {
+          "S": 50,
+          "T": 56,
+          "H": 50,
+          "C": 51,
+          "U": 50
+        },
+        "pillarsV2": {
+          "repentance": 1,
+          "gratitude": 1,
+          "service": 1,
+          "helping": 1,
+          "giving": 1
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.5,
+          "repentance_score": 0.5,
+          "ego_signal": 0.1,
+          "authenticity": 0.7,
+          "love_tone": 0.5,
+          "depth": 0.5
+        },
+        "v2Score": {
+          "lightScore": 20.67,
+          "intent": 0.62,
+          "depth": 0.5,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 1.84,
+          "I": 1.85,
+          "K": 0.1
+        },
+        "truthGateFailed": false,
+        "decision": "pass",
+        "failReasons": [],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 1.18,
+          "trustContext": 0.3,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.65,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 70,
+        "finalLightScore": 20.67,
+        "finalReward": 70,
+        "lightContribution": 20.67
+      }
+    },
+    {
+      "case_id": "G03_toxic_suspended::B_pinned_ai",
+      "fixture": "G03_toxic_suspended",
+      "mode": "B_pinned_ai",
+      "result": {
+        "pillars": {
+          "S": 20,
+          "T": 20,
+          "H": 20,
+          "C": 20,
+          "U": 20
+        },
+        "pillarsV2": {
+          "repentance": 0,
+          "gratitude": 0,
+          "service": 0,
+          "helping": 0,
+          "giving": 0
+        },
+        "nlpFeatures": {
+          "gratitude_score": 0.05,
+          "repentance_score": 0,
+          "ego_signal": 0.95,
+          "authenticity": 0.2,
+          "love_tone": 0.05,
+          "depth": 0.1
+        },
+        "v2Score": {
+          "lightScore": 0.28,
+          "intent": 0.07,
+          "depth": 0.06,
+          "impact": 0.67
+        },
+        "multipliers": {
+          "Q": 0,
+          "I": 0,
+          "K": 0
+        },
+        "truthGateFailed": true,
+        "decision": "fail",
+        "failReasons": [
+          "TRUTH_GATE_FAILED"
+        ],
+        "vvu": {
+          "baseValue": 3,
+          "quality": 0.34,
+          "trustContext": 0.65,
+          "trustConfidencePersisted": 0.65,
+          "iis": 1,
+          "impactMultiplier": 0.5,
+          "antiAbuseFactorPersisted": 1,
+          "erp": 1,
+          "reliability": 0.95,
+          "score": 0
+        },
+        "reputationWeight": 1,
+        "consistencyMultiplier": 1,
+        "integrityPenalty": 0,
+        "trustMultiplier": 1,
+        "baseReward": 100,
+        "finalLightScore": 0,
+        "finalReward": 0,
+        "lightContribution": 0
+      }
+    }
+  ]
+}

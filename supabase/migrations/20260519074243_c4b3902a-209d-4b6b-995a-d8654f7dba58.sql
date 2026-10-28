@@ -1,0 +1,1 @@
+ALTER TYPE coin_transaction_type ADD VALUE IF NOT EXISTS 'forge_burn'; ALTER TYPE coin_transaction_type ADD VALUE IF NOT EXISTS 'forge_reward';

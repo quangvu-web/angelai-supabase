@@ -1,0 +1,1 @@
+UPDATE knowledge_documents SET ingest_status='pending', ingest_error=NULL WHERE ingest_status='failed';

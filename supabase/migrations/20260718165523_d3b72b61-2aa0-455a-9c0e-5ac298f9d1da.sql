@@ -1,0 +1,1 @@
+UPDATE public.user_api_keys SET image_daily_limit = 1000 WHERE name = 'Founder 10K/day';
