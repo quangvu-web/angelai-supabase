@@ -3,7 +3,7 @@
 ## Hiện trạng đã kiểm tra
 
 - Angel đã có `POST .../functions/v1/angel-chat` (`verify_jwt = false`, CORS mở, nhận `x-api-key`).
-- Body hiện tại: `{ messages[], stream, showCitations, responseStyle }`; response dạng OpenAI hoặc SSE.
+- Body hiện tại: `{ messages[], stream, showCitations, responseStyle }`; response dạng OpenAI hoặc SSE..
 - **Chưa có** `message` / `language` / `context` / `conversation`, cũng chưa có `{ answer, sources, relatedPapers, suggestions, meta }`.
 
 → Bổ sung một cổng mới có phiên bản. `angel-chat` giữ nguyên 100%.
